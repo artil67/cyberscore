@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyberscore by cegecom — Évaluez votre cybersécurité</title>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --teal:#009BA5;
+  --teal-dark:#005F69;
+  --teal-deep:#003F47;
+  --teal-mid:#00717A;
+  --teal-light:#C8EDEF;
+  --teal-pale:#EDF8F9;
+  --white:#FFFFFF;
+  --off:#F5F7F8;
+  --black:#0A0F10;
+  --ink:#1A2326;
+  --g2:#E2E8EA;
+  --g3:#B8C4C8;
+  --g4:#7A8D93;
+  --g5:#445059;
+  --body:#2C3A40;
+  --red-bg:#FBF0EF;--red-tx:#6B1414;--red-br:rgba(160,30,30,.13);
+  --grn-bg:#EDF7F2;--grn-tx:#0F4A28;--grn-br:rgba(15,100,50,.13);
+  --amb-bg:#FDF8EC;--amb-tx:#6B4208;--amb-br:rgba(160,100,10,.16);
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--white);color:var(--body);
+  line-height:1.65;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',Georgia,serif;line-height:1.12}
+
+/* ════════════════════════
+   NAV
+════════════════════════ */
+nav{
+  position:sticky;top:0;z-index:300;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--g2);
+  padding:0 56px;height:70px;
+  overflow:hidden;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-right{display:flex;align-items:center;gap:20px}
+.nav-link{color:var(--g5);font-size:13.5px;font-weight:500;text-decoration:none;transition:color .2s;letter-spacing:.01em}
+.nav-link:hover{color:var(--teal)}
+.btn-nav{
+  background:var(--teal-deep);color:#fff;border:none;
+  padding:10px 22px;border-radius:6px;
+  font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:500;
+  cursor:pointer;text-decoration:none;display:inline-block;
+  transition:background .2s;letter-spacing:.01em;
+}
+.btn-nav:hover{background:var(--teal-dark)}
+
+/* ════════════════════════
+   HERO
+════════════════════════ */
+.hero{
+  background:var(--teal-deep);
+  min-height:88vh;
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;padding:0 56px;
+  position:relative;overflow:hidden;
+}
+/* Fond : grille de points + dégradé radial */
+.hero-bg{
+  position:absolute;inset:0;
+  background-image:radial-gradient(rgba(0,155,165,.18) 1px,transparent 1px);
+  background-size:28px 28px;pointer-events:none;
+}
+.hero-glow{
+  position:absolute;right:-240px;top:-240px;
+  width:700px;height:700px;
+  background:radial-gradient(circle,rgba(0,155,165,.2) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero-glow2{
+  position:absolute;left:-120px;bottom:-120px;
+  width:400px;height:400px;
+  background:radial-gradient(circle,rgba(0,95,105,.25) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero-left{position:relative;z-index:1;padding:96px 0}
+.hero-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid rgba(0,155,165,.5);
+  background:rgba(0,155,165,.1);
+  color:rgba(255,255,255,.82);
+  font-size:11px;font-weight:600;letter-spacing:1.1px;text-transform:uppercase;
+  padding:6px 14px;border-radius:20px;margin-bottom:30px;
+}
+.pill-dot{
+  width:5px;height:5px;background:var(--teal);
+  border-radius:50%;flex-shrink:0;
+  animation:pulse 2.2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.75)}}
+
+.hero h1{
+  font-size:clamp(44px,4.8vw,68px);
+  font-weight:600;color:#fff;
+  letter-spacing:-.5px;margin-bottom:24px;
+  line-height:1.08;
+}
+.hero h1 em{font-style:italic;color:var(--teal)}
+.hero-sub{
+  font-size:16.5px;font-weight:300;
+  color:rgba(255,255,255,.58);
+  max-width:460px;line-height:1.72;margin-bottom:48px;
+}
+.hero-ctas{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.btn-hero{
+  background:var(--teal);color:#fff;border:none;
+  padding:15px 30px;border-radius:7px;
+  font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;
+  cursor:pointer;text-decoration:none;
+  display:inline-flex;align-items:center;gap:9px;
+  transition:all .22s;letter-spacing:.01em;
+}
+.btn-hero:hover{background:#00AFBB;transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,155,165,.35)}
+.btn-ghost-hero{
+  color:rgba(255,255,255,.6);font-size:14px;font-weight:400;
+  text-decoration:none;display:inline-flex;align-items:center;gap:7px;
+  transition:color .2s;
+}
+.btn-ghost-hero:hover{color:#fff}
+
+/* Hero card */
+.hero-right{
+  position:relative;z-index:1;
+  padding:96px 0 96px 48px;
+  display:flex;align-items:center;justify-content:center;
+}
+.hcard{
+  background:rgba(255,255,255,.065);
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:16px;padding:28px;
+  width:100%;max-width:390px;
+  backdrop-filter:blur(10px);
+}
+.hcard-head{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:20px;
+}
+.hcard-label{font-size:12px;font-weight:500;color:rgba(255,255,255,.6)}
+.hcard-grade{
+  background:#D97706;color:#fff;
+  font-family:'Cormorant Garamond',serif;
+  font-size:24px;font-weight:600;
+  width:44px;height:44px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+}
+.bar-list{display:grid;gap:12px;margin-bottom:20px}
+.bar-lbl{display:flex;justify-content:space-between;font-size:11.5px;color:rgba(255,255,255,.5);margin-bottom:5px}
+.bar-track{height:4px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;border-radius:2px;transition:width 1s ease}
+.fg{background:var(--teal)}.fw{background:#F59E0B}.fb{background:#EF4444}
+.hcard-foot{
+  border-top:1px solid rgba(255,255,255,.08);
+  padding-top:13px;font-size:11px;
+  color:rgba(255,255,255,.3);
+  display:flex;align-items:center;gap:7px;
+}
+
+/* ════════════════════════
+   TRUST BAR
+════════════════════════ */
+.trust{
+  background:#fff;border-bottom:1px solid var(--g2);
+  padding:16px 56px;
+  display:flex;align-items:center;justify-content:center;
+  gap:36px;flex-wrap:wrap;
+}
+.ti{display:flex;align-items:center;gap:9px;font-size:18px;font-weight:500;color:var(--g5)}
+.ti-ico{
+  width:30px;height:30px;background:var(--teal-pale);
+  border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+
+/* ════════════════════════
+   CEO SECTION
+════════════════════════ */
+.ceo{background:var(--ink);padding:80px 56px}
+.ceo-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.eyebrow{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:1.6px;color:var(--teal);margin-bottom:14px}
+.ceo h2{
+  font-size:clamp(28px,3.2vw,44px);font-weight:600;
+  color:#fff;margin-bottom:20px;letter-spacing:-.3px;
+}
+.ceo-body{font-size:15px;font-weight:300;color:rgba(255,255,255,.52);line-height:1.8}
+.ceo-body strong{color:rgba(255,255,255,.88);font-weight:500}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sbox{
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:10px;padding:22px 18px;
+}
+.sbox-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:36px;font-weight:600;
+  color:var(--teal);line-height:1;margin-bottom:8px;
+}
+.sbox-t{font-size:12px;color:rgba(255,255,255,.42);line-height:1.5}
+
+/* ════════════════════════
+   RISQUES
+════════════════════════ */
+.risks{padding:80px 56px;background:var(--off)}
+.sec-head{max-width:1080px;margin:0 auto 52px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end}
+.sec-title{font-size:clamp(26px,2.8vw,40px);font-weight:600;color:var(--black);letter-spacing:-.3px;margin-top:10px}
+.sec-desc{font-size:15px;font-weight:300;color:var(--g5);line-height:1.72;padding-top:4px}
+.grid3{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rcard{
+  background:#fff;border-radius:12px;border:1px solid var(--g2);
+  padding:28px 24px;transition:box-shadow .22s,transform .22s;
+}
+.rcard:hover{box-shadow:0 10px 32px rgba(0,95,105,.1);transform:translateY(-2px)}
+.rico{
+  width:42px;height:42px;border-radius:10px;
+  background:var(--teal-pale);
+  display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+}
+.rcard h3{font-size:17px;font-weight:600;color:var(--black);margin-bottom:8px}
+.rcard p{font-size:13.5px;color:var(--g5);line-height:1.65}
+
+/* ════════════════════════
+   BÉNÉFICES
+════════════════════════ */
+.benefits{padding:80px 56px;background:#fff}
+.bwrap{max-width:1080px;margin:0 auto}
+.bgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:52px}
+.bcard{
+  border-radius:12px;padding:26px 22px;
+  background:var(--teal-pale);border:1px solid rgba(0,155,165,.12);
+  transition:box-shadow .2s,transform .2s;
+}
+.bcard:hover{box-shadow:0 6px 20px rgba(0,155,165,.1);transform:translateY(-2px)}
+.bnum{font-size:10.5px;font-weight:600;letter-spacing:1px;color:var(--teal-mid);margin-bottom:10px;text-transform:uppercase}
+.bcard h3{font-size:16px;font-weight:600;color:var(--black);margin-bottom:7px}
+.bcard p{font-size:13px;color:var(--g5);line-height:1.62}
+.bcard-fin{background:var(--teal-light);border-color:rgba(0,155,165,.2)}
+.blink{
+  display:inline-flex;align-items:center;gap:5px;
+  margin-top:12px;color:var(--teal-dark);
+  font-size:13px;font-weight:500;text-decoration:none;
+  transition:gap .2s,color .2s;
+}
+.blink:hover{color:var(--teal);gap:8px}
+
+/* ════════════════════════
+   QUIZ
+════════════════════════ */
+.quiz{background:var(--off);padding:80px 56px}
+.qwrap{max-width:700px;margin:0 auto}
+.qintro{text-align:center;margin-bottom:52px}
+.qintro h2{font-size:clamp(28px,3.2vw,42px);color:var(--black);margin:10px 0 14px}
+.qintro p{font-size:15px;font-weight:300;color:var(--g5)}
+
+.pmeta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.plbl{font-size:12px;font-weight:500;color:var(--g4)}
+.ppct{font-size:12.5px;font-weight:600;color:var(--teal-dark)}
+.ptrack{height:2px;background:var(--g2);border-radius:2px;margin-bottom:30px}
+.pfill{height:100%;background:var(--teal);border-radius:2px;transition:width .45s cubic-bezier(.4,0,.2,1)}
+
+.qcard{
+  background:#fff;border-radius:16px;border:1px solid var(--g2);
+  padding:44px 40px;box-shadow:0 2px 16px rgba(0,0,0,.04);
+  animation:fadeup .32s ease;
+}
+@keyframes fadeup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.qcat{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:1.3px;color:var(--teal);margin-bottom:10px}
+.qtext{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-weight:600;
+  color:var(--black);line-height:1.38;margin-bottom:30px;
+}
+.answers{display:grid;gap:9px}
+.ans{
+  width:100%;text-align:left;
+  padding:14px 18px 14px 48px;
+  border:1.5px solid var(--g2);border-radius:9px;
+  background:var(--off);cursor:pointer;
+  font-family:'DM Sans',sans-serif;font-size:14px;
+  color:var(--body);transition:all .18s;position:relative;
+}
+.ans::before{
+  content:'';position:absolute;left:15px;top:50%;transform:translateY(-50%);
+  width:16px;height:16px;border-radius:50%;
+  border:1.5px solid var(--g3);transition:all .18s;
+}
+.ans:hover{border-color:var(--teal);background:var(--teal-pale)}
+.ans:hover::before{border-color:var(--teal)}
+.ans.sel{border-color:var(--teal);background:var(--teal-pale)}
+.ans.sel::before{border-color:var(--teal);background:var(--teal);box-shadow:inset 0 0 0 3px var(--teal-pale)}
+.qnav{display:flex;justify-content:flex-end;margin-top:20px}
+.btn-next{
+  background:var(--teal-deep);color:#fff;border:none;
+  padding:13px 26px;border-radius:7px;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
+  cursor:pointer;transition:all .2s;
+  opacity:.3;pointer-events:none;letter-spacing:.01em;
+}
+.btn-next.on{opacity:1;pointer-events:all}
+.btn-next.on:hover{background:var(--teal);transform:translateX(2px)}
+
+/* ════════════════════════
+   RESULTS
+════════════════════════ */
+#res{display:none;padding:80px 56px;background:var(--off)}
+.rswrap{max-width:700px;margin:0 auto}
+.rscard{
+  background:#fff;border-radius:16px;border:1px solid var(--g2);
+  padding:44px 40px;
+  box-shadow:0 4px 24px rgba(0,0,0,.06);
+  animation:fadeup .45s ease;margin-bottom:20px;
+}
+.gauge{display:flex;justify-content:center;gap:8px;margin-bottom:30px}
+.gp{
+  width:50px;height:50px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-weight:600;
+  color:rgba(255,255,255,.25);transition:all .4s;
+}
+.gp.lit{color:#fff;transform:scale(1.14);box-shadow:0 4px 16px rgba(0,0,0,.2)}
+.gA{background:#15803D}.gB{background:#65A30D}.gC{background:#D97706}.gD{background:#EA580C}.gE{background:#DC2626}
+.rs-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;font-weight:600;
+  color:var(--black);text-align:center;margin-bottom:10px;
+}
+.rs-sub{
+  text-align:center;font-size:15px;color:var(--g5);
+  max-width:420px;margin:0 auto 32px;line-height:1.68;
+}
+.ptgroup{display:grid;gap:8px;margin-bottom:22px}
+.ptlabel{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--black);margin-bottom:6px}
+.pt{
+  border-radius:8px;padding:12px 15px;
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:13px;line-height:1.5;
+}
+.pt.bad{background:var(--red-bg);color:var(--red-tx);border:1px solid var(--red-br)}
+.pt.good{background:var(--grn-bg);color:var(--grn-tx);border:1px solid var(--grn-br)}
+.pt-ico{flex-shrink:0;margin-top:1px}
+.legalbox{
+  background:var(--amb-bg);border:1px solid var(--amb-br);
+  border-radius:10px;padding:18px 20px;margin-bottom:24px;
+  display:flex;gap:13px;align-items:flex-start;
+}
+.lbody strong{display:block;font-size:13.5px;font-weight:600;color:var(--amb-tx);margin-bottom:5px}
+.lbody p{font-size:13px;color:var(--amb-tx);line-height:1.6}
+.rsctas{display:flex;gap:10px;flex-wrap:wrap}
+.btn-main{
+  flex:1;min-width:180px;background:var(--teal);color:#fff;border:none;
+  padding:14px 20px;border-radius:7px;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
+  cursor:pointer;text-align:center;text-decoration:none;
+  transition:background .2s;display:block;
+}
+.btn-main:hover{background:var(--teal-dark)}
+.btn-sec{
+  flex:1;min-width:160px;background:transparent;
+  color:var(--teal-dark);border:1.5px solid var(--teal);
+  padding:13px 20px;border-radius:7px;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
+  cursor:pointer;text-align:center;text-decoration:none;
+  transition:all .2s;display:block;
+}
+.btn-sec:hover{background:var(--teal-pale)}
+
+/* ════════════════════════
+   CONTACT
+════════════════════════ */
+#contact{
+  background:var(--teal-deep);padding:80px 56px;
+  position:relative;overflow:hidden;
+}
+#contact::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(rgba(0,155,165,.13) 1px,transparent 1px);
+  background-size:24px 24px;pointer-events:none;
+}
+.coinner{max-width:1080px;margin:0 auto;position:relative;z-index:1}
+.cogrid{display:grid;grid-template-columns:1fr 1.08fr;gap:72px;align-items:start}
+.co-title{font-size:clamp(26px,3vw,40px);font-weight:600;color:#fff;margin-bottom:16px;letter-spacing:-.3px}
+.co-body{font-size:15px;font-weight:300;color:rgba(255,255,255,.52);margin-bottom:36px;line-height:1.75}
+.perks{display:grid;gap:14px}
+.perk{display:flex;align-items:flex-start;gap:13px}
+.pico{
+  width:34px;height:34px;min-width:34px;border-radius:8px;
+  background:rgba(0,155,165,.18);
+  display:flex;align-items:center;justify-content:center;
+}
+.ptxt{font-size:13px;color:rgba(255,255,255,.6);line-height:1.52}
+.ptxt strong{color:rgba(255,255,255,.88);font-weight:500;display:block;margin-bottom:2px}
+
+/* Form box */
+.fbox{background:#fff;border-radius:16px;padding:36px;box-shadow:0 28px 64px rgba(0,0,0,.3)}
+.fbox-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px;font-weight:600;color:var(--black);margin-bottom:24px;
+}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:11px}
+.fg2{display:flex;flex-direction:column;gap:5px}
+.fg2.full{grid-column:1/-1}
+.fg2 label{font-size:11.5px;font-weight:600;color:var(--black);letter-spacing:.15px}
+.fg2 label span{color:var(--teal)}
+.fg2 input,.fg2 select,.fg2 textarea{
+  padding:10px 13px;border:1.5px solid var(--g2);border-radius:7px;
+  font-family:'DM Sans',sans-serif;font-size:13.5px;
+  color:var(--body);background:var(--off);outline:none;
+  transition:border-color .2s,background .2s;
+}
+.fg2 input:focus,.fg2 select:focus,.fg2 textarea:focus{border-color:var(--teal);background:#fff}
+.fg2 textarea{resize:vertical;min-height:74px}
+.fcheck{
+  display:flex;flex-direction:row;align-items:flex-start;gap:9px;
+  font-size:12px;color:var(--g5);line-height:1.5;
+  margin:14px 0 20px;cursor:pointer;
+  grid-column:1/-1;
+}
+.fcheck input{margin-top:2px;accent-color:var(--teal);flex-shrink:0;}
+.fcheck a{color:var(--teal);text-decoration:none}
+.btn-sub{
+  width:100%;background:var(--teal);color:#fff;border:none;
+  padding:14px;border-radius:7px;
+  font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;
+  cursor:pointer;transition:all .2s;letter-spacing:.01em;
+}
+.btn-sub:hover{background:var(--teal-dark);transform:translateY(-1px)}
+.for{text-align:center;color:var(--g3);font-size:12px;margin:14px 0;position:relative}
+.for::before,.for::after{content:'';position:absolute;top:50%;width:42%;height:1px;background:var(--g2)}
+.for::before{left:0}.for::after{right:0}
+.btn-cs{
+  display:block;text-align:center;background:transparent;
+  border:1.5px solid var(--g2);color:var(--body);
+  padding:11px;border-radius:7px;
+  font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;
+  text-decoration:none;transition:all .2s;
+}
+.btn-cs:hover{border-color:var(--teal);color:var(--teal)}
+.fsuccess{display:none;text-align:center;padding:40px 16px}
+.fchk{
+  width:58px;height:58px;border-radius:50%;
+  background:var(--teal-pale);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 18px;
+}
+.fok{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--black);margin-bottom:9px}
+.fokb{font-size:14px;color:var(--g5)}
+.fokb a{color:var(--teal);text-decoration:none}
+
+/* ════════════════════════
+   FOOTER
+════════════════════════ */
+footer{
+  background:var(--black);border-top:1px solid rgba(255,255,255,.06);
+  padding:22px 56px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
+}
+.fleft{font-size:12px;color:rgba(255,255,255,.28)}
+.flinks{display:flex;gap:18px}
+.flinks a{font-size:12px;color:rgba(255,255,255,.28);text-decoration:none;transition:color .2s}
+.flinks a:hover{color:var(--teal)}
+
+/* ════════════════════════
+   RESPONSIVE
+════════════════════════ */
+@media(max-width:980px){
+  nav,.hero,.trust,.ceo,.risks,.benefits,.quiz,#res,#contact{padding-left:28px;padding-right:28px}
+  .hero{grid-template-columns:1fr;min-height:auto}.hero-right{display:none}
+  .ceo-inner,.sec-head,.cogrid{grid-template-columns:1fr}
+  .grid3,.bgrid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .trust{gap:18px;padding:14px 28px}
+  footer{padding:18px 28px;flex-direction:column;align-items:flex-start}
+}
+@media(max-width:560px){
+  .frow{grid-template-columns:1fr}
+  .qcard,.rscard{padding:26px 18px}
+  .gauge{flex-wrap:wrap}
+  .rsctas{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════
+     NAV
+══════════════════════════════════ -->
+<nav>
+  <a href="#" style="text-decoration:none;display:inline-flex;align-items:center"><img src="data:image/png;base64,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" alt="Cyberscore by cegecom" style="height:160px;width:auto;display:block;margin:-38px -44px;image-rendering:crisp-edges;"></a>
+  <div class="nav-right">
+    <a href="https://cegecom.lu/fr/" class="nav-link" target="_blank">cegecom.lu</a>
+    <a href="#contact" class="btn-nav" onclick="setOrigine('Navigation')">Demander un accompagnement</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════
+     HERO
+══════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-left">
+    <div class="hero-pill">
+      <div class="pill-dot"></div>
+      Diagnostique cybersécurité · PME & entreprises luxembourgeoises
+    </div>
+    <h1>Évaluez la maturité<br>cybersécurité de votre <em>entreprise.</em></h1>
+    <p class="hero-sub">En quelques minutes, obtenez une première estimation de votre niveau de préparation face aux risques cyber et identifiez les axes prioritaires à renforcer.</p>
+    <div class="hero-ctas">
+      <a href="#quiz" class="btn-hero">
+        Lancer le diagnostic
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M3 7.5h9M8.5 4l3.5 3.5L8.5 11" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#contact" class="btn-ghost-hero" onclick="setOrigine('Hero — Parler à un expert')">
+        Être accompagné par un expert
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 11L11 2M11 2H4.5M11 2v6.5" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hcard">
+      <div class="hcard-head">
+        <div class="hcard-label">Aperçu du diagnostic Cyberscore</div>
+        <div class="hcard-grade">C</div>
+      </div>
+      <div class="bar-list">
+        <div><div class="bar-lbl"><span>Gouvernance</span><span>42%</span></div><div class="bar-track"><div class="bar-fill fw" style="width:42%"></div></div></div>
+        <div><div class="bar-lbl"><span>Gestion des accès</span><span>25%</span></div><div class="bar-track"><div class="bar-fill fb" style="width:25%"></div></div></div>
+        <div><div class="bar-lbl"><span>Sauvegardes</span><span>60%</span></div><div class="bar-track"><div class="bar-fill fg" style="width:60%"></div></div></div>
+        <div><div class="bar-lbl"><span>Sensibilisation</span><span>18%</span></div><div class="bar-track"><div class="bar-fill fb" style="width:18%"></div></div></div>
+        <div><div class="bar-lbl"><span>Conformité NIS2</span><span>71%</span></div><div class="bar-track"><div class="bar-fill fg" style="width:71%"></div></div></div>
+      </div>
+      <div class="hcard-foot">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="2" y="5" width="8" height="6" rx="1.2" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/><path d="M4 5V3.8a2 2 0 014 0V5" stroke="rgba(255,255,255,.35)" stroke-width="1.2" stroke-linecap="round"/></svg>
+        Diagnostic confidentiel · Résultat en 2 minutes
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     TRUST BAR
+══════════════════════════════════ -->
+<div class="trust">
+  <div class="ti">
+    <div class="ti-ico">
+      <svg width="30" height="30" viewBox="0 0 16 16" fill="none"><path d="M2 8L8 2l4.8 4.8a.9.9 0 010 1.3L8 13 2 8z" stroke="#005F69" stroke-width="1.3" stroke-linejoin="round"/><circle cx="10.5" cy="5.5" r="1" fill="#005F69"/></svg>
+    </div>
+    Diagnostic gratuit
+  </div>
+  <div class="ti">
+    <div class="ti-ico">
+      <svg width="30" height="30" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="9" r="5" stroke="#005F69" stroke-width="1.3"/><path d="M8 6.8V9l1.4.9" stroke="#005F69" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 2h4" stroke="#005F69" stroke-width="1.3" stroke-linecap="round"/></svg>
+    </div>
+    En deux minutes
+  </div>
+  <div class="ti">
+    <div class="ti-ico">
+      <svg width="30" height="30" viewBox="0 0 16 16" fill="none"><path d="M8 2L3 4.3v3.6c0 3 2.4 5.6 5 6.6 2.6-1 5-3.6 5-6.6V4.3L8 2z" stroke="#005F69" stroke-width="1.3" stroke-linejoin="round"/></svg>
+    </div>
+    Sans engagement
+  </div>
+  <div class="ti">
+    <div class="ti-ico">
+      <svg width="30" height="30" viewBox="0 0 16 16" fill="none"><path d="M8 2a4.2 4.2 0 014.2 4.2c0 2.8-4.2 7.8-4.2 7.8S3.8 9 3.8 6.2A4.2 4.2 0 018 2z" stroke="#005F69" stroke-width="1.3" stroke-linejoin="round"/><circle cx="8" cy="6.2" r="1.4" stroke="#005F69" stroke-width="1.2"/></svg>
+    </div>
+    Acteur local luxembourgeois
+  </div>
+  <div class="ti">
+    <div class="ti-ico">
+      <svg width="30" height="30" viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="12" rx="1.4" stroke="#005F69" stroke-width="1.3"/><path d="M5.5 6h5M5.5 8.5h5M5.5 11h3" stroke="#005F69" stroke-width="1.2" stroke-linecap="round"/></svg>
+    </div>
+    Partenaire Luxcontrol
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     CEO
+══════════════════════════════════ -->
+<section class="ceo">
+  <div class="ceo-inner">
+    <div>
+      <div class="eyebrow">Nouveau cadre légal · Mars 2025</div>
+      <h2>La cybersécurité,<br>un enjeu de gouvernance</h2>
+      <p class="ceo-body" style="margin-top:18px">
+        Aujourd'hui, la cybersécurité ne concerne plus uniquement les équipes techniques.<br><br>
+        Les dirigeants doivent pouvoir démontrer une démarche d'évaluation et d'amélioration de leur posture cyber. Au Luxembourg, depuis la <strong>directive NIS 2</strong> le CEO est désormais <strong>personnellement responsable</strong> en cas d'incident.<br><br>
+        Le Cyberscore permet d'obtenir un état des lieux clair, de prioriser les actions à mener et de structurer une trajectoire d'amélioration adaptée à <strong>votre organisation.</strong>
+      </p>
+    </div>
+    <div class="stats-grid">
+      <div class="sbox"><div class="sbox-n">Vision claire</div><div class="sbox-t">Évaluez rapidement votre niveau de maturité cyber.</div></div>
+      <div class="sbox"><div class="sbox-n">8 questions</div><div class="sbox-t">Le questionnaire repose sur une analyse détaillée en 8 points.</div></div>
+      <div class="sbox"><div class="sbox-n">Score A → E</div><div class="sbox-t">Une notation lisible pour situer votre niveau et suivre votre progression.</div></div>
+      <div class="sbox"><div class="sbox-n">Plan d'action</div><div class="sbox-t">Identifiez les priorités pour renforcer votre sécurité par étape.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     QUIZ
+══════════════════════════════════ -->
+<section class="quiz" id="quiz">
+  <div class="qwrap">
+    <div class="qintro">
+      <div class="eyebrow">Diagnostic rapide</div>
+      <h2>Quel est votre Cyberscore ?</h2>
+      <p>Répondez à 8 questions clés inspirées du Cyberscore complet. Vous obtiendrez une première estimation de votre niveau de préparation.</p>
+    </div>
+    <div class="pmeta">
+      <span class="plbl" id="plbl">Question 1 sur 8</span>
+      <span class="ppct" id="ppct">12%</span>
+    </div>
+    <div class="ptrack"><div class="pfill" id="pfill" style="width:12.5%"></div></div>
+    <div id="qcontainer"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     RESULTS
+══════════════════════════════════ -->
+<section id="res">
+  <div class="rswrap">
+    <div style="text-align:center;margin-bottom:40px">
+      <div class="eyebrow">Votre résultat</div>
+      <h2 style="font-size:clamp(28px,3.2vw,42px);color:var(--black);margin-top:10px">Votre estimation Cyberscore</h2>
+    </div>
+    <div id="rescontent"></div>
+    <div style="text-align:center;margin-top:28px">
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     RISQUES
+══════════════════════════════════ -->
+<section class="risks">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow">Pourquoi agir maintenant ?</div>
+      <h2 class="sec-title">Les risques concernent<br>toutes les entreprises</h2>
+    </div>
+    <p class="sec-desc">Les cyberattaques ne visent plus uniquement les grandes entreprises. Les PME et TPE sont aussi exposées à des risques concrets : interuption d'activité, perte de données, atteinte à la réputation, pression réglementaire ou perte de confiance des clients.</p>
+  </div>
+  <div class="grid3">
+    <div class="rcard">
+      <div class="rico">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8.5" stroke="#009BA5" stroke-width="1.5"/><circle cx="11" cy="11" r="4.5" stroke="#009BA5" stroke-width="1.5"/><circle cx="11" cy="11" r="1.4" fill="#009BA5"/><path d="M11 2.5V5M11 17v2.5M2.5 11H5M17 11h2.5" stroke="#009BA5" stroke-width="1.4" stroke-linecap="round"/></svg>
+      </div>
+      <h3>Des attaques ciblées</h3>
+      <p>Les cybercriminels exploitent souvent les organisations les moins préparées : accès mal protégés, sauvegarde insuffisantes, absence de procédure ou manque de sensibilisation.</p>
+    </div>
+    <div class="rcard">
+      <div class="rico">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="7" r="3.5" stroke="#009BA5" stroke-width="1.5"/><path d="M4.5 19c0-3.6 2.9-6.5 6.5-6.5s6.5 2.9 6.5 6.5" stroke="#009BA5" stroke-width="1.5" stroke-linecap="round"/><path d="M17 3v4.5" stroke="#009BA5" stroke-width="1.5" stroke-linecap="round"/><path d="M17 8.8v.4" stroke="#009BA5" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </div>
+      <h3>L'humain reste un point d'entrée majeur</h3>
+      <p>Phishing, mots de passe faibles ou encore erreur de manipulation : une grande partie des incidents commencent par une action humaine évitable.</p>
+    </div>
+    <div class="rcard">
+      <div class="rico">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 3v16" stroke="#009BA5" stroke-width="1.5" stroke-linecap="round"/><path d="M7 19h8" stroke="#009BA5" stroke-width="1.5" stroke-linecap="round"/><path d="M4 8.5h5.5L7 13.5 4 8.5z" stroke="#009BA5" stroke-width="1.4" stroke-linejoin="round"/><path d="M12.5 8.5H18L15 13.5l-2.5-5z" stroke="#009BA5" stroke-width="1.4" stroke-linejoin="round"/><path d="M4 8.5h14" stroke="#009BA5" stroke-width="1.3" stroke-linecap="round"/></svg>
+      </div>
+      <h3>Des exigences plus fortes</h3>
+      <p>La cybersécurité devient un critère de confiance. De plus en plus de clients et partenaires attendent des garanties concrètes sur la sécurité de leurs prestataires.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     BÉNÉFICES
+══════════════════════════════════ -->
+<section class="benefits">
+  <div class="bwrap">
+    <div class="sec-head" style="margin-bottom:0">
+      <div>
+        <div class="eyebrow">Ce que vous gagnez</div>
+        <h2 class="sec-title">Transformez votre Cyberscore<br>en plan d'action</h2>
+      </div>
+      <p class="sec-desc">Le Cyberscore ne se limite pas à une note. Il permet de structurer une démarche progressive, lisible et actionnable pour améliorer votre posture cybersécurité.</p>
+    </div>
+    <div class="bgrid">
+      <div class="bcard"><div class="bnum">01</div><h3>Comprendre votre niveau actuel</h3><p>Obtenez une vision claire de vos forces, de vos faiblesses mais également des domaines à renforcer.</p></div>
+      <div class="bcard"><div class="bnum">02</div><h3>Prioriser les bonnes actions</h3><p>Identifiez les mesures les plus importantes à mettre en place selon votre niveau de risque, vos contraintes et vos ressources.</p></div>
+      <div class="bcard"><div class="bnum">03</div><h3>Structurer votre démarche cyber</h3><p>Passez d'actions ponctuelles à une feuille de route cohérente, documentée et surtout suivie dans le temps.</p></div>
+      <div class="bcard"><div class="bnum">04</div><h3>Renforcer la confiance</h3><p>Montrez à vos clients, partenaires et collaborateurs que la cybersécurité est prise au sérieux dans votre organisation.</p></div>
+      <div class="bcard"><div class="bnum">05</div><h3>Préparer les exigences réglementaires</h3><p>Anticipez les attentes liée à la gouvernance cyber, à la continuité d'activité, à la gestion des incidents et à la protection des données.</p></div>
+      <div class="bcard bcard-fin">
+        <div class="bnum">06</div>
+        <h3>Identifier les aides disponibles</h3>
+        <p>Certains dispositifs luxembourgeois peuvent accompagner les PME dans leurs projets de cybersécurité selon leur éligibilité.</p>
+        <a href="#contact" class="blink" onclick="setOrigine('Bénéfices — Infos sur les aides et dispositifs luxembourgeois')">
+          Découvrir les possibilités d'accompagnement
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2v6" stroke="#005F69" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     CONTACT
+══════════════════════════════════ -->
+<section id="contact">
+  <div class="coinner">
+    <div class="cogrid">
+      <div>
+        <div class="eyebrow" style="color:rgba(0,155,165,.9)">Prenons contact</div>
+        <h2 class="co-title">Un expert cegecom<br>vous accompagne.</h2>
+        <p class="co-body">Vous souhaitez connaître votre niveau réel, préparer le questionnaire complet ou identifier les premières actions à mettre en place ?<br><br>Nos équipes vous accompagne pour analyser votre situation, prioriser les mesures utiles et construire une cybersécurité adaptée à votre entreprise. </p>
+        <div class="perks">
+          <div class="perk">
+            <div class="pico">
+              <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M8.5 2L3 4.6v3.5c0 3 2.4 5.7 5.5 6.6C11.6 13.8 14 11.1 14 8.1V4.6L8.5 2z" stroke="rgba(0,155,165,.85)" stroke-width="1.4" stroke-linejoin="round"/><path d="M6 8.5l2 2 3-3" stroke="rgba(0,155,165,.85)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="ptxt"><strong>Diagnostic personnalisé</strong>Analyse de votre situation, de vos enjeux et de votre niveau de maturité actuel.</div>
+          </div>
+          <div class="perk">
+            <div class="pico">
+              <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><rect x="3" y="2.5" width="11" height="12" rx="1.4" stroke="rgba(0,155,165,.85)" stroke-width="1.4"/><path d="M5.5 7h6M5.5 9.5h6M5.5 12h4" stroke="rgba(0,155,165,.85)" stroke-width="1.3" stroke-linecap="round"/></svg>
+            </div>
+            <div class="ptxt"><strong>Plan d'action priorisé</strong>Recommandations comncrètes selon vos risques, vos contraintes et votre budget.</div>
+          </div>
+          <div class="perk">
+            <div class="pico">
+              <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M3 15V7.5l5.5-4.5 5.5 4.5V15" stroke="rgba(0,155,165,.85)" stroke-width="1.4" stroke-linejoin="round"/><rect x="6.2" y="9.5" width="2.2" height="3.2" rx=".4" stroke="rgba(0,155,165,.85)" stroke-width="1.2"/><rect x="8.6" y="9.5" width="2.2" height="3.2" rx=".4" stroke="rgba(0,155,165,.85)" stroke-width="1.2"/><path d="M2 15h13" stroke="rgba(0,155,165,.85)" stroke-width="1.3" stroke-linecap="round"/></svg>
+            </div>
+            <div class="ptxt"><strong>Accompagnement local</strong>une approche adaptée au contexte luxembourgeois et aux besoins des PME.</div>
+          </div>
+          <div class="perk">
+            <div class="pico">
+              <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M9.5 2.5L5 9.5h5l-2.5 5L14 7h-5l2.5-4.5-2 0z" stroke="rgba(0,155,165,.85)" stroke-width="1.4" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="ptxt"><strong>Orientation vers les aides disponibles</strong>Identification des dispositifs mobilisables selon votre projet et votre éligibilité.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM -->
+      <div class="fbox" id="fwrap">
+        <div id="ffields">
+          <div class="fbox-title">Demander mon diagnostic gratuit</div>
+          <div class="frow">
+            <div class="fg2"><label>Prénom <span>*</span></label><input type="text" placeholder="Jean" id="fp"></div>
+            <div class="fg2"><label>Nom <span>*</span></label><input type="text" placeholder="Dupont" id="fn"></div>
+            <div class="fg2"><label>Email professionnel <span>*</span></label><input type="email" placeholder="j.dupont@entreprise.lu" id="fe"></div>
+            <div class="fg2"><label>Téléphone <span>*</span></label><input type="tel" placeholder="+352 6x xx xx xx" id="ft"></div>
+            <div class="fg2 full"><label>Société <span>*</span></label><input type="text" placeholder="Nom de votre entreprise" id="fs"></div>
+            <div class="fg2 full"><label>Votre fonction</label>
+              <select id="ff">
+                <option value="">Sélectionner...</option>
+                <option>CEO / Directeur général</option>
+                <option>CFO / Directeur financier</option>
+                <option>CTO / DSI</option>
+                <option>Responsable IT</option>
+                <option>Autre</option>
+              </select>
+            </div>
+            <div class="fg2 full"><label>Message (optionnel)</label><textarea placeholder="Décrivez brièvement votre situation, vos besoins ou vos priorités cybersécurité." id="fm"></textarea></div>
+          </div>
+          <label class="fcheck">
+            <input type="checkbox" id="frgpd">
+            J’accepte que mes données soient traitées par cegecom afin d’être recontacté dans le cadre de ma demande, conformément à la  <a href="https://cegecom.lu/fr/cegecom-luxembourg/protection-des-donnees-cegecom/" target="_blank">politique de confidentialité</a>.
+          </label>
+          <button class="btn-sub" onclick="submitForm()">Envoyer ma demande →</button>
+          <div class="for">ou</div>
+          <a href="https://cyberscore.lu" target="_blank" class="btn-cs">Accéder au Cyberscore complet ↗</a>
+        </div>
+        <div class="fsuccess" id="fsuccess">
+          <div class="fchk">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M5.5 13l5.5 5.5 10-10" stroke="#005F69" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="fok">Demande bien reçue !</div>
+          <p class="fokb">Merci pour votre intérêt. Un expert cegecom reviendra vers vous prochainement afin d'échanger sur les prochaines étapes possibles.<br><br>En attendant : <a href="https://cyberscore.lu" target="_blank">Accéder au Cyberscore complet <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 11L11 2M11 2H4.5M11 2v6.5" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     FOOTER
+══════════════════════════════════ -->
+<footer>
+  <div class="fleft">© 2025 cegecom S.A. — Premier opérateur alternatif au Luxembourg</div>
+  <div class="flinks">
+    <a href="https://cegecom.lu/fr/cegecom-luxembourg/protection-des-donnees-cegecom/" target="_blank">Protection des données</a>
+    <a href="https://cegecom.lu/fr/cegecom-luxembourg/mentions-legales-cegecom/" target="_blank">Mentions légales</a>
+    <a href="https://cegecom.lu/fr/" target="_blank">cegecom.lu</a>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════
+     QUIZ LOGIC
+══════════════════════════════════ -->
+<script>
+const Qs=[
+  {cat:"Gouvernance",q:"Votre entreprise dispose-t-elle d'une politique de cybersécurité formalisée ?",a:[{t:"Oui, elle est documentée, communiquée et régulièrement mise à jour.",r:0},{t:"Partiellement, certaines règles existent mais ne sont pas formalisées.",r:1},{t:"Non, aucune politique claire n'est mise en place.",r:2}]},
+  {cat:"Responsabilité",q:"Une personne ou une équipe est-elle clairement responsable de la cybersécurité",a:[{t:"Oui, les rôles et les responsabilités sont clairement définis.",r:0},{t:"Partiellement, le sujet est géré sans cadre vraiment formalisé.",r:1},{t:"Non, personne n'est clairement identifié.",r:2}]},
+  {cat:"Gestion des accès",q:"Comment les accès aux outils et données sensibles sont-ils protégés ?",a:[{t:"Les accès sont limités, revus régulièrement et protégés par MFA.",r:0},{t:"Les accès sont protégés, mais sans revue régulière ni MFA systématique.",r:1},{t:"Les accès sont peu contrôlés ou partagés entre plusieurs utilisateurs.",r:2}]},
+  {cat:"Sauvegardes",q:"Vos données critiques sont-elles sauvegardées et testées régulièrement ?",a:[{t:"Oui, les sauvegardes sont régulières, sécurisés et testés.",r:0},{t:"Des sauvegardes existent, mais elles sont peu ou jamais testées",r:1},{t:"Non, les sauvegardes ne sont pas clairement maîtrisées.",r:2}]},
+  {cat:"Sensibilisation",q:"Vos collaborateurs sont-ils sensibilisés aux risques cyber ?",a:[{t:"Oui, avec des formations régulières ou des simulations.",r:0},{t:"Occasionnellement, mais sans programme structuré.",r:1},{t:"ANon, aucune sensibilisation spécifique n'est réalisée.",r:2}]},
+  {cat:"Incident cyber",q:"Votre entreprise saurait-elle quoi faire dans les premières heures d'un incident cyber ?",a:[{t:"Une procédure existe et les contacts sont identifiés.",r:0},{t:"Vaguement, certaines personnes sauraient réagir mais sans procédure claire.",r:1},{t:"La réaction serait probablement improvisée.",r:2}]},
+  {cat:"Continuité d'activité",q:"Disposez-vous d'un plan de continuité ou de reprise d'activité en cas d'attaque ?",a:[{t:"Oui, il est documenté et testé régulièrement.",r:0},{t:"Un plan existe mais n'est pas testé régulièrement.",r:1},{t:"Aucun plan n'est formalisé.",r:2}]},  
+  {cat:"Conformité & amélioration",q:"Avez-vous déjà évalué votre niveau de conformité ou de maturité cyber ?",a:[{t:"Oui, une évaluation récente à été réalisée.",r:0},{t:"Une réflexion est en cours, mais aucune démarche complète n'a été menée.",r:1},{t:"Non, le sujet n'a pas encore été évalué.",r:2}]}
+];
+
+const RM=[
+  "Aucune politique formalisée — risque réglementaire immédiat pour le CEO",
+  "Aucun responsable désigné — la responsabilité du dirigeant n'est pas couverte",
+  "Accès non contrôlés — vecteur principal des attaques ransomware",
+  "Aucun plan de reprise — une attaque pourrait arrêter définitivement votre activité",
+  "Sauvegardes non isolées ou non testées — inefficaces face à un ransomware",
+  "Personnel non formé — 91% des attaques débutent par un email de phishing",
+  "Aucune procédure d'urgence — chaque heure coûte en moyenne 35 000€",
+  "Non-conformité NIS2/Cyberscore — sanctions financières et pénales possibles"
+];
+const GM=[
+  "Politique de cybersécurité documentée",
+  "Responsable cybersécurité désigné",
+  "Authentification multi-facteurs en place",
+  "Plan de reprise d'activité testé",
+  "Sauvegardes isolées et testées régulièrement",
+  "Personnel sensibilisé régulièrement",
+  "Procédure d'urgence opérationnelle",
+  "Conformité NIS2 évaluée et engagée"
+];
+const GL={A:"Très bonne maturité cyber",B:"Bonne base, quelques points à renforcer",C:"Maturité intermédiaire : des actions sont recommandées",D:"Niveau de préparation insuffisant",E:"Situation à traiter en priorité"};
+const GD={
+  A:"Votre entreprise semble avoir des bases solides en matière de cybersécurité. Le Cyberscore complet permettrait de formaliser cette posture, de la valoriser et d'identifier les derniers axes d'optimisation.",
+  B:"Votre entreprise présente plusieurs bonnes pratiques, mais certains points méritent d'être renforcés pour améliorer votre niveau de résilience et structurer davantage votre démarche cybersécurité.",
+  C:"Votre entreprise dispose de certaines pratiques de sécurité, mais plusieurs axes d'améliorations ressortent. Une analyse approfondie permettrait de prioriser les mesures à mettre en place.",
+  D:"Votre organisation pourrait être exposée à des risques importants en cas d'incident cyber. Il est recommandé de formaliser rapidement une démarche structurée d'évaluation et d'amélioration.",
+  E:"Votre niveau de préparation semble faible au regard des risques actuels. Un accompagnement dédié permettrait d'identifier les mesures urgentes à mettre en place pour réduire votre exposition."
+};
+
+const icoWarn=`<svg class="pt-ico" width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M7.5 2L1 13h13L7.5 2z" stroke="#6B1414" stroke-width="1.3" stroke-linejoin="round"/><path d="M7.5 6.5v3" stroke="#6B1414" stroke-width="1.3" stroke-linecap="round"/><circle cx="7.5" cy="10.8" r=".6" fill="#6B1414"/></svg>`;
+const icoOk=`<svg class="pt-ico" width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6" stroke="#0F4A28" stroke-width="1.3"/><path d="M5 7.5l2 2 3-3" stroke="#0F4A28" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const icoLegal=`<svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M8.5 2L3 4.6v3.5c0 3 2.4 5.7 5.5 6.6 3.1-.9 5.5-3.6 5.5-6.6V4.6L8.5 2z" stroke="#6B4208" stroke-width="1.3" stroke-linejoin="round"/><path d="M8.5 6.5v3" stroke="#6B4208" stroke-width="1.3" stroke-linecap="round"/><circle cx="8.5" cy="11" r=".6" fill="#6B4208"/></svg>`;
+
+let cur=0,ans=[],risk=0;
+
+function render(){
+  const q=Qs[cur];
+  const p=(cur+1)/Qs.length;
+  document.getElementById('pfill').style.width=(p*100)+'%';
+  document.getElementById('plbl').textContent=`Question ${cur+1} sur ${Qs.length}`;
+  document.getElementById('ppct').textContent=Math.round(p*100)+'%';
+  document.getElementById('qcontainer').innerHTML=`
+    <div class="qcard">
+      <div class="qcat">${q.cat}</div>
+      <div class="qtext">${q.q}</div>
+      <div class="answers">${q.a.map((a,i)=>`<button class="ans" id="a${i}" onclick="pick(${i},${a.r})">${a.t}</button>`).join('')}</div>
+    </div>
+    <div class="qnav">
+      <button class="btn-next" id="btn-next" onclick="go()">
+        ${cur<Qs.length-1?'Question suivante →':'Voir mon résultat →'}
+      </button>
+    </div>`;
+}
+
+function pick(i,r){
+  document.querySelectorAll('.ans').forEach(b=>b.classList.remove('sel'));
+  document.getElementById('a'+i).classList.add('sel');
+  document.getElementById('btn-next').classList.add('on');
+  ans[cur]={i,r};
+}
+
+function go(){
+  if(!ans[cur])return;
+  risk+=ans[cur].r;
+  if(cur<Qs.length-1){
+    cur++;render();
+    document.getElementById('quiz').scrollIntoView({behavior:'smooth',block:'start'});
+  } else showRes();
+}
+
+function grade(r){
+  const p=r/(Qs.length*2);
+  if(p<=.15)return'A';if(p<=.35)return'B';if(p<=.55)return'C';if(p<=.75)return'D';return'E';
+}
+
+function showRes(){
+  const g=grade(risk);
+  setNoteQuiz(g, GL[g]);
+  document.getElementById('quiz').style.display='none';
+  const rs=document.getElementById('res');
+  rs.style.display='block';
+
+  const gauge=['A','B','C','D','E'].map(l=>`<div class="gp g${l}${l===g?' lit':''}">${l}</div>`).join('');
+
+  const bads=ans.filter(a=>a.r>=2)
+    .map(a=>`<div class="pt bad">${icoWarn}<span>${RM[ans.indexOf(a)]}</span></div>`)
+    .join('');
+  const goods=ans.filter(a=>a.r===0)
+    .map(a=>`<div class="pt good">${icoOk}<span>${GM[ans.indexOf(a)]}</span></div>`)
+    .join('');
+
+  const legal=['C','D','E'].includes(g)?`
+    <div class="legalbox">
+      ${icoLegal}
+      <div class="lbody">
+        <strong>Responsabilité personnelle du CEO</strong>
+        <p>Depuis mars 2025, le dirigeant est personnellement responsable de la cybersécurité au Luxembourg. Votre score actuel vous expose à des sanctions en cas d'incident. cegecom vous accompagne pour remédier rapidement à cette situation.</p>
+      </div>
+    </div>`:'';
+
+  document.getElementById('rescontent').innerHTML=`
+    <div class="rscard">
+      <div class="gauge">${gauge}</div>
+      <div class="rs-title">${GL[g]}</div>
+      <p class="rs-sub">${GD[g]}</p>
+      ${bads?`<div class="ptgroup"><div class="ptlabel">Points critiques identifiés</div>${bads}</div>`:''}
+      ${goods?`<div class="ptgroup"><div class="ptlabel">Bonnes pratiques en place</div>${goods}</div>`:''}
+      ${legal}
+      <div class="rsctas">
+        <a href="#contact" class="btn-main" onclick="setOrigine('Résultats quiz')">Parler à un expert cegecom</a>
+        <a href="https://cyberscore.lu" target="_blank" class="btn-sec">Accéder au Cyberscore complet ↗</a>
+      </div>
+    </div>`;
+  rs.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ── EmailJS init ──────────────────────────────────────────────────────────
+emailjs.init({ publicKey: 'KKGAZovxe4JvkehyH' });
+
+// ── Tracking origine ──────────────────────────────────────────────────────
+let _origine = 'Direct (formulaire)';
+let _noteQuiz = 'Quiz non effectué';
+
+function setOrigine(label) {
+  _origine = label;
+}
+
+// Appelé depuis showRes() pour mémoriser la note
+function setNoteQuiz(note, label) {
+  _noteQuiz = 'Note ' + note + ' — ' + label;
+  // Si le visiteur clique "Parler à un expert" depuis les résultats,
+  // l'origine sera déjà mise à jour par le onclick du bouton.
+  // Mais si il scrolle manuellement, on met quand même à jour l'origine.
+  if (_origine === 'Direct (formulaire)') {
+    _origine = 'Après quiz (scroll manuel)';
+  }
+}
+
+// ── Soumission formulaire ─────────────────────────────────────────────────
+function submitForm(){
+  const prenom   = document.getElementById('fp').value.trim();
+  const nom      = document.getElementById('fn').value.trim();
+  const email    = document.getElementById('fe').value.trim();
+  const tel      = document.getElementById('ft').value.trim();
+  const societe  = document.getElementById('fs').value.trim();
+  const fonction = document.getElementById('ff').value.trim();
+  const message  = document.getElementById('fm').value.trim();
+  const rgpd     = document.getElementById('frgpd').checked;
+
+  if(!prenom||!nom||!email||!societe||!tel){
+    alert('Merci de remplir tous les champs obligatoires.');return;
+  }
+  if(!rgpd){
+    alert('Veuillez accepter la politique de confidentialité.');return;
+  }
+
+  // Désactiver le bouton pendant l'envoi
+  const btn = document.querySelector('.btn-sub');
+  btn.disabled = true;
+  btn.textContent = 'Envoi en cours…';
+
+  const templateParams = {
+    origine:   _origine,
+    note_quiz: _noteQuiz,
+    prenom:    prenom,
+    nom:       nom,
+    email:     email,
+    telephone: tel || 'Non renseigné',
+    societe:   societe,
+    fonction:  fonction || 'Non renseigné',
+    message:   message  || 'Aucun message',
+  };
+
+  emailjs.send('service_f73hdpo', 'template_1jie6yv', templateParams)
+    .then(function() {
+      document.getElementById('ffields').style.display='none';
+      document.getElementById('fsuccess').style.display='block';
+    }, function(error) {
+      btn.disabled = false;
+      btn.textContent = 'Envoyer ma demande →';
+      alert('Une erreur est survenue. Veuillez réessayer ou nous contacter directement.');
+      console.error('EmailJS error:', error);
+    });
+}
+
+render();
+</script>
+</body>
+</html>
+
