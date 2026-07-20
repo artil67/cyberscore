@@ -314,6 +314,678 @@ nav{
 .btn-next.on{opacity:1;pointer-events:all}
 .btn-next.on:hover{background:var(--teal);transform:translateX(2px)}
 
+.packages{
+
+  padding:80px 56px;
+
+  background:#fff;
+
+}
+
+ 
+
+.pkg-wrap{
+
+  max-width:1180px;
+
+  margin:0 auto;
+
+}
+
+ 
+
+.pkg-head{
+
+  max-width:760px;
+
+  margin:0 auto 52px;
+
+  text-align:center;
+
+}
+
+ 
+
+.pkg-head h2{
+
+  font-size:clamp(28px,3.2vw,44px);
+
+  font-weight:600;
+
+  color:var(--black);
+
+  letter-spacing:-.3px;
+
+  margin:10px 0 14px;
+
+}
+
+ 
+
+.pkg-head p{
+
+  font-size:15px;
+
+  font-weight:300;
+
+  color:var(--g5);
+
+  line-height:1.72;
+
+}
+
+ 
+
+.pkg-grid{
+
+  display:grid;
+
+  grid-template-columns:repeat(4,1fr);
+
+  gap:16px;
+
+}
+
+ 
+
+.pkg-card{
+
+  position:relative;
+
+  border:1px solid var(--g2);
+
+  border-radius:16px;
+
+  background:var(--white);
+
+  padding:26px 22px 22px;
+
+  overflow:hidden;
+
+  display:flex;
+
+  flex-direction:column;
+
+  min-height:640px;
+
+  transition:transform .22s, box-shadow .22s, border-color .22s;
+
+}
+
+ 
+
+.pkg-card:hover{
+
+  transform:translateY(-3px);
+
+  box-shadow:0 14px 38px rgba(0,95,105,.11);
+
+}
+
+ 
+
+.pkg-card::before{
+
+  content:'';
+
+  position:absolute;
+
+  left:0;
+
+  top:0;
+
+  width:100%;
+
+  height:4px;
+
+  background:var(--pkg-color);
+
+}
+
+ 
+
+.pkg-light{--pkg-color:#009BA5;--pkg-soft:#EDF8F9}
+
+.pkg-basic{--pkg-color:#2456A6;--pkg-soft:#EEF4FF}
+
+.pkg-standard{--pkg-color:#F28A2E;--pkg-soft:#FFF5EC}
+
+.pkg-compliance{--pkg-color:#4D2D91;--pkg-soft:#F4F0FF}
+
+ 
+
+.pkg-top{
+
+  display:flex;
+
+  align-items:flex-start;
+
+  justify-content:space-between;
+
+  gap:14px;
+
+  margin-bottom:24px;
+
+}
+
+ 
+
+.pkg-icon{
+
+  width:52px;
+
+  height:52px;
+
+  border-radius:14px;
+
+  background:var(--pkg-soft);
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  color:var(--pkg-color);
+
+  flex-shrink:0;
+
+}
+
+ 
+
+.pkg-tag{
+
+  font-size:10px;
+
+  font-weight:700;
+
+  letter-spacing:1.1px;
+
+  text-transform:uppercase;
+
+  color:var(--pkg-color);
+
+  margin-bottom:6px;
+
+}
+
+ 
+
+.pkg-title{
+
+  font-family:'Cormorant Garamond',Georgia,serif;
+
+  font-size:28px;
+
+  line-height:1;
+
+  font-weight:700;
+
+  color:var(--black);
+
+}
+
+ 
+
+.pkg-sub{
+
+  font-size:12.5px;
+
+  color:var(--g5);
+
+  line-height:1.55;
+
+  margin:12px 0 22px;
+
+  min-height:40px;
+
+}
+
+ 
+
+.pkg-block{
+
+  padding-top:18px;
+
+  border-top:1px solid var(--g2);
+
+  margin-top:18px;
+
+}
+
+ 
+
+.pkg-block:first-of-type{
+
+  margin-top:0;
+
+}
+
+ 
+
+.pkg-block h4{
+
+  font-family:'DM Sans',sans-serif;
+
+  font-size:11px;
+
+  font-weight:700;
+
+  letter-spacing:1px;
+
+  text-transform:uppercase;
+
+  color:var(--pkg-color);
+
+  margin-bottom:10px;
+
+}
+
+ 
+
+.pkg-block ul{
+
+  list-style:none;
+
+  display:grid;
+
+  gap:7px;
+
+}
+
+ 
+
+.pkg-block li{
+
+  position:relative;
+
+  padding-left:16px;
+
+  font-size:12.5px;
+
+  color:var(--g5);
+
+  line-height:1.48;
+
+}
+
+ 
+
+.pkg-block li::before{
+
+  content:'';
+
+  position:absolute;
+
+  left:0;
+
+  top:.65em;
+
+  width:5px;
+
+  height:5px;
+
+  border-radius:50%;
+
+  background:var(--pkg-color);
+
+  opacity:.75;
+
+}
+
+ 
+
+.pkg-note{
+
+  margin-top:10px;
+
+  font-size:11.5px;
+
+  color:var(--g4);
+
+  font-style:italic;
+
+  line-height:1.45;
+
+}
+
+ 
+
+.pkg-option{
+
+  margin-top:14px;
+
+  background:var(--pkg-soft);
+
+  border:1px solid color-mix(in srgb, var(--pkg-color) 22%, transparent);
+
+  border-radius:10px;
+
+  padding:12px;
+
+  font-size:12px;
+
+  color:var(--body);
+
+  line-height:1.5;
+
+}
+
+ 
+
+.pkg-option strong{
+
+  color:var(--pkg-color);
+
+  font-weight:700;
+
+}
+
+ 
+
+.pkg-footer{
+
+  margin-top:auto;
+
+  padding-top:20px;
+
+}
+
+ 
+
+.pkg-meta{
+
+  display:grid;
+
+  grid-template-columns:1fr;
+
+  gap:8px;
+
+  background:var(--pkg-soft);
+
+  border-radius:12px;
+
+  padding:13px;
+
+}
+
+ 
+
+.pkg-meta-item{
+
+  display:flex;
+
+  align-items:flex-start;
+
+  gap:9px;
+
+  font-size:11.5px;
+
+  color:var(--g5);
+
+  line-height:1.35;
+
+}
+
+ 
+
+.pkg-meta-item svg{
+
+  color:var(--pkg-color);
+
+  flex-shrink:0;
+
+  margin-top:1px;
+
+}
+
+ 
+
+.pkg-score{
+
+  margin-top:16px;
+
+  text-align:center;
+
+  font-size:10.5px;
+
+  font-weight:700;
+
+  letter-spacing:1px;
+
+  color:var(--pkg-color);
+
+  text-transform:uppercase;
+
+}
+
+ 
+
+.pkg-scale{
+
+  display:flex;
+
+  justify-content:center;
+
+  gap:4px;
+
+  margin-top:6px;
+
+}
+
+ 
+
+.pkg-scale span{
+
+  width:22px;
+
+  height:22px;
+
+  border-radius:6px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:var(--pkg-soft);
+
+  color:var(--pkg-color);
+
+  font-size:12px;
+
+  font-weight:700;
+
+}
+
+ 
+
+.pkg-scale.plus span:last-child{
+
+  width:auto;
+
+  padding:0 8px;
+
+}
+
+ 
+
+.pkg-journey{
+
+  margin-top:34px;
+
+  border:1px solid var(--g2);
+
+  border-radius:16px;
+
+  padding:18px 22px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:18px;
+
+  background:var(--off);
+
+}
+
+ 
+
+.j-step{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+  min-width:0;
+
+}
+
+ 
+
+.j-ico{
+
+  width:38px;
+
+  height:38px;
+
+  border-radius:10px;
+
+  background:#fff;
+
+  border:1px solid var(--g2);
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  color:var(--teal-dark);
+
+  flex-shrink:0;
+
+}
+
+ 
+
+.j-text strong{
+
+  display:block;
+
+  font-size:11px;
+
+  color:var(--black);
+
+  text-transform:uppercase;
+
+  letter-spacing:.6px;
+
+  margin-bottom:2px;
+
+}
+
+ 
+
+.j-text span{
+
+  display:block;
+
+  font-size:11.5px;
+
+  color:var(--g5);
+
+  line-height:1.35;
+
+}
+
+ 
+
+.j-arrow{
+
+  color:var(--teal);
+
+  font-size:22px;
+
+  font-weight:600;
+
+  opacity:.75;
+
+}
+
+ 
+
+@media(max-width:1120px){
+
+  .pkg-grid{
+
+    grid-template-columns:repeat(2,1fr);
+
+  }
+
+  .pkg-card{
+
+    min-height:auto;
+
+  }
+
+  .pkg-journey{
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+
+  }
+
+}
+
+ 
+
+@media(max-width:680px){
+
+  .packages{
+
+    padding:64px 28px;
+
+  }
+
+  .pkg-grid{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .pkg-card{
+
+    padding:24px 20px 20px;
+
+  }
+
+  .pkg-journey{
+
+    align-items:flex-start;
+
+    flex-direction:column;
+
+  }
+
+  .j-arrow{
+
+    transform:rotate(90deg);
+
+    align-self:center;
+
+  }
+
+}
+
 /* ════════════════════════
    RESULTS
 ════════════════════════ */
@@ -645,6 +1317,705 @@ footer{
     <div style="text-align:center;margin-top:28px">
     </div>
   </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+
+     PACKAGES CYBERSCORE
+
+══════════════════════════════════ -->
+
+<section class="packages" id="packages">
+
+  <div class="pkg-wrap">
+
+    <div class="pkg-head">
+
+      <div class="eyebrow">Packages CyberScore</div>
+
+      <h2>4 niveaux pour évaluer, comprendre et renforcer votre cybersécurité</h2>
+
+      <p>
+
+        Du premier diagnostic rapide à l’accompagnement de conformité, les packages CyberScore permettent d’avancer progressivement selon votre niveau de maturité, vos objectifs et vos obligations.
+
+      </p>
+
+    </div>
+
+ 
+
+    <div class="pkg-grid">
+
+ 
+
+      <!-- LIGHT -->
+
+      <article class="pkg-card pkg-light">
+
+        <div class="pkg-top">
+
+          <div>
+
+            <div class="pkg-tag">CyberScore</div>
+
+            <div class="pkg-title">Light</div>
+
+          </div>
+
+          <div class="pkg-icon">
+
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+
+              <path d="M5 18a9 9 0 1118 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+
+              <path d="M14 18l4-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+
+              <circle cx="14" cy="18" r="2.2" stroke="currentColor" stroke-width="2"/>
+
+              <path d="M7.5 18h-2M22.5 18h-2M8.2 11.8l-1.5-1.2M19.8 11.8l1.5-1.2M14 9V6.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+
+            </svg>
+
+          </div>
+
+        </div>
+
+ 
+
+        <p class="pkg-sub">Je veux un premier niveau de visibilité.</p>
+
+ 
+
+        <div class="pkg-block">
+
+          <h4>Méthode</h4>
+
+          <ul>
+
+            <li>Auto-évaluation en ligne</li>
+
+            <li>8 questions essentielles</li>
+
+            <li>Réalisation en moins de 15 minutes</li>
+
+          </ul>
+
+        </div>
+
+ 
+
+        <div class="pkg-block">
+
+          <h4>Livrables</h4>
+
+          <ul>
+
+            <li>Score global de A à E</li>
+
+            <li>Niveau de maturité estimé</li>
+
+          </ul>
+
+        </div>
+
+ 
+
+        <div class="pkg-block">
+
+          <h4>Cas d’usage</h4>
+
+          <ul>
+
+            <li>Première approche cybersécurité</li>
+
+            <li>Sensibilisation des dirigeants</li>
+
+            <li>PME n’ayant jamais réalisé d’évaluation</li>
+
+          </ul>
+
+        </div>
+
+ 
+
+        <div class="pkg-footer">
+
+          <div class="pkg-meta">
+
+            <div class="pkg-meta-item">
+
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M7.5 4.5v3.3l2 1.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+
+              <span>Durée : 15 minutes</span>
+
+            </div>
+
+            <div class="pkg-meta-item">
+
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect x="2.2" y="3" width="10.6" height="7.4" rx="1" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 12h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+
+              <span>Réalisation : en ligne</span>
+
+            </div>
+
+          </div>
+
+          <div class="pkg-score">Score A à E</div>
+
+          <div class="pkg-scale"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span></div>
+
+        </div>
+
+      </article>
+
+ 
+
+      <!-- BASIC -->
+
+      <article class="pkg-card pkg-basic">
+
+        <div class="pkg-top">
+
+          <div>
+
+            <div class="pkg-tag">CyberScore</div>
+
+            <div class="pkg-title">Basic</div>
+
+          </div>
+
+          <div class="pkg-icon">
+
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+
+              <circle cx="12" cy="12" r="7" stroke="currentColor" stroke-width="2"/>
+
+              <path d="M17.2 17.2L23 23" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+
+            </svg>
+
+          </div>
+
+        </div>
+
+ 
+
+        <p class="pkg-sub">Je veux connaître mon niveau réel de cybersécurité.</p>
+
+ 
+
+        <div class="pkg-block">
+
+          <h4>Méthode</h4>
+
+          <ul>
+
+            <li>Évaluation indépendante réalisée sur site</li>
+
+            <li>Plus de 90 points de contrôle</li>
+
+            <li>Entretiens avec les parties prenantes</li>
+
+            <li>Vérifications factuelles de la mise en œuvre des mesures</li>
+
+            <li>Réalisé par 2 experts certifiés IT & cybersécurité</li>
+
+          </ul>
+
+        </div>
+
+ 
+
+        <div class="pkg-block">
+
+          <h4>Livrables</h4>
+
+          <ul>
+
+            <li>Note finale de A à E</li>
+
+            <li>Analyse des résultats</li>
+
+          </ul>
+
+          <p class="pkg-note">Aucun rapport détaillé. Aucune recommandation.</p>
+
+        </div>
+
+ 
+
+        <div class="pkg-block">
+
+          <h4>Cas d’usage</h4>
+
+          <ul>
+
+            <li>Évaluation d’un fournisseur ou sous-traitant</li>
+
+            <li>Évaluation d’une filiale ou d’un partenaire</li>
+
+            <li>Due diligence cyber</li>
+
+            <li>Benchmark interne</li>
+
+            <li>Qualification d’un partenaire avant contractualisation</li>
+
+          </ul>
+
+        </div>
+
+ 
+
+        <div class="pkg-footer">
+
+          <div class="pkg-meta">
+
+            <div class="pkg-meta-item">
+
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M7.5 4.5v3.3l2 1.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+
+              <span>Durée : 1 jour sur site + temps de rédaction</span>
+
+            </div>
+
+            <div class="pkg-meta-item">
+
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="5.4" cy="5" r="2" stroke="currentColor" stroke-width="1.3"/><circle cx="10.2" cy="5.8" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M2.2 12c.5-2.2 1.8-3.4 3.2-3.4s2.7 1.2 3.2 3.4M8.2 12c.3-1.5 1.1-2.4 2-2.4s1.7.9 2.1 2.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+
+              <span>Réalisation : sur site - 2 personnes</span>
+
+            </div>
+
+          </div>
+
+          <div class="pkg-score">Score A à E</div>
+
+          <div class="pkg-scale"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span></div>
+
+        </div>
+
+      </article>
+
+ 
+
+      <!-- STANDARD -->
+
+      <article class="pkg-card pkg-standard">
+
+        <div class="pkg-top">
+
+          <div>
+
+            <div class="pkg-tag">CyberScore</div>
+
+            <div class="pkg-title">Standard</div>
+
+          </div>
+
+          <div class="pkg-icon">
+
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+
+              <path d="M6 22V12M14 22V7M22 22V4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+
+              <path d="M5 22h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+
+              <path d="M6 12l5-4 4 3 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+            </svg>
+
+          </div>
+
+        </div>
+
+ 
+
+        <p class="pkg-sub">Je veux comprendre et améliorer ma maturité cyber.</p>
+
+ 
+
+        <div class="pkg-block">
+
+          <h4>Méthode</h4>
+
+          <ul>
+
+            <li>Évaluation indépendante réalisée sur site</li>
+
+            <li>Plus de 90 points de contrôle</li>
+
+            <li>Entretiens avec les parties prenantes</li>
+
+            <li>Vérifications factuelles de la mise en œuvre des mesures</li>
+
+            <li>Réalisé par 2 experts certifiés IT & cybersécurité</li>
+
+          </ul>
+
+        </div>
+
+ 
+
+        <div class="pkg-block">
+
+          <h4>Livrables</h4>
+
+          <ul>
+
+            <li>Note finale de A à E</li>
+
+            <li>Analyse des résultats</li>
+
+            <li>Rapport détaillé</li>
+
+            <li>Recommandations</li>
+
+          </ul>
+
+          <div class="pkg-option">
+
+            <strong>Option :</strong> obtention du label « Cyber-Responsable ».
+
+          </div>
+
+        </div>
+
+ 
+
+        <div class="pkg-block">
+
+          <h4>Cas d’usage</h4>
+
+          <ul>
+
+            <li>PME</li>
+
+            <li>ETI</li>
+
+            <li>Collectivités</li>
+
+            <li>Organisations souhaitant structurer leur démarche cybersécurité</li>
+
+          </ul>
+
+        </div>
+
+ 
+
+        <div class="pkg-footer">
+
+          <div class="pkg-meta">
+
+            <div class="pkg-meta-item">
+
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M7.5 4.5v3.3l2 1.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+
+              <span>Durée : 1 jour sur site + temps de rédaction</span>
+
+            </div>
+
+            <div class="pkg-meta-item">
+
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="5.4" cy="5" r="2" stroke="currentColor" stroke-width="1.3"/><circle cx="10.2" cy="5.8" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M2.2 12c.5-2.2 1.8-3.4 3.2-3.4s2.7 1.2 3.2 3.4M8.2 12c.3-1.5 1.1-2.4 2-2.4s1.7.9 2.1 2.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+
+              <span>Réalisation : sur site - 2 personnes + rapport et recommandations</span>
+
+            </div>
+
+          </div>
+
+          <div class="pkg-score">Score A à E</div>
+
+          <div class="pkg-scale"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span></div>
+
+        </div>
+
+      </article>
+
+ 
+
+      <!-- COMPLIANCE -->
+
+      <article class="pkg-card pkg-compliance">
+
+        <div class="pkg-top">
+
+          <div>
+
+            <div class="pkg-tag">CyberScore</div>
+
+            <div class="pkg-title">Compliance</div>
+
+          </div>
+
+          <div class="pkg-icon">
+
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+
+              <path d="M14 3l9 4v6c0 5.2-3.7 9.8-9 12-5.3-2.2-9-6.8-9-12V7l9-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+
+              <path d="M10 14l2.6 2.6L18.5 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+            </svg>
+
+          </div>
+
+        </div>
+
+ 
+
+        <p class="pkg-sub">Je veux mesurer et démontrer ma conformité.</p>
+
+ 
+
+        <div class="pkg-block">
+
+          <h4>Méthode</h4>
+
+          <ul>
+
+            <li>Évaluation basée sur un référentiel ou une réglementation</li>
+
+            <li>Analyse documentaire</li>
+
+            <li>Interviews</li>
+
+            <li>Vérification sur site</li>
+
+            <li>Mapping des exigences</li>
+
+          </ul>
+
+        </div>
+
+ 
+
+        <div class="pkg-block">
+
+          <h4>Référentiels couverts</h4>
+
+          <ul>
+
+            <li>NIS2</li>
+
+            <li>ISO 27001</li>
+
+            <li>DORA</li>
+
+            <li>CRA</li>
+
+          </ul>
+
+        </div>
+
+ 
+
+        <div class="pkg-block">
+
+          <h4>Livrables</h4>
+
+          <ul>
+
+            <li>Note finale de A à E</li>
+
+            <li>Taux de conformité</li>
+
+            <li>Analyse des écarts</li>
+
+            <li>Rapport détaillé</li>
+
+            <li>Plan d’actions</li>
+
+            <li>Feuille de route de mise en conformité</li>
+
+          </ul>
+
+        </div>
+
+ 
+
+        <div class="pkg-block">
+
+          <h4>Cas d’usage</h4>
+
+          <ul>
+
+            <li>Préparation à une certification ISO 27001</li>
+
+            <li>Préparation à NIS2</li>
+
+            <li>Préparation à DORA</li>
+
+            <li>Réponse aux exigences clients ou réglementaires</li>
+
+          </ul>
+
+        </div>
+
+ 
+
+        <div class="pkg-footer">
+
+          <div class="pkg-meta">
+
+            <div class="pkg-meta-item">
+
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M7.5 4.5v3.3l2 1.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+
+              <span>Durée : 2 à 3 jours sur site + temps de rédaction</span>
+
+            </div>
+
+            <div class="pkg-meta-item">
+
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="5.4" cy="5" r="2" stroke="currentColor" stroke-width="1.3"/><circle cx="10.2" cy="5.8" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M2.2 12c.5-2.2 1.8-3.4 3.2-3.4s2.7 1.2 3.2 3.4M8.2 12c.3-1.5 1.1-2.4 2-2.4s1.7.9 2.1 2.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+
+              <span>Réalisation : sur site - 2 personnes + rapport et recommandations</span>
+
+            </div>
+
+          </div>
+
+          <div class="pkg-score">Score A à E + taux de conformité</div>
+
+          <div class="pkg-scale plus"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>+</span></div>
+
+        </div>
+
+      </article>
+
+ 
+
+    </div>
+
+ 
+
+    <!-- Parcours progressif -->
+
+    <div class="pkg-journey">
+
+      <div class="j-step">
+
+        <div class="j-ico">
+
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><circle cx="9.5" cy="9.5" r="6.8" stroke="currentColor" stroke-width="1.4"/><path d="M9.5 3v13M3 9.5h13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+
+        </div>
+
+        <div class="j-text">
+
+          <strong>Un parcours progressif</strong>
+
+          <span>adapté à vos besoins</span>
+
+        </div>
+
+      </div>
+
+ 
+
+      <div class="j-arrow">›</div>
+
+ 
+
+      <div class="j-step">
+
+        <div class="j-ico">
+
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><circle cx="9.5" cy="6.2" r="3" stroke="currentColor" stroke-width="1.4"/><path d="M3.8 16c.7-3.2 2.9-5 5.7-5s5 1.8 5.7 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+
+        </div>
+
+        <div class="j-text">
+
+          <strong>Sensibiliser</strong>
+
+          <span>premier pas</span>
+
+        </div>
+
+      </div>
+
+ 
+
+      <div class="j-arrow">›</div>
+
+ 
+
+      <div class="j-step">
+
+        <div class="j-ico">
+
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><circle cx="8" cy="8" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M12 12l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+
+        </div>
+
+        <div class="j-text">
+
+          <strong>Mesurer</strong>
+
+          <span>connaître son niveau</span>
+
+        </div>
+
+      </div>
+
+ 
+
+      <div class="j-arrow">›</div>
+
+ 
+
+      <div class="j-step">
+
+        <div class="j-ico">
+
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M4 15V9M9.5 15V5M15 15V3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M3.5 15.5h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+
+        </div>
+
+        <div class="j-text">
+
+          <strong>Comprendre & agir</strong>
+
+          <span>améliorer sa maturité</span>
+
+        </div>
+
+      </div>
+
+ 
+
+      <div class="j-arrow">›</div>
+
+ 
+
+      <div class="j-step">
+
+        <div class="j-ico">
+
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M9.5 2.5l6 2.7v4.2c0 3.5-2.4 6.3-6 7.8-3.6-1.5-6-4.3-6-7.8V5.2l6-2.7z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+
+        </div>
+
+        <div class="j-text">
+
+          <strong>Se conformer</strong>
+
+          <span>répondre aux exigences</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+ 
+
+  </div>
+
 </section>
 
 <!-- ══════════════════════════════════
