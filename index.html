@@ -389,27 +389,22 @@ nav{
  
 
 .pkg-card{
-
   position:relative;
-
   border:1px solid var(--g2);
-
   border-radius:16px;
-
   background:var(--white);
-
   padding:26px 22px 22px;
-
   overflow:hidden;
-
-  display:flex;
-
-  flex-direction:column;
-
-  min-height:640px;
-
+  display:grid;
+  grid-template-rows:
+    105px     /* header + intro */
+    205px     /* méthode */
+    100px     /* référentiels / espace réservé */
+    185px     /* livrables */
+    215px     /* cas d’usage */
+    auto;     /* footer */
+  min-height:860px;
   transition:transform .22s, box-shadow .22s, border-color .22s;
-
 }
 
  
@@ -545,13 +540,10 @@ nav{
  
 
 .pkg-block{
-
-  padding-top:18px;
-
+  padding-top:16px;
   border-top:1px solid var(--g2);
-
-  margin-top:18px;
-
+  margin-top:0;
+  overflow:hidden;
 }
 
  
@@ -685,11 +677,8 @@ nav{
  
 
 .pkg-footer{
-
-  margin-top:auto;
-
-  padding-top:20px;
-
+  align-self:end;
+  padding-top:18px;
 }
 
  
@@ -1398,7 +1387,7 @@ footer{
 
             <li>8 questions essentielles</li>
 
-            <li>Réalisation en moins de 15 minutes<br> <br> <br></rb></li>
+            <li>Réalisation en moins de 15 minutes</li>
 
           </ul>
 
