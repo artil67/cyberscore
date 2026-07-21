@@ -1282,7 +1282,7 @@ footer{
     <div class="qintro">
       <div class="eyebrow">Diagnostic rapide</div>
       <h2>Quel est votre Cyberscore ?</h2>
-      <p>Répondez à 8 questions clés inspirées du Cyberscore complet. Vous obtiendrez une première estimation de votre niveau de préparation.</p>
+      <p>Répondez à 8 questions clés inspirées du Cyberscore . Vous obtiendrez une première estimation de votre niveau de préparation.</p>
     </div>
     <div class="pmeta">
       <span class="plbl" id="plbl">Question 1 sur 8</span>
@@ -2083,7 +2083,7 @@ footer{
       <div>
         <div class="eyebrow" style="color:rgba(0,155,165,.9)">Prenons contact</div>
         <h2 class="co-title">Un expert cegecom<br>vous accompagne.</h2>
-        <p class="co-body">Vous souhaitez connaître votre niveau réel, préparer le questionnaire complet ou identifier les premières actions à mettre en place ?<br><br>Nos équipes vous accompagne pour analyser votre situation, prioriser les mesures utiles et construire une cybersécurité adaptée à votre entreprise. </p>
+        <p class="co-body">Vous souhaitez connaître votre niveau réel, préparer le Cyberscore ou identifier les premières actions à mettre en place ?<br><br>Nos équipes vous accompagne pour analyser votre situation, prioriser les mesures utiles et construire une cybersécurité adaptée à votre entreprise. </p>
         <div class="perks">
           <div class="perk">
             <div class="pico">
@@ -2139,15 +2139,12 @@ footer{
             J’accepte que mes données soient traitées par cegecom afin d’être recontacté dans le cadre de ma demande, conformément à la  <a href="https://cegecom.lu/fr/cegecom-luxembourg/protection-des-donnees-cegecom/" target="_blank">politique de confidentialité</a>.
           </label>
           <button class="btn-sub" onclick="submitForm()">Envoyer ma demande →</button>
-          <div class="for">ou</div>
-          <a href="https://cyberscore.lu" target="_blank" class="btn-cs">Accéder au Cyberscore complet ↗</a>
-        </div>
         <div class="fsuccess" id="fsuccess">
           <div class="fchk">
             <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M5.5 13l5.5 5.5 10-10" stroke="#005F69" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <div class="fok">Demande bien reçue !</div>
-          <p class="fokb">Merci pour votre intérêt. Un expert cegecom reviendra vers vous prochainement afin d'échanger sur les prochaines étapes possibles.<br><br>En attendant : <a href="https://cyberscore.lu" target="_blank">Accéder au Cyberscore complet <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 11L11 2M11 2H4.5M11 2v6.5" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+          <p class="fokb">Merci pour votre intérêt. Un expert cegecom reviendra vers vous prochainement afin d'échanger sur les prochaines étapes possibles.<br><br></p>
         </div>
       </div>
     </div>
@@ -2203,7 +2200,7 @@ const GM=[
 ];
 const GL={A:"Très bonne maturité cyber",B:"Bonne base, quelques points à renforcer",C:"Maturité intermédiaire : des actions sont recommandées",D:"Niveau de préparation insuffisant",E:"Situation à traiter en priorité"};
 const GD={
-  A:"Votre entreprise semble avoir des bases solides en matière de cybersécurité. Le Cyberscore complet permettrait de formaliser cette posture, de la valoriser et d'identifier les derniers axes d'optimisation.",
+  A:"Votre entreprise semble avoir des bases solides en matière de cybersécurité. Le Cyberscore permettrait de formaliser cette posture, de la valoriser et d'identifier les derniers axes d'optimisation.",
   B:"Votre entreprise présente plusieurs bonnes pratiques, mais certains points méritent d'être renforcés pour améliorer votre niveau de résilience et structurer davantage votre démarche cybersécurité.",
   C:"Votre entreprise dispose de certaines pratiques de sécurité, mais plusieurs axes d'améliorations ressortent. Une analyse approfondie permettrait de prioriser les mesures à mettre en place.",
   D:"Votre organisation pourrait être exposée à des risques importants en cas d'incident cyber. Il est recommandé de formaliser rapidement une démarche structurée d'évaluation et d'amélioration.",
@@ -2291,7 +2288,6 @@ function showRes(){
       ${legal}
       <div class="rsctas">
         <a href="#contact" class="btn-main" onclick="setOrigine('Résultats quiz')">Parler à un expert cegecom</a>
-        <a href="https://cyberscore.lu" target="_blank" class="btn-sec">Accéder au Cyberscore complet ↗</a>
       </div>
     </div>`;
   rs.scrollIntoView({behavior:'smooth',block:'start'});
