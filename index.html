@@ -63,6 +63,16 @@ nav{
 }
 .btn-nav:hover{background:var(--teal-dark)}
 
+  .hp-field{
+  position:absolute;
+  left:-9999px;
+  opacity:0;
+  height:0;
+  width:0;
+  overflow:hidden;
+  pointer-events:none;
+}
+
 /* ════════════════════════
    HERO
 ════════════════════════ */
@@ -1164,7 +1174,7 @@ footer{
 <nav>
   <a href="#" style="text-decoration:none;display:inline-flex;align-items:center"><img src="assets/Logo.png" alt="Cyberscore by cegecom" style="height:70px;width:auto;display:block;margin:-38px -44px;image-rendering:crisp-edges;"></a>
   <div class="nav-right">
-    <a href="https://cegecom.lu/fr/" class="nav-link" target="_blank">cegecom.lu</a>
+    <a href="https://cegecom.lu/fr/" class="nav-link" target="_blank" rel="noopener noreferrer">cegecom.lu</a>
     <a href="#contact" class="btn-nav" onclick="setOrigine('Navigation')">Demander un accompagnement</a>
   </div>
 </nav>
@@ -2120,9 +2130,14 @@ footer{
           </div>
           <label class="fcheck">
             <input type="checkbox" id="frgpd">
-            J’accepte que mes données soient traitées par cegecom afin d’être recontacté dans le cadre de ma demande, conformément à la  <a href="https://cegecom.lu/fr/cegecom-luxembourg/protection-des-donnees-cegecom/" target="_blank">politique de confidentialité</a>.
+            J’accepte que mes données soient traitées par cegecom afin d’être recontacté dans le cadre de ma demande, conformément à la  <a href="https://cegecom.lu/fr/cegecom-luxembourg/protection-des-donnees-cegecom/" target="_blank" rel="noopener noreferrer">politique de confidentialité</a>.
           </label>
+          <div class="hp-field" aria-hidden="true">
+            <label>Site web</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+          </div>
           <button class="btn-sub" onclick="submitForm()">Envoyer ma demande →</button>
+        </div>  
         <div class="fsuccess" id="fsuccess">
           <div class="fchk">
             <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M5.5 13l5.5 5.5 10-10" stroke="#005F69" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -2130,7 +2145,6 @@ footer{
           <div class="fok">Demande bien reçue !</div>
           <p class="fokb">Merci pour votre intérêt. Un expert cegecom reviendra vers vous prochainement afin d'échanger sur les prochaines étapes possibles.<br><br></p>
         </div>
-      </div>
     </div>
   </div>
 </section>
@@ -2141,9 +2155,9 @@ footer{
 <footer>
   <div class="fleft">© 2025 cegecom S.A. — Premier opérateur alternatif au Luxembourg</div>
   <div class="flinks">
-    <a href="https://cegecom.lu/fr/cegecom-luxembourg/protection-des-donnees-cegecom/" target="_blank">Protection des données</a>
-    <a href="https://cegecom.lu/fr/cegecom-luxembourg/mentions-legales-cegecom/" target="_blank">Mentions légales</a>
-    <a href="https://cegecom.lu/fr/" target="_blank">cegecom.lu</a>
+    <a href="https://cegecom.lu/fr/cegecom-luxembourg/protection-des-donnees-cegecom/" target="_blank" rel="noopener noreferrer">Protection des données</a>
+    <a href="https://cegecom.lu/fr/cegecom-luxembourg/mentions-legales-cegecom/" target="_blank" rel="noopener noreferrer">Mentions légales</a>
+    <a href="https://cegecom.lu/fr/" target="_blank" rel="noopener noreferrer">cegecom.lu</a>
   </div>
 </footer>
 
@@ -2246,9 +2260,15 @@ function showRes(){
 
   const gauge=['A','B','C','D','E'].map(l=>`<div class="gp g${l}${l===g?' lit':''}">${l}</div>`).join('');
 
-  const bads=ans.filter(a=>a.r>=2)
-    .map(a=>`<div class="pt bad">${icoWarn}<span>${RM[ans.indexOf(a)]}</span></div>`)
+  const bads = ans
+    .map((a, index) => ({ answer: a, index }))
+    .filter(item => {
+      const maxForQuestion = Math.max(...Qs[item.index].a.map(option => option.r));
+      return item.answer.r >= maxForQuestion;
+    })
+    .map(item => `<div class="pt bad">${icoWarn}<span>${RM[item.index]}</span></div>`)
     .join('');
+  
   const goods=ans.filter(a=>a.r===0)
     .map(a=>`<div class="pt good">${icoOk}<span>${GM[ans.indexOf(a)]}</span></div>`)
     .join('');
@@ -2310,9 +2330,22 @@ function submitForm(){
   const message  = document.getElementById('fm').value.trim();
   const rgpd     = document.getElementById('frgpd').checked;
 
+  const honeypot = document.getElementById('website').value.trim();
+
+  if(honeypot){
+    return;
+  }
+  
   if(!prenom||!nom||!email||!societe||!tel){
     alert('Merci de remplir tous les champs obligatoires.');return;
   }
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if(!emailRegex.test(email)){
+    alert('Merci de renseigner une adresse email valide.');
+    return;
+  }
+  
   if(!rgpd){
     alert('Veuillez accepter la politique de confidentialité.');return;
   }
