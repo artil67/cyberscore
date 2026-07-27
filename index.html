@@ -72,6 +72,20 @@ nav{
   overflow:hidden;
   pointer-events:none;
 }
+  .brand-logo-link{
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  height:70px;
+}
+
+.brand-logo{
+  height:42px;
+  width:auto;
+  display:block;
+  object-fit:contain;
+  image-rendering:auto;
+}
   
 /* ════════════════════════
    FLOATING SHARE BUTTON
@@ -1304,7 +1318,9 @@ footer{
      NAV
 ══════════════════════════════════ -->
 <nav>
-  <a href="#" style="text-decoration:none;display:inline-flex;align-items:center"><img src="assets/Logo.png" alt="Cyberscore by cegecom" style="height:70px;width:auto;display:block;margin:-38px -44px;image-rendering:crisp-edges;"></a>
+  <a href="#" class="brand-logo-link">
+    <img src="assets/Logo.png" alt="Cyberscore by cegecom" class="brand-logo">
+  </a>  
   <div class="nav-right">
     <a href="https://cegecom.lu/fr/" class="nav-link" target="_blank" rel="noopener noreferrer">cegecom.lu</a>
     <a href="#contact" class="btn-nav" onclick="setOrigine('Navigation')">Demander un accompagnement</a>
