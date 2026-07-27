@@ -72,7 +72,139 @@ nav{
   overflow:hidden;
   pointer-events:none;
 }
+  
+/* ════════════════════════
+   FLOATING SHARE BUTTON
+════════════════════════ */
+.share-widget{
+  position:fixed;
+  right:24px;
+  bottom:24px;
+  z-index:900;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:10px;
+}
 
+.share-main{
+  border:none;
+  background:var(--teal);
+  color:#fff;
+  border-radius:999px;
+  padding:13px 18px;
+  font-family:'DM Sans',sans-serif;
+  font-size:13.5px;
+  font-weight:600;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  box-shadow:0 12px 30px rgba(0,95,105,.26);
+  transition:transform .2s, background .2s, box-shadow .2s;
+}
+
+.share-main:hover{
+  background:var(--teal-dark);
+  transform:translateY(-2px);
+  box-shadow:0 16px 36px rgba(0,95,105,.32);
+}
+
+.share-main svg{
+  flex-shrink:0;
+}
+
+.share-menu{
+  width:230px;
+  background:#fff;
+  border:1px solid var(--g2);
+  border-radius:14px;
+  padding:8px;
+  box-shadow:0 18px 46px rgba(0,0,0,.14);
+  opacity:0;
+  transform:translateY(8px);
+  pointer-events:none;
+  transition:opacity .18s, transform .18s;
+}
+
+.share-widget.open .share-menu{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:all;
+}
+
+.share-option{
+  width:100%;
+  border:none;
+  background:transparent;
+  color:var(--body);
+  text-decoration:none;
+  padding:11px 12px;
+  border-radius:10px;
+  font-family:'DM Sans',sans-serif;
+  font-size:13px;
+  font-weight:500;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  transition:background .18s, color .18s;
+}
+
+.share-option:hover{
+  background:var(--teal-pale);
+  color:var(--teal-dark);
+}
+
+.share-option svg{
+  color:var(--teal-dark);
+  flex-shrink:0;
+}
+
+.share-toast{
+  position:absolute;
+  right:0;
+  bottom:64px;
+  background:var(--ink);
+  color:#fff;
+  border-radius:10px;
+  padding:10px 13px;
+  font-size:12.5px;
+  font-weight:500;
+  box-shadow:0 12px 28px rgba(0,0,0,.22);
+  opacity:0;
+  transform:translateY(6px);
+  pointer-events:none;
+  transition:opacity .2s, transform .2s;
+  white-space:nowrap;
+}
+
+.share-toast.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+@media(max-width:560px){
+  .share-widget{
+    right:16px;
+    bottom:16px;
+  }
+
+  .share-main{
+    padding:13px;
+    width:52px;
+    height:52px;
+    justify-content:center;
+  }
+
+  .share-main span{
+    display:none;
+  }
+
+  .share-menu{
+    width:220px;
+  }
+}
 /* ════════════════════════
    HERO
 ════════════════════════ */
@@ -2162,6 +2294,50 @@ footer{
 </footer>
 
 <!-- ══════════════════════════════════
+     FLOATING SHARE BUTTON
+══════════════════════════════════ -->
+<div class="share-widget" id="shareWidget">
+  <div class="share-toast" id="shareToast">Lien copié</div>
+
+  <div class="share-menu" id="shareMenu" aria-hidden="true">
+    <button class="share-option" type="button" id="shareNative">
+      <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+        <path d="M6.5 9.2l4-2.2M6.5 7.8l4 2.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="4.5" cy="8.5" r="2" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="12.5" cy="5.5" r="2" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="12.5" cy="11.5" r="2" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      Partager la page
+    </button>
+
+    <button class="share-option" type="button" id="copyLink">
+      <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+        <rect x="6" y="3" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M3 6.5v6A1.5 1.5 0 004.5 14h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      Copier le lien
+    </button>
+
+    <a class="share-option" id="shareEmail" href="#">
+      <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+        <rect x="2.5" y="4" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M3.5 5l5 4 5-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Envoyer par email
+    </a>
+  </div>
+
+  <button class="share-main" type="button" id="shareToggle" aria-expanded="false" aria-controls="shareMenu">
+    <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+      <path d="M6.5 9.2l4-2.2M6.5 7.8l4 2.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="4.5" cy="8.5" r="2" stroke="currentColor" stroke-width="1.6"/>
+      <circle cx="12.5" cy="5.5" r="2" stroke="currentColor" stroke-width="1.6"/>
+      <circle cx="12.5" cy="11.5" r="2" stroke="currentColor" stroke-width="1.6"/>
+    </svg>
+    <span>Partager</span>
+  </button>
+</div>
+<!-- ══════════════════════════════════
      QUIZ LOGIC
 ══════════════════════════════════ -->
 <script>
@@ -2378,7 +2554,119 @@ function submitForm(){
       console.error('EmailJS error:', error);
     });
 }
+// ── Floating share button ────────────────────────────────────────────────
+function getShareUrl(){
+  return window.location.origin + window.location.pathname;
+}
 
+function showShareToast(message){
+  const toast = document.getElementById('shareToast');
+  if(!toast) return;
+
+  toast.textContent = message;
+  toast.classList.add('show');
+
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2200);
+}
+
+async function copyShareLink(){
+  const url = getShareUrl();
+
+  try{
+    await navigator.clipboard.writeText(url);
+    showShareToast('Lien copié');
+  }catch(e){
+    const tempInput = document.createElement('textarea');
+    tempInput.value = url;
+    tempInput.setAttribute('readonly', '');
+    tempInput.style.position = 'absolute';
+    tempInput.style.left = '-9999px';
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+    showShareToast('Lien copié');
+  }
+}
+
+async function sharePage(){
+  const shareData = {
+    title: 'CyberScore cegecom',
+    text: 'Découvrez ce diagnostic rapide pour évaluer la maturité cybersécurité de votre entreprise.',
+    url: getShareUrl()
+  };
+
+  if(navigator.share){
+    try{
+      await navigator.share(shareData);
+    }catch(e){
+      // L’utilisateur peut fermer la fenêtre de partage, donc pas besoin d’alerte.
+    }
+  }else{
+    await copyShareLink();
+  }
+}
+
+function initShareWidget(){
+  const widget = document.getElementById('shareWidget');
+  const toggle = document.getElementById('shareToggle');
+  const menu = document.getElementById('shareMenu');
+  const nativeBtn = document.getElementById('shareNative');
+  const copyBtn = document.getElementById('copyLink');
+  const emailLink = document.getElementById('shareEmail');
+
+  if(!widget || !toggle || !menu) return;
+
+  const url = getShareUrl();
+  const subject = encodeURIComponent('CyberScore cegecom — Diagnostic cybersécurité');
+  const body = encodeURIComponent(
+    `Hello,\n\nJe te partage cette page pour évaluer rapidement la maturité cybersécurité de notre entreprise :\n\n${url}\n\n`
+  );
+
+  emailLink.href = `mailto:?subject=${subject}&body=${body}`;
+
+  toggle.addEventListener('click', function(e){
+    e.stopPropagation();
+
+    const isOpen = widget.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    menu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+  });
+
+  nativeBtn.addEventListener('click', async function(){
+    await sharePage();
+    widget.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    menu.setAttribute('aria-hidden', 'true');
+  });
+
+  copyBtn.addEventListener('click', async function(){
+    await copyShareLink();
+    widget.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    menu.setAttribute('aria-hidden', 'true');
+  });
+
+  document.addEventListener('click', function(e){
+    if(!widget.contains(e.target)){
+      widget.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      menu.setAttribute('aria-hidden', 'true');
+    }
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      widget.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      menu.setAttribute('aria-hidden', 'true');
+    }
+  });
+}
+
+initShareWidget();
 render();
 </script>
 </body>
