@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cyberscore by cegecom — Évaluez votre cybersécurité</title>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<link rel="preconnect" href="https://api.emailjs.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -1310,6 +1310,355 @@ footer{
   .gauge{flex-wrap:wrap}
   .rsctas{flex-direction:column}
 }
+
+/* ════════════════════════════════════════════════
+   MOBILE — FINE TUNING (nav burger, hero, densité,
+   typographie, zones cliquables ≥ 48px, formulaire)
+════════════════════════════════════════════════ */
+
+html{-webkit-text-size-adjust:100%}
+a,button,input,select,textarea{-webkit-tap-highlight-color:rgba(0,155,165,.18)}
+
+/* Ancrages : compense la nav sticky */
+section,#quiz,#res,#contact,#packages{scroll-margin-top:78px}
+
+/* ── Burger (masqué en desktop) ────────────────── */
+.nav-burger{
+  display:none;
+  width:48px;height:48px;
+  margin-right:-10px;
+  border:none;background:transparent;cursor:pointer;
+  flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  border-radius:10px;
+}
+.nav-burger span{
+  display:block;width:23px;height:2px;border-radius:2px;
+  background:var(--teal-deep);
+  transition:transform .25s ease,opacity .18s ease;
+}
+nav.open .nav-burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+nav.open .nav-burger span:nth-child(2){opacity:0}
+nav.open .nav-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav-lang-slot:empty{display:none}
+
+/* ══════════ ≤ 900px : nav repliée ══════════ */
+@media(max-width:900px){
+  nav{
+    height:64px;padding:0 20px;
+    overflow:visible;                 /* laisse sortir le panneau */
+  }
+  .brand-logo-link{height:64px;overflow:hidden}
+  .brand-logo{height:82px}
+
+  .nav-burger{display:flex}
+
+  .nav-right{
+    position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;align-items:stretch;gap:4px;
+    padding:10px 20px 18px;
+    background:#fff;
+    border-bottom:1px solid var(--g2);
+    box-shadow:0 20px 40px rgba(0,0,0,.13);
+    display:none;
+  }
+  nav.open .nav-right{display:flex}
+
+  .nav-link{
+    display:flex;align-items:center;
+    min-height:48px;padding:0 4px;
+    font-size:16px;
+  }
+  .nav-lang-slot{
+    display:flex;align-items:center;
+    min-height:48px;
+  }
+  .btn-nav{
+    display:flex;align-items:center;justify-content:center;
+    width:100%;min-height:52px;
+    margin-top:6px;padding:14px 16px;
+    font-size:15px;white-space:nowrap;text-align:center;
+    border-radius:8px;
+  }
+
+  section,#quiz,#res,#contact,#packages{scroll-margin-top:70px}
+}
+
+/* ══════════ ≤ 768px : version mobile ══════════ */
+@media(max-width:768px){
+
+  /* ── HERO : zone raccourcie ── */
+  .hero{min-height:auto;padding-left:22px;padding-right:22px}
+  .hero-left{padding:40px 0 46px}
+  .hero-pill{
+    margin-bottom:18px;padding:8px 13px;
+    font-size:10.5px;letter-spacing:.9px;line-height:1.35;
+  }
+  .hero h1{font-size:clamp(31px,8.4vw,42px);margin-bottom:16px;line-height:1.1}
+  .hero h1 br{display:none}
+  .hero-sub{font-size:16px;line-height:1.6;max-width:none;margin-bottom:26px}
+  .hero-ctas{flex-direction:column;align-items:stretch;gap:12px}
+  .btn-hero{
+    width:100%;min-height:52px;justify-content:center;
+    font-size:16px;padding:14px 24px;
+  }
+  .btn-ghost-hero{
+    width:100%;min-height:48px;justify-content:center;
+    font-size:15px;color:rgba(255,255,255,.75);
+  }
+  .hero-glow{width:460px;height:460px;right:-200px;top:-200px}
+  .hero-glow2{width:300px;height:300px}
+
+  /* ── TRUST BAR : 2 colonnes, lisible ── */
+  .trust{
+    display:grid;grid-template-columns:1fr 1fr;
+    gap:14px 16px;padding:20px 22px;justify-items:start;
+  }
+  .trust .ti:last-child{grid-column:1/-1}
+  .ti{font-size:14.5px;gap:10px;align-items:center;line-height:1.3}
+  .ti-ico{width:38px;height:38px;border-radius:9px}
+  .ti-ico svg{width:22px;height:22px}
+
+  /* ── CEO ── */
+  .ceo{padding:52px 22px}
+  .ceo-inner{gap:32px}
+  .ceo h2 br{display:none}
+  .ceo h2{font-size:29px}
+  .ceo-body{font-size:15.5px;line-height:1.7}
+  .eyebrow{font-size:11.5px;letter-spacing:1.4px}
+  .stats-grid{gap:10px}
+  .sbox{padding:18px 15px;border-radius:12px}
+  .sbox-n{font-size:27px;margin-bottom:6px}
+  .sbox-t{font-size:13px;line-height:1.45}
+
+  /* ── RISQUES / BÉNÉFICES ── */
+  .risks,.benefits{padding:52px 22px}
+  .sec-head{margin-bottom:28px;gap:14px}
+  .sec-title{font-size:28px;margin-top:6px}
+  .sec-title br{display:none}
+  .sec-desc{font-size:15px;line-height:1.65}
+  .grid3,.bgrid{gap:12px}
+  .bgrid{margin-top:26px}
+  .rcard{padding:22px 20px}
+  .rico{width:46px;height:46px;margin-bottom:14px}
+  .rico svg{width:26px;height:26px}
+  .rcard h3{font-size:18px}
+  .rcard p{font-size:14.5px;line-height:1.6}
+  .bcard{padding:22px 18px}
+  .bnum{font-size:11.5px;margin-bottom:8px}
+  .bcard h3{font-size:17px}
+  .bcard p{font-size:14px;line-height:1.6}
+  .blink{
+    display:inline-flex;align-items:center;
+    min-height:48px;margin-top:6px;font-size:14.5px;
+  }
+
+  /* ── QUIZ ── */
+  .quiz{padding:52px 18px}
+  .qintro{margin-bottom:28px}
+  .qintro h2{font-size:29px}
+  .qintro p{font-size:15px;line-height:1.6}
+  .pmeta{margin-bottom:8px}
+  .plbl,.ppct{font-size:13px}
+  .ptrack{height:4px;margin-bottom:22px}
+  .qcard{padding:24px 18px;border-radius:14px}
+  .qcat{font-size:11px;letter-spacing:1.2px}
+  .qtext{font-size:21px;margin-bottom:22px;line-height:1.35}
+  .answers{gap:10px}
+  .ans{
+    display:flex;align-items:center;
+    min-height:56px;
+    padding:14px 16px 14px 48px;
+    font-size:15px;line-height:1.45;border-radius:10px;
+  }
+  .ans::before{left:15px;width:20px;height:20px}
+  .ans.sel::before{box-shadow:inset 0 0 0 4px var(--teal-pale)}
+  .qnav{margin-top:18px}
+  .btn-next{
+    width:100%;min-height:52px;
+    padding:14px 20px;font-size:16px;border-radius:8px;
+  }
+  .btn-next.on:hover{transform:none}
+
+  /* ── RÉSULTATS ── */
+  #res{padding:52px 18px}
+  .rscard{padding:26px 18px;border-radius:14px}
+  .gauge{gap:6px;margin-bottom:24px}
+  .gp{width:52px;height:52px;font-size:22px;border-radius:11px}
+  .rs-title{font-size:25px}
+  .rs-sub{font-size:15px;margin-bottom:24px;max-width:none}
+  .ptlabel{font-size:11.5px}
+  .ptgroup{gap:10px}
+  .pt{font-size:14px;padding:13px 14px;line-height:1.55}
+  .legalbox{padding:16px;gap:12px}
+  .lbody strong{font-size:14.5px}
+  .lbody p{font-size:13.5px;line-height:1.6}
+  .rsctas{flex-direction:column;gap:12px}
+  .btn-main,.btn-sec{
+    display:flex;align-items:center;justify-content:center;
+    width:100%;min-height:52px;font-size:16px;border-radius:8px;
+  }
+
+  /* ── PACKAGES : suppression des vides ── */
+  .packages{padding:52px 22px}
+  .pkg-head{margin-bottom:30px}
+  .pkg-head h2{font-size:29px}
+  .pkg-head p{font-size:15px}
+  .pkg-grid{gap:14px}
+  .pkg-card{
+    display:block;                 /* annule les rangées fixes 215px */
+    grid-template-rows:none;
+    min-height:0;
+    padding:24px 20px 20px;
+  }
+  .pkg-top{margin-bottom:18px;gap:12px}
+  .pkg-icon{width:56px;height:56px}
+  .pkg-tag{font-size:11px}
+  .pkg-title{font-size:30px}
+  .pkg-sub{font-size:14px;min-height:0;margin:10px 0 18px}
+  .pkg-block{padding-top:16px;margin-top:16px}
+  .pkg-block h4{font-size:12px}
+  .pkg-block ul{gap:9px}
+  .pkg-block li{font-size:14px;padding-left:18px;line-height:1.5}
+  .pkg-block li::before{width:6px;height:6px}
+  .pkg-note{font-size:13px}
+  .pkg-option{font-size:13.5px;padding:14px;line-height:1.55}
+  .pkg-footer{padding-top:18px}
+  .pkg-meta{padding:14px;gap:10px}
+  .pkg-meta-item{font-size:13px;line-height:1.45}
+  .pkg-score{font-size:11.5px;margin-top:14px}
+  .pkg-scale span{width:28px;height:28px;font-size:13.5px;border-radius:7px}
+  .pkg-journey{margin-top:26px;padding:18px;gap:14px}
+  .j-ico{width:44px;height:44px}
+  .j-text strong{font-size:12px}
+  .j-text span{font-size:13px;line-height:1.45}
+
+  /* ── CONTACT + FORMULAIRE ── */
+  #contact{padding:52px 22px}
+  .cogrid{gap:34px}
+  .co-title{font-size:28px}
+  .co-title br{display:none}
+  .co-body{font-size:15.5px;line-height:1.7;margin-bottom:26px}
+  .perks{gap:16px}
+  .perk{gap:13px}
+  .pico{width:40px;height:40px;min-width:40px;border-radius:10px}
+  .pico svg{width:20px;height:20px}
+  .ptxt{font-size:14px;line-height:1.5}
+  .ptxt strong{font-size:14.5px;margin-bottom:3px}
+
+  .fbox{padding:24px 18px;border-radius:14px}
+  .fbox-title{font-size:21px;margin-bottom:18px}
+  .frow{grid-template-columns:1fr;gap:14px;margin-bottom:14px}
+  .fg2{gap:7px}
+  .fg2 label{font-size:13px}
+  .fg2 input,.fg2 select,.fg2 textarea{
+    min-height:50px;padding:13px 14px;border-radius:9px;
+    font-size:16px;               /* évite le zoom auto iOS */
+  }
+  .fg2 textarea{min-height:110px}
+  .fcheck{
+    align-items:flex-start;gap:12px;
+    margin:18px 0 22px;padding:2px 0;
+    font-size:13.5px;line-height:1.75;
+  }
+  .fcheck a{display:inline-block;padding:2px 0}
+  .fcheck input{width:24px;height:24px;margin-top:2px}
+  .btn-sub{min-height:54px;font-size:16.5px;border-radius:8px}
+  .btn-sub:hover{transform:none}
+  .for{font-size:13px;margin:16px 0}
+  .btn-cs{
+    display:flex;align-items:center;justify-content:center;
+    min-height:50px;font-size:15px;
+  }
+  .fsuccess{padding:32px 8px}
+  .fok{font-size:21px}
+  .fokb{font-size:15px;line-height:1.6}
+
+  /* ── FOOTER ── */
+  footer{padding:20px 22px 26px;gap:8px}
+  .fleft{font-size:13px;line-height:1.5}
+  .flinks{flex-direction:column;gap:0;width:100%}
+  .flinks a{
+    display:flex;align-items:center;
+    min-height:48px;font-size:14px;
+  }
+
+  /* ── PARTAGE ── */
+  .share-main{width:56px;height:56px;padding:0}
+  .share-option{min-height:48px;font-size:14px}
+  .share-toast{bottom:68px;font-size:13px}
+}
+
+/* Tablette : supprime les rangées fixes (source de blancs) */
+@media(max-width:1120px){
+  .pkg-card{display:block;grid-template-rows:none;min-height:0}
+  .pkg-sub{min-height:0}
+}
+
+/* ══════════ ≤ 400px : petits écrans ══════════ */
+@media(max-width:400px){
+  .trust{grid-template-columns:1fr}
+  .trust .ti:last-child{grid-column:auto}
+  .stats-grid{grid-template-columns:1fr}
+  .gp{width:46px;height:46px;font-size:20px}
+  .hero h1{font-size:30px}
+}
+
+/* ════════════════════════
+   SÉLECTEUR DE LANGUE
+════════════════════════ */
+nav{overflow:visible}
+.brand-logo-link{overflow:hidden}
+
+.lang-switch{position:relative}
+.lang-btn{
+  display:flex;align-items:center;gap:7px;
+  background:transparent;border:1px solid var(--g2);
+  border-radius:6px;padding:7px 11px;
+  font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;
+  letter-spacing:.04em;color:var(--g5);cursor:pointer;
+  transition:border-color .2s,color .2s;
+}
+.lang-btn:hover{border-color:var(--teal);color:var(--teal)}
+.lang-chev{transition:transform .2s}
+.lang-switch.open .lang-chev{transform:rotate(180deg)}
+
+.lang-menu{
+  position:absolute;top:calc(100% + 9px);right:0;
+  min-width:176px;background:#fff;
+  border:1px solid var(--g2);border-radius:9px;
+  box-shadow:0 16px 38px rgba(0,0,0,.13);
+  padding:5px;display:none;z-index:400;
+}
+.lang-switch.open .lang-menu{display:block}
+
+.lang-opt{
+  display:flex;align-items:center;gap:10px;width:100%;
+  background:transparent;border:none;border-radius:6px;
+  padding:9px 10px;cursor:pointer;text-align:left;
+  font-family:'DM Sans',sans-serif;font-size:13.5px;color:var(--g5);
+  transition:background .15s,color .15s;
+}
+.lang-opt:hover{background:var(--teal-pale);color:var(--teal-dark)}
+.lang-opt .lc{
+  font-weight:600;font-size:11.5px;letter-spacing:.06em;
+  color:var(--teal-dark);min-width:24px;
+}
+.lang-opt[aria-selected="true"]{background:var(--teal-pale);color:var(--teal-dark);font-weight:500}
+
+@media(max-width:900px){
+  .nav-lang-slot{width:100%;min-height:auto;display:block}
+  .lang-switch{width:100%}
+  .lang-btn{
+    width:100%;justify-content:flex-start;
+    min-height:50px;font-size:15px;padding:12px 14px;border-radius:8px;
+  }
+  .lang-btn .lang-chev{margin-left:auto}
+  .lang-menu{
+    position:static;right:auto;top:auto;
+    width:100%;margin-top:6px;box-shadow:none;
+  }
+  .lang-opt{min-height:48px;font-size:15px}
+}
 </style>
 </head>
 <body>
@@ -1317,13 +1666,34 @@ footer{
 <!-- ══════════════════════════════════
      NAV
 ══════════════════════════════════ -->
-<nav>
+<nav id="siteNav">
   <a href="#" class="brand-logo-link">
     <img src="assets/Logo.png" alt="Cyberscore by cegecom" class="brand-logo">
-  </a>  
-  <div class="nav-right">
-    <a href="https://cegecom.lu/fr/" class="nav-link" target="_blank" rel="noopener noreferrer">cegecom.lu</a>
-    <a href="#contact" class="btn-nav" onclick="setOrigine('Navigation')">Demander un accompagnement</a>
+  </a>
+  <button class="nav-burger" id="navBurger" type="button" aria-label="Ouvrir le menu" data-i18n-aria-label="nav.burger.open" aria-expanded="false" aria-controls="navRight">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-right" id="navRight">
+    <a href="https://cegecom.lu/fr/" class="nav-link" id="navCegecomLink" target="_blank" rel="noopener noreferrer">cegecom.lu</a>
+
+    <!-- Sélecteur de langue -->
+    <div class="nav-lang-slot" id="navLangSlot">
+      <div class="lang-switch" id="langSwitch">
+        <button class="lang-btn" id="langBtn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Langue" data-i18n-aria-label="nav.lang.label">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><circle cx="7.5" cy="7.5" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M1.6 7.5h11.8M7.5 1.5c1.6 1.7 2.5 3.8 2.5 6s-.9 4.3-2.5 6c-1.6-1.7-2.5-3.8-2.5-6s.9-4.3 2.5-6z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+          <span id="langCurrent">FR</span>
+          <svg class="lang-chev" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.8L5 6.8l3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="lang-menu" id="langMenu" role="listbox" aria-label="Langue" data-i18n-aria-label="nav.lang.label">
+          <button class="lang-opt" type="button" role="option" data-lang="fr"><span class="lc">FR</span><span data-i18n="lang.fr">Français</span></button>
+          <button class="lang-opt" type="button" role="option" data-lang="en"><span class="lc">EN</span><span data-i18n="lang.en">Anglais</span></button>
+          <button class="lang-opt" type="button" role="option" data-lang="de"><span class="lc">DE</span><span data-i18n="lang.de">Allemand</span></button>
+          <button class="lang-opt" type="button" role="option" data-lang="lu"><span class="lc">LU</span><span data-i18n="lang.lu">Luxembourgeois</span></button>
+        </div>
+      </div>
+    </div>
+
+    <a href="#contact" class="btn-nav" onclick="setOrigine('Navigation')" data-i18n="nav.cta">Demander un accompagnement</a>
   </div>
 </nav>
 
@@ -1337,17 +1707,17 @@ footer{
   <div class="hero-left">
     <div class="hero-pill">
       <div class="pill-dot"></div>
-      Diagnostique cybersécurité · PME & entreprises luxembourgeoises
+      <span data-i18n="hero.pill">Diagnostique cybersécurité · PME &amp; entreprises luxembourgeoises</span>
     </div>
-    <h1>Évaluez la maturité<br>cybersécurité de votre <em>entreprise.</em></h1>
-    <p class="hero-sub">En quelques minutes, obtenez une première estimation de votre niveau de préparation face aux risques cyber et identifiez les axes prioritaires à renforcer.</p>
+    <h1 data-i18n-html="hero.title">Évaluez la maturité <br>cybersécurité de votre <em>entreprise.</em></h1>
+    <p class="hero-sub" data-i18n="hero.sub">En quelques minutes, obtenez une première estimation de votre niveau de préparation face aux risques cyber et identifiez les axes prioritaires à renforcer.</p>
     <div class="hero-ctas">
       <a href="#quiz" class="btn-hero">
-        Lancer le diagnostic
+        <span data-i18n="hero.cta1">Lancer le diagnostic</span>
         <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M3 7.5h9M8.5 4l3.5 3.5L8.5 11" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
       <a href="#contact" class="btn-ghost-hero" onclick="setOrigine('Hero — Parler à un expert')">
-        Être accompagné par un expert
+        <span data-i18n="hero.cta2">Être accompagné par un expert</span>
         <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 11L11 2M11 2H4.5M11 2v6.5" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
@@ -1355,19 +1725,19 @@ footer{
   <div class="hero-right">
     <div class="hcard">
       <div class="hcard-head">
-        <div class="hcard-label">Aperçu du diagnostic Cyberscore</div>
+        <div class="hcard-label" data-i18n="hero.card.label">Aperçu du diagnostic Cyberscore</div>
         <div class="hcard-grade">C</div>
       </div>
       <div class="bar-list">
-        <div><div class="bar-lbl"><span>Gouvernance</span><span>42%</span></div><div class="bar-track"><div class="bar-fill fw" style="width:42%"></div></div></div>
-        <div><div class="bar-lbl"><span>Gestion des accès</span><span>25%</span></div><div class="bar-track"><div class="bar-fill fb" style="width:25%"></div></div></div>
-        <div><div class="bar-lbl"><span>Sauvegardes</span><span>60%</span></div><div class="bar-track"><div class="bar-fill fg" style="width:60%"></div></div></div>
-        <div><div class="bar-lbl"><span>Sensibilisation</span><span>18%</span></div><div class="bar-track"><div class="bar-fill fb" style="width:18%"></div></div></div>
-        <div><div class="bar-lbl"><span>Conformité NIS2</span><span>71%</span></div><div class="bar-track"><div class="bar-fill fg" style="width:71%"></div></div></div>
+        <div><div class="bar-lbl"><span data-i18n="hero.card.b1">Gouvernance</span><span>42%</span></div><div class="bar-track"><div class="bar-fill fw" style="width:42%"></div></div></div>
+        <div><div class="bar-lbl"><span data-i18n="hero.card.b2">Gestion des accès</span><span>25%</span></div><div class="bar-track"><div class="bar-fill fb" style="width:25%"></div></div></div>
+        <div><div class="bar-lbl"><span data-i18n="hero.card.b3">Sauvegardes</span><span>60%</span></div><div class="bar-track"><div class="bar-fill fg" style="width:60%"></div></div></div>
+        <div><div class="bar-lbl"><span data-i18n="hero.card.b4">Sensibilisation</span><span>18%</span></div><div class="bar-track"><div class="bar-fill fb" style="width:18%"></div></div></div>
+        <div><div class="bar-lbl"><span data-i18n="hero.card.b5">Conformité NIS2</span><span>71%</span></div><div class="bar-track"><div class="bar-fill fg" style="width:71%"></div></div></div>
       </div>
       <div class="hcard-foot">
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="2" y="5" width="8" height="6" rx="1.2" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/><path d="M4 5V3.8a2 2 0 014 0V5" stroke="rgba(255,255,255,.35)" stroke-width="1.2" stroke-linecap="round"/></svg>
-        Diagnostic confidentiel · Résultat en 2 minutes
+        <span data-i18n="hero.card.foot">Diagnostic confidentiel · Résultat en 2 minutes</span>
       </div>
     </div>
   </div>
@@ -1381,31 +1751,31 @@ footer{
     <div class="ti-ico">
       <svg width="30" height="30" viewBox="0 0 16 16" fill="none"><path d="M2 8L8 2l4.8 4.8a.9.9 0 010 1.3L8 13 2 8z" stroke="#005F69" stroke-width="1.3" stroke-linejoin="round"/><circle cx="10.5" cy="5.5" r="1" fill="#005F69"/></svg>
     </div>
-    Diagnostic gratuit
+    <span data-i18n="trust.1">Diagnostic gratuit</span>
   </div>
   <div class="ti">
     <div class="ti-ico">
       <svg width="30" height="30" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="9" r="5" stroke="#005F69" stroke-width="1.3"/><path d="M8 6.8V9l1.4.9" stroke="#005F69" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 2h4" stroke="#005F69" stroke-width="1.3" stroke-linecap="round"/></svg>
     </div>
-    En deux minutes
+    <span data-i18n="trust.2">En deux minutes</span>
   </div>
   <div class="ti">
     <div class="ti-ico">
       <svg width="30" height="30" viewBox="0 0 16 16" fill="none"><path d="M8 2L3 4.3v3.6c0 3 2.4 5.6 5 6.6 2.6-1 5-3.6 5-6.6V4.3L8 2z" stroke="#005F69" stroke-width="1.3" stroke-linejoin="round"/></svg>
     </div>
-    Sans engagement
+    <span data-i18n="trust.3">Sans engagement</span>
   </div>
   <div class="ti">
     <div class="ti-ico">
       <svg width="30" height="30" viewBox="0 0 16 16" fill="none"><path d="M8 2a4.2 4.2 0 014.2 4.2c0 2.8-4.2 7.8-4.2 7.8S3.8 9 3.8 6.2A4.2 4.2 0 018 2z" stroke="#005F69" stroke-width="1.3" stroke-linejoin="round"/><circle cx="8" cy="6.2" r="1.4" stroke="#005F69" stroke-width="1.2"/></svg>
     </div>
-    Acteur local luxembourgeois
+    <span data-i18n="trust.4">Acteur local luxembourgeois</span>
   </div>
   <div class="ti">
     <div class="ti-ico">
       <svg width="30" height="30" viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="12" rx="1.4" stroke="#005F69" stroke-width="1.3"/><path d="M5.5 6h5M5.5 8.5h5M5.5 11h3" stroke="#005F69" stroke-width="1.2" stroke-linecap="round"/></svg>
     </div>
-    Partenaire Luxcontrol
+    <span data-i18n="trust.5">Partenaire Luxcontrol</span>
   </div>
 </div>
 
@@ -1415,19 +1785,19 @@ footer{
 <section class="ceo">
   <div class="ceo-inner">
     <div>
-      <div class="eyebrow">Nouveau cadre légal · Mars 2025</div>
-      <h2>La cybersécurité,<br>un enjeu de gouvernance</h2>
-      <p class="ceo-body" style="margin-top:18px">
+      <div class="eyebrow" data-i18n="ceo.eyebrow">Nouveau cadre légal · Mars 2025</div>
+      <h2 data-i18n-html="ceo.title">La cybersécurité, <br>un enjeu de gouvernance</h2>
+      <p class="ceo-body" style="margin-top:18px" data-i18n-html="ceo.body">
         Aujourd'hui, la cybersécurité ne concerne plus uniquement les équipes techniques.<br><br>
         Les dirigeants doivent pouvoir démontrer une démarche d'évaluation et d'amélioration de leur posture cyber. Au Luxembourg, depuis la <strong>directive NIS 2</strong> le CEO est désormais <strong>personnellement responsable</strong> en cas d'incident.<br><br>
         Le Cyberscore permet d'obtenir un état des lieux clair, de prioriser les actions à mener et de structurer une trajectoire d'amélioration adaptée à <strong>votre organisation.</strong>
       </p>
     </div>
     <div class="stats-grid">
-      <div class="sbox"><div class="sbox-n">Vision claire</div><div class="sbox-t">Évaluez rapidement votre niveau de maturité cyber.</div></div>
-      <div class="sbox"><div class="sbox-n">8 questions</div><div class="sbox-t">Le questionnaire repose sur une analyse détaillée en 8 points.</div></div>
-      <div class="sbox"><div class="sbox-n">Score A → E</div><div class="sbox-t">Une notation lisible pour situer votre niveau et suivre votre progression.</div></div>
-      <div class="sbox"><div class="sbox-n">Plan d'action</div><div class="sbox-t">Identifiez les priorités pour renforcer votre sécurité par étape.</div></div>
+      <div class="sbox"><div class="sbox-n" data-i18n="ceo.s1.n">Vision claire</div><div class="sbox-t" data-i18n="ceo.s1.t">Évaluez rapidement votre niveau de maturité cyber.</div></div>
+      <div class="sbox"><div class="sbox-n" data-i18n="ceo.s2.n">8 questions</div><div class="sbox-t" data-i18n="ceo.s2.t">Le questionnaire repose sur une analyse détaillée en 8 points.</div></div>
+      <div class="sbox"><div class="sbox-n" data-i18n="ceo.s3.n">Score A → E</div><div class="sbox-t" data-i18n="ceo.s3.t">Une notation lisible pour situer votre niveau et suivre votre progression.</div></div>
+      <div class="sbox"><div class="sbox-n" data-i18n="ceo.s4.n">Plan d'action</div><div class="sbox-t" data-i18n="ceo.s4.t">Identifiez les priorités pour renforcer votre sécurité par étape.</div></div>
     </div>
   </div>
 </section>
@@ -1438,9 +1808,9 @@ footer{
 <section class="quiz" id="quiz">
   <div class="qwrap">
     <div class="qintro">
-      <div class="eyebrow">Diagnostic rapide</div>
-      <h2>Quel est votre Cyberscore ?</h2>
-      <p>Répondez à 8 questions clés inspirées du Cyberscore . Vous obtiendrez une première estimation de votre niveau de préparation.</p>
+      <div class="eyebrow" data-i18n="quiz.eyebrow">Diagnostic rapide</div>
+      <h2 data-i18n="quiz.title">Quel est votre Cyberscore ?</h2>
+      <p data-i18n="quiz.sub">Répondez à 8 questions clés inspirées du Cyberscore . Vous obtiendrez une première estimation de votre niveau de préparation.</p>
     </div>
     <div class="pmeta">
       <span class="plbl" id="plbl">Question 1 sur 8</span>
@@ -1457,8 +1827,8 @@ footer{
 <section id="res">
   <div class="rswrap">
     <div style="text-align:center;margin-bottom:40px">
-      <div class="eyebrow">Votre résultat</div>
-      <h2 style="font-size:clamp(28px,3.2vw,42px);color:var(--black);margin-top:10px">Votre estimation Cyberscore</h2>
+      <div class="eyebrow" data-i18n="res.eyebrow">Votre résultat</div>
+      <h2 style="font-size:clamp(28px,3.2vw,42px);color:var(--black);margin-top:10px" data-i18n="res.title">Votre estimation Cyberscore</h2>
     </div>
     <div id="rescontent"></div>
     <div style="text-align:center;margin-top:28px">
@@ -1466,687 +1836,344 @@ footer{
   </div>
 </section>
 
-
 <!-- ══════════════════════════════════
-
      PACKAGES CYBERSCORE
-
 ══════════════════════════════════ -->
-
 <section class="packages" id="packages">
-
   <div class="pkg-wrap">
-
     <div class="pkg-head">
-
-      <div class="eyebrow">Packages CyberScore</div>
-
-      <h2>4 niveaux pour évaluer, comprendre et renforcer votre cybersécurité</h2>
-
-      <p>
-
-        Du premier diagnostic rapide à l’accompagnement de conformité, les packages CyberScore permettent d’avancer progressivement selon votre niveau de maturité, vos objectifs et vos obligations.
-
-      </p>
-
+      <div class="eyebrow" data-i18n="pkg.eyebrow">Packages CyberScore</div>
+      <h2 data-i18n="pkg.title">4 niveaux pour évaluer, comprendre et renforcer votre cybersécurité</h2>
+      <p data-i18n="pkg.sub">Du premier diagnostic rapide à l’accompagnement de conformité, les packages CyberScore permettent d’avancer progressivement selon votre niveau de maturité, vos objectifs et vos obligations.</p>
     </div>
-
- 
 
     <div class="pkg-grid">
 
- 
-
       <!-- LIGHT -->
-
       <article class="pkg-card pkg-light">
-
         <div class="pkg-top">
-
           <div>
-
             <div class="pkg-tag">CyberScore</div>
-
             <div class="pkg-title">Light</div>
-
           </div>
-
           <div class="pkg-icon">
-
             <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-
               <path d="M5 18a9 9 0 1118 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-
               <path d="M14 18l4-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-
               <circle cx="14" cy="18" r="2.2" stroke="currentColor" stroke-width="2"/>
-
               <path d="M7.5 18h-2M22.5 18h-2M8.2 11.8l-1.5-1.2M19.8 11.8l1.5-1.2M14 9V6.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-
             </svg>
-
           </div>
-
         </div>
 
- 
-
-        <p class="pkg-sub">Je veux un premier niveau de visibilité.</p>
-
- 
+        <p class="pkg-sub" data-i18n="pkg.light.sub">Je veux un premier niveau de visibilité.</p>
 
         <div class="pkg-block">
-
-          <h4>Méthode</h4>
-
+          <h4 data-i18n="pkg.h.method">Méthode</h4>
           <ul>
-
-            <li>Auto-évaluation en ligne</li>
-
-            <li>8 questions essentielles</li>
-
-            <li>Réalisation en moins de 15 minutes</li>
-
+            <li data-i18n="pkg.light.m1">Auto-évaluation en ligne</li>
+            <li data-i18n="pkg.light.m2">8 questions essentielles</li>
+            <li data-i18n="pkg.light.m3">Réalisation en moins de 15 minutes</li>
           </ul>
-
         </div>
-
- 
 
         <div class="pkg-block">
-
-          <h4>Livrables</h4>
-
+          <h4 data-i18n="pkg.h.deliver">Livrables</h4>
           <ul>
-
-            <li>Score global de A à E</li>
-
-            <li>Niveau de maturité estimé</li>
-
+            <li data-i18n="pkg.light.d1">Score global de A à E</li>
+            <li data-i18n="pkg.light.d2">Niveau de maturité estimé</li>
           </ul>
-
         </div>
-
- 
 
         <div class="pkg-block">
-
-          <h4>Cas d’usage</h4>
-
+          <h4 data-i18n="pkg.h.usecase">Cas d’usage</h4>
           <ul>
-
-            <li>Première approche cybersécurité</li>
-
-            <li>Sensibilisation des dirigeants</li>
-
-            <li>PME n’ayant jamais réalisé d’évaluation</li>
-
+            <li data-i18n="pkg.light.u1">Première approche cybersécurité</li>
+            <li data-i18n="pkg.light.u2">Sensibilisation des dirigeants</li>
+            <li data-i18n="pkg.light.u3">PME n’ayant jamais réalisé d’évaluation</li>
           </ul>
-
         </div>
-
- 
 
         <div class="pkg-footer">
-
           <div class="pkg-meta">
-
             <div class="pkg-meta-item">
-
               <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M7.5 4.5v3.3l2 1.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-
-              <span>Durée : 15 minutes</span>
-
+              <span data-i18n="pkg.light.dur">Durée : 15 minutes</span>
             </div>
-
             <div class="pkg-meta-item">
-
               <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect x="2.2" y="3" width="10.6" height="7.4" rx="1" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 12h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-
-              <span>Réalisation : en ligne</span>
-
+              <span data-i18n="pkg.light.mode">Réalisation : en ligne</span>
             </div>
-
           </div>
-
         </div>
-
       </article>
-
- 
 
       <!-- BASIC -->
-
       <article class="pkg-card pkg-basic">
-
         <div class="pkg-top">
-
           <div>
-
             <div class="pkg-tag">CyberScore</div>
-
             <div class="pkg-title">Basic</div>
-
           </div>
-
           <div class="pkg-icon">
-
             <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-
               <circle cx="12" cy="12" r="7" stroke="currentColor" stroke-width="2"/>
-
               <path d="M17.2 17.2L23 23" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-
             </svg>
-
           </div>
-
         </div>
 
- 
-
-        <p class="pkg-sub">Je veux connaître mon niveau réel de cybersécurité.</p>
-
- 
+        <p class="pkg-sub" data-i18n="pkg.basic.sub">Je veux connaître mon niveau réel de cybersécurité.</p>
 
         <div class="pkg-block">
-
-          <h4>Méthode</h4>
-
+          <h4 data-i18n="pkg.h.method">Méthode</h4>
           <ul>
-
-            <li>Évaluation indépendante réalisée sur site</li>
-
-            <li>Plus de 90 points de contrôle</li>
-
-            <li>Entretiens avec les parties prenantes</li>
-
-            <li>Vérifications factuelles de la mise en œuvre des mesures</li>
-
-            <li>Réalisé par 2 experts certifiés IT & cybersécurité</li>
-
+            <li data-i18n="pkg.audit.m1">Évaluation indépendante réalisée sur site</li>
+            <li data-i18n="pkg.audit.m2">Plus de 90 points de contrôle</li>
+            <li data-i18n="pkg.audit.m3">Entretiens avec les parties prenantes</li>
+            <li data-i18n="pkg.audit.m4">Vérifications factuelles de la mise en œuvre des mesures</li>
+            <li data-i18n="pkg.audit.m5">Réalisé par 2 experts certifiés IT &amp; cybersécurité</li>
           </ul>
-
         </div>
-
- 
 
         <div class="pkg-block">
-
-          <h4>Livrables</h4>
-
+          <h4 data-i18n="pkg.h.deliver">Livrables</h4>
           <ul>
-
-            <li>Note finale de A à E</li>
-
-            <li>Analyse des résultats</li>
-
+            <li data-i18n="pkg.d.note">Note finale de A à E</li>
+            <li data-i18n="pkg.d.analysis">Analyse des résultats</li>
           </ul>
-
-          <p class="pkg-note">Aucun rapport détaillé. Aucune recommandation.</p>
-
+          <p class="pkg-note" data-i18n="pkg.basic.note">Aucun rapport détaillé. Aucune recommandation.</p>
         </div>
-
- 
 
         <div class="pkg-block">
-
-          <h4>Cas d’usage</h4>
-
+          <h4 data-i18n="pkg.h.usecase">Cas d’usage</h4>
           <ul>
-
-            <li>Évaluation d’un fournisseur ou sous-traitant</li>
-
-            <li>Évaluation d’une filiale ou d’un partenaire</li>
-
-            <li>Due diligence cyber</li>
-
-            <li>Benchmark interne</li>
-
-            <li>Qualification d’un partenaire avant contractualisation</li>
-
+            <li data-i18n="pkg.basic.u1">Évaluation d’un fournisseur ou sous-traitant</li>
+            <li data-i18n="pkg.basic.u2">Évaluation d’une filiale ou d’un partenaire</li>
+            <li data-i18n="pkg.basic.u3">Due diligence cyber</li>
+            <li data-i18n="pkg.basic.u4">Benchmark interne</li>
+            <li data-i18n="pkg.basic.u5">Qualification d’un partenaire avant contractualisation</li>
           </ul>
-
         </div>
-
- 
 
         <div class="pkg-footer">
-
           <div class="pkg-meta">
-
             <div class="pkg-meta-item">
-
               <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M7.5 4.5v3.3l2 1.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-
-              <span>Durée : 1 jour sur site + temps de rédaction</span>
-
+              <span data-i18n="pkg.dur.1day">Durée : 1 jour sur site + temps de rédaction</span>
             </div>
-
             <div class="pkg-meta-item">
-
               <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="5.4" cy="5" r="2" stroke="currentColor" stroke-width="1.3"/><circle cx="10.2" cy="5.8" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M2.2 12c.5-2.2 1.8-3.4 3.2-3.4s2.7 1.2 3.2 3.4M8.2 12c.3-1.5 1.1-2.4 2-2.4s1.7.9 2.1 2.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-
-              <span>Réalisation : sur site - 2 personnes</span>
-
+              <span data-i18n="pkg.basic.mode">Réalisation : sur site - 2 personnes</span>
             </div>
-
           </div>
-
         </div>
-
       </article>
-
- 
 
       <!-- STANDARD -->
-
       <article class="pkg-card pkg-standard">
-
         <div class="pkg-top">
-
           <div>
-
             <div class="pkg-tag">CyberScore</div>
-
             <div class="pkg-title">Standard</div>
-
           </div>
-
           <div class="pkg-icon">
-
             <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-
               <path d="M6 22V12M14 22V7M22 22V4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-
               <path d="M5 22h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-
               <path d="M6 12l5-4 4 3 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-
             </svg>
-
           </div>
-
         </div>
 
- 
-
-        <p class="pkg-sub">Je veux comprendre et améliorer ma maturité cyber.</p>
-
- 
+        <p class="pkg-sub" data-i18n="pkg.standard.sub">Je veux comprendre et améliorer ma maturité cyber.</p>
 
         <div class="pkg-block">
-
-          <h4>Méthode</h4>
-
+          <h4 data-i18n="pkg.h.method">Méthode</h4>
           <ul>
-
-            <li>Évaluation indépendante réalisée sur site</li>
-
-            <li>Plus de 90 points de contrôle</li>
-
-            <li>Entretiens avec les parties prenantes</li>
-
-            <li>Vérifications factuelles de la mise en œuvre des mesures</li>
-
-            <li>Réalisé par 2 experts certifiés IT & cybersécurité</li>
-
+            <li data-i18n="pkg.audit.m1">Évaluation indépendante réalisée sur site</li>
+            <li data-i18n="pkg.audit.m2">Plus de 90 points de contrôle</li>
+            <li data-i18n="pkg.audit.m3">Entretiens avec les parties prenantes</li>
+            <li data-i18n="pkg.audit.m4">Vérifications factuelles de la mise en œuvre des mesures</li>
+            <li data-i18n="pkg.audit.m5">Réalisé par 2 experts certifiés IT &amp; cybersécurité</li>
           </ul>
-
         </div>
 
- 
-
         <div class="pkg-block">
-
-          <h4>Livrables</h4>
-
+          <h4 data-i18n="pkg.h.deliver">Livrables</h4>
           <ul>
-
-            <li>Note finale de A à E</li>
-
-            <li>Analyse des résultats</li>
-
-            <li>Rapport détaillé</li>
-
-            <li>Recommandations</li>
-
+            <li data-i18n="pkg.d.note">Note finale de A à E</li>
+            <li data-i18n="pkg.d.analysis">Analyse des résultats</li>
+            <li data-i18n="pkg.d.report">Rapport détaillé</li>
+            <li data-i18n="pkg.d.reco">Recommandations</li>
           </ul>
-
-          <div class="pkg-option">
-
+          <div class="pkg-option" data-i18n-html="pkg.standard.option">
             <strong>Option :</strong> obtention du label « Cyber-Responsable ».
-
           </div>
-
         </div>
-
- 
 
         <div class="pkg-block">
-
-          <h4>Cas d’usage</h4>
-
+          <h4 data-i18n="pkg.h.usecase">Cas d’usage</h4>
           <ul>
-
-            <li>PME</li>
-
-            <li>ETI</li>
-
-            <li>Collectivités</li>
-
-            <li>Organisations souhaitant structurer leur démarche cybersécurité</li>
-
+            <li data-i18n="pkg.standard.u1">PME</li>
+            <li data-i18n="pkg.standard.u2">ETI</li>
+            <li data-i18n="pkg.standard.u3">Collectivités</li>
+            <li data-i18n="pkg.standard.u4">Organisations souhaitant structurer leur démarche cybersécurité</li>
           </ul>
-
         </div>
-
- 
 
         <div class="pkg-footer">
-
           <div class="pkg-meta">
-
             <div class="pkg-meta-item">
-
               <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M7.5 4.5v3.3l2 1.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-
-              <span>Durée : 1 jour sur site + temps de rédaction</span>
-
+              <span data-i18n="pkg.dur.1day">Durée : 1 jour sur site + temps de rédaction</span>
             </div>
-
             <div class="pkg-meta-item">
-
               <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="5.4" cy="5" r="2" stroke="currentColor" stroke-width="1.3"/><circle cx="10.2" cy="5.8" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M2.2 12c.5-2.2 1.8-3.4 3.2-3.4s2.7 1.2 3.2 3.4M8.2 12c.3-1.5 1.1-2.4 2-2.4s1.7.9 2.1 2.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-
-              <span>Réalisation : sur site - 2 personnes + rapport et recommandations</span>
-
+              <span data-i18n="pkg.mode.full">Réalisation : sur site - 2 personnes + rapport et recommandations</span>
             </div>
-
           </div>
-
         </div>
-
       </article>
-
- 
 
       <!-- COMPLIANCE -->
-
       <article class="pkg-card pkg-compliance">
-
         <div class="pkg-top">
-
           <div>
-
             <div class="pkg-tag">CyberScore</div>
-
             <div class="pkg-title">Compliance</div>
-
           </div>
-
           <div class="pkg-icon">
-
             <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-
               <path d="M14 3l9 4v6c0 5.2-3.7 9.8-9 12-5.3-2.2-9-6.8-9-12V7l9-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-
               <path d="M10 14l2.6 2.6L18.5 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-
             </svg>
-
           </div>
-
         </div>
 
- 
-
-        <p class="pkg-sub">Je veux mesurer et démontrer ma conformité.</p>
-
- 
+        <p class="pkg-sub" data-i18n="pkg.compliance.sub">Je veux mesurer et démontrer ma conformité.</p>
 
         <div class="pkg-block">
-
-          <h4>Méthode</h4>
-
+          <h4 data-i18n="pkg.h.method">Méthode</h4>
           <ul>
-
-            <li>Évaluation basée sur un référentiel ou une réglementation</li>
-
-            <li>Analyse documentaire</li>
-
-            <li>Interviews</li>
-
-            <li>Vérification sur site</li>
-
-            <li>Mapping des exigences</li>
-
+            <li data-i18n="pkg.compliance.m1">Évaluation basée sur un référentiel ou une réglementation</li>
+            <li data-i18n="pkg.compliance.m2">Analyse documentaire</li>
+            <li data-i18n="pkg.compliance.m3">Interviews</li>
+            <li data-i18n="pkg.compliance.m4">Vérification sur site</li>
+            <li data-i18n="pkg.compliance.m5">Mapping des exigences</li>
           </ul>
-
         </div>
 
- 
-
         <div class="pkg-block">
-
-          <h4>Référentiels couverts</h4>
-
+          <h4 data-i18n="pkg.h.frameworks">Référentiels couverts</h4>
           <ul>
-
             <li>NIS2</li>
-
             <li>ISO 27001</li>
-
             <li>DORA</li>
-
             <li>CRA</li>
-
           </ul>
-
         </div>
-
- 
 
         <div class="pkg-block">
-
-          <h4>Livrables</h4>
-
+          <h4 data-i18n="pkg.h.deliver">Livrables</h4>
           <ul>
-
-            <li>Note finale de A à E</li>
-
-            <li>Taux de conformité</li>
-
-            <li>Analyse des écarts</li>
-
-            <li>Rapport détaillé</li>
-
-            <li>Plan d’actions</li>
-
-            <li>Feuille de route de mise en conformité</li>
-
+            <li data-i18n="pkg.d.note">Note finale de A à E</li>
+            <li data-i18n="pkg.compliance.d2">Taux de conformité</li>
+            <li data-i18n="pkg.compliance.d3">Analyse des écarts</li>
+            <li data-i18n="pkg.d.report">Rapport détaillé</li>
+            <li data-i18n="pkg.compliance.d5">Plan d’actions</li>
+            <li data-i18n="pkg.compliance.d6">Feuille de route de mise en conformité</li>
           </ul>
-
         </div>
-
- 
 
         <div class="pkg-block">
-
-          <h4>Cas d’usage</h4>
-
+          <h4 data-i18n="pkg.h.usecase">Cas d’usage</h4>
           <ul>
-
-            <li>Préparation à une certification ISO 27001</li>
-
-            <li>Préparation à NIS2</li>
-
-            <li>Préparation à DORA</li>
-
-            <li>Réponse aux exigences clients ou réglementaires</li>
-
+            <li data-i18n="pkg.compliance.u1">Préparation à une certification ISO 27001</li>
+            <li data-i18n="pkg.compliance.u2">Préparation à NIS2</li>
+            <li data-i18n="pkg.compliance.u3">Préparation à DORA</li>
+            <li data-i18n="pkg.compliance.u4">Réponse aux exigences clients ou réglementaires</li>
           </ul>
-
         </div>
-
- 
 
         <div class="pkg-footer">
-
           <div class="pkg-meta">
-
             <div class="pkg-meta-item">
-
               <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M7.5 4.5v3.3l2 1.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-
-              <span>Durée : 2 à 3 jours sur site + temps de rédaction</span>
-
+              <span data-i18n="pkg.compliance.dur">Durée : 2 à 3 jours sur site + temps de rédaction</span>
             </div>
-
             <div class="pkg-meta-item">
-
               <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="5.4" cy="5" r="2" stroke="currentColor" stroke-width="1.3"/><circle cx="10.2" cy="5.8" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M2.2 12c.5-2.2 1.8-3.4 3.2-3.4s2.7 1.2 3.2 3.4M8.2 12c.3-1.5 1.1-2.4 2-2.4s1.7.9 2.1 2.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-
-              <span>Réalisation : sur site - 2 personnes + rapport et recommandations</span>
-
+              <span data-i18n="pkg.mode.full">Réalisation : sur site - 2 personnes + rapport et recommandations</span>
             </div>
-
           </div>
-
         </div>
-
       </article>
 
- 
-
     </div>
-
- 
 
     <!-- Parcours progressif -->
-
     <div class="pkg-journey">
-
       <div class="j-step">
-
         <div class="j-ico">
-
           <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><circle cx="9.5" cy="9.5" r="6.8" stroke="currentColor" stroke-width="1.4"/><path d="M9.5 3v13M3 9.5h13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-
         </div>
-
         <div class="j-text">
-
-          <strong>Un parcours progressif</strong>
-
-          <span>adapté à vos besoins</span>
-
+          <strong data-i18n="journey.0.t">Un parcours progressif</strong>
+          <span data-i18n="journey.0.s">adapté à vos besoins</span>
         </div>
-
       </div>
-
- 
 
       <div class="j-arrow">›</div>
 
- 
-
       <div class="j-step">
-
         <div class="j-ico">
-
           <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><circle cx="9.5" cy="6.2" r="3" stroke="currentColor" stroke-width="1.4"/><path d="M3.8 16c.7-3.2 2.9-5 5.7-5s5 1.8 5.7 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-
         </div>
-
         <div class="j-text">
-
-          <strong>Sensibiliser</strong>
-
-          <span>premier pas</span>
-
+          <strong data-i18n="journey.1.t">Sensibiliser</strong>
+          <span data-i18n="journey.1.s">premier pas</span>
         </div>
-
       </div>
-
- 
 
       <div class="j-arrow">›</div>
 
- 
-
       <div class="j-step">
-
         <div class="j-ico">
-
           <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><circle cx="8" cy="8" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M12 12l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-
         </div>
-
         <div class="j-text">
-
-          <strong>Mesurer</strong>
-
-          <span>connaître son niveau</span>
-
+          <strong data-i18n="journey.2.t">Mesurer</strong>
+          <span data-i18n="journey.2.s">connaître son niveau</span>
         </div>
-
       </div>
-
- 
 
       <div class="j-arrow">›</div>
 
- 
-
       <div class="j-step">
-
         <div class="j-ico">
-
           <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M4 15V9M9.5 15V5M15 15V3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M3.5 15.5h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-
         </div>
-
         <div class="j-text">
-
-          <strong>Comprendre & agir</strong>
-
-          <span>améliorer sa maturité</span>
-
+          <strong data-i18n="journey.3.t">Comprendre &amp; agir</strong>
+          <span data-i18n="journey.3.s">améliorer sa maturité</span>
         </div>
-
       </div>
-
- 
 
       <div class="j-arrow">›</div>
 
- 
-
       <div class="j-step">
-
         <div class="j-ico">
-
           <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M9.5 2.5l6 2.7v4.2c0 3.5-2.4 6.3-6 7.8-3.6-1.5-6-4.3-6-7.8V5.2l6-2.7z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
-
         </div>
-
         <div class="j-text">
-
-          <strong>Se conformer</strong>
-
-          <span>répondre aux exigences</span>
-
+          <strong data-i18n="journey.4.t">Se conformer</strong>
+          <span data-i18n="journey.4.s">répondre aux exigences</span>
         </div>
-
       </div>
-
     </div>
 
- 
-
   </div>
-
 </section>
 
 <!-- ══════════════════════════════════
@@ -2155,32 +2182,32 @@ footer{
 <section class="risks">
   <div class="sec-head">
     <div>
-      <div class="eyebrow">Pourquoi agir maintenant ?</div>
-      <h2 class="sec-title">Les risques concernent<br>toutes les entreprises</h2>
+      <div class="eyebrow" data-i18n="risks.eyebrow">Pourquoi agir maintenant ?</div>
+      <h2 class="sec-title" data-i18n-html="risks.title">Les risques concernent <br>toutes les entreprises</h2>
     </div>
-    <p class="sec-desc">Les cyberattaques ne visent plus uniquement les grandes entreprises. Les PME et TPE sont aussi exposées à des risques concrets : interuption d'activité, perte de données, atteinte à la réputation, pression réglementaire ou perte de confiance des clients.</p>
+    <p class="sec-desc" data-i18n="risks.desc">Les cyberattaques ne visent plus uniquement les grandes entreprises. Les PME et TPE sont aussi exposées à des risques concrets : interruption d'activité, perte de données, atteinte à la réputation, pression réglementaire ou perte de confiance des clients.</p>
   </div>
   <div class="grid3">
     <div class="rcard">
       <div class="rico">
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8.5" stroke="#009BA5" stroke-width="1.5"/><circle cx="11" cy="11" r="4.5" stroke="#009BA5" stroke-width="1.5"/><circle cx="11" cy="11" r="1.4" fill="#009BA5"/><path d="M11 2.5V5M11 17v2.5M2.5 11H5M17 11h2.5" stroke="#009BA5" stroke-width="1.4" stroke-linecap="round"/></svg>
       </div>
-      <h3>Des attaques ciblées</h3>
-      <p>Les cybercriminels exploitent souvent les organisations les moins préparées : accès mal protégés, sauvegarde insuffisantes, absence de procédure ou manque de sensibilisation.</p>
+      <h3 data-i18n="risks.1.t">Des attaques ciblées</h3>
+      <p data-i18n="risks.1.b">Les cybercriminels exploitent souvent les organisations les moins préparées : accès mal protégés, sauvegarde insuffisantes, absence de procédure ou manque de sensibilisation.</p>
     </div>
     <div class="rcard">
       <div class="rico">
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="7" r="3.5" stroke="#009BA5" stroke-width="1.5"/><path d="M4.5 19c0-3.6 2.9-6.5 6.5-6.5s6.5 2.9 6.5 6.5" stroke="#009BA5" stroke-width="1.5" stroke-linecap="round"/><path d="M17 3v4.5" stroke="#009BA5" stroke-width="1.5" stroke-linecap="round"/><path d="M17 8.8v.4" stroke="#009BA5" stroke-width="1.8" stroke-linecap="round"/></svg>
       </div>
-      <h3>L'humain reste un point d'entrée majeur</h3>
-      <p>Phishing, mots de passe faibles ou encore erreur de manipulation : une grande partie des incidents commencent par une action humaine évitable.</p>
+      <h3 data-i18n="risks.2.t">L'humain reste un point d'entrée majeur</h3>
+      <p data-i18n="risks.2.b">Phishing, mots de passe faibles ou encore erreur de manipulation : une grande partie des incidents commencent par une action humaine évitable.</p>
     </div>
     <div class="rcard">
       <div class="rico">
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 3v16" stroke="#009BA5" stroke-width="1.5" stroke-linecap="round"/><path d="M7 19h8" stroke="#009BA5" stroke-width="1.5" stroke-linecap="round"/><path d="M4 8.5h5.5L7 13.5 4 8.5z" stroke="#009BA5" stroke-width="1.4" stroke-linejoin="round"/><path d="M12.5 8.5H18L15 13.5l-2.5-5z" stroke="#009BA5" stroke-width="1.4" stroke-linejoin="round"/><path d="M4 8.5h14" stroke="#009BA5" stroke-width="1.3" stroke-linecap="round"/></svg>
       </div>
-      <h3>Des exigences plus fortes</h3>
-      <p>La cybersécurité devient un critère de confiance. De plus en plus de clients et partenaires attendent des garanties concrètes sur la sécurité de leurs prestataires.</p>
+      <h3 data-i18n="risks.3.t">Des exigences plus fortes</h3>
+      <p data-i18n="risks.3.b">La cybersécurité devient un critère de confiance. De plus en plus de clients et partenaires attendent des garanties concrètes sur la sécurité de leurs prestataires.</p>
     </div>
   </div>
 </section>
@@ -2192,23 +2219,23 @@ footer{
   <div class="bwrap">
     <div class="sec-head" style="margin-bottom:0">
       <div>
-        <div class="eyebrow">Ce que vous gagnez</div>
-        <h2 class="sec-title">Transformez votre Cyberscore<br>en plan d'action</h2>
+        <div class="eyebrow" data-i18n="ben.eyebrow">Ce que vous gagnez</div>
+        <h2 class="sec-title" data-i18n-html="ben.title">Transformez votre Cyberscore <br>en plan d'action</h2>
       </div>
-      <p class="sec-desc">Le Cyberscore ne se limite pas à une note. Il permet de structurer une démarche progressive, lisible et actionnable pour améliorer votre posture cybersécurité.</p>
+      <p class="sec-desc" data-i18n="ben.desc">Le Cyberscore ne se limite pas à une note. Il permet de structurer une démarche progressive, lisible et actionnable pour améliorer votre posture cybersécurité.</p>
     </div>
     <div class="bgrid">
-      <div class="bcard"><div class="bnum">01</div><h3>Comprendre votre niveau actuel</h3><p>Obtenez une vision claire de vos forces, de vos faiblesses mais également des domaines à renforcer.</p></div>
-      <div class="bcard"><div class="bnum">02</div><h3>Prioriser les bonnes actions</h3><p>Identifiez les mesures les plus importantes à mettre en place selon votre niveau de risque, vos contraintes et vos ressources.</p></div>
-      <div class="bcard"><div class="bnum">03</div><h3>Structurer votre démarche cyber</h3><p>Passez d'actions ponctuelles à une feuille de route cohérente, documentée et surtout suivie dans le temps.</p></div>
-      <div class="bcard"><div class="bnum">04</div><h3>Renforcer la confiance</h3><p>Montrez à vos clients, partenaires et collaborateurs que la cybersécurité est prise au sérieux dans votre organisation.</p></div>
-      <div class="bcard"><div class="bnum">05</div><h3>Préparer les exigences réglementaires</h3><p>Anticipez les attentes liée à la gouvernance cyber, à la continuité d'activité, à la gestion des incidents et à la protection des données.</p></div>
+      <div class="bcard"><div class="bnum">01</div><h3 data-i18n="ben.1.t">Comprendre votre niveau actuel</h3><p data-i18n="ben.1.b">Obtenez une vision claire de vos forces, de vos faiblesses mais également des domaines à renforcer.</p></div>
+      <div class="bcard"><div class="bnum">02</div><h3 data-i18n="ben.2.t">Prioriser les bonnes actions</h3><p data-i18n="ben.2.b">Identifiez les mesures les plus importantes à mettre en place selon votre niveau de risque, vos contraintes et vos ressources.</p></div>
+      <div class="bcard"><div class="bnum">03</div><h3 data-i18n="ben.3.t">Structurer votre démarche cyber</h3><p data-i18n="ben.3.b">Passez d'actions ponctuelles à une feuille de route cohérente, documentée et surtout suivie dans le temps.</p></div>
+      <div class="bcard"><div class="bnum">04</div><h3 data-i18n="ben.4.t">Renforcer la confiance</h3><p data-i18n="ben.4.b">Montrez à vos clients, partenaires et collaborateurs que la cybersécurité est prise au sérieux dans votre organisation.</p></div>
+      <div class="bcard"><div class="bnum">05</div><h3 data-i18n="ben.5.t">Préparer les exigences réglementaires</h3><p data-i18n="ben.5.b">Anticipez les attentes liée à la gouvernance cyber, à la continuité d'activité, à la gestion des incidents et à la protection des données.</p></div>
       <div class="bcard bcard-fin">
         <div class="bnum">06</div>
-        <h3>Identifier les aides disponibles</h3>
-        <p>Certains dispositifs luxembourgeois peuvent accompagner les PME dans leurs projets de cybersécurité selon leur éligibilité.</p>
+        <h3 data-i18n="ben.6.t">Identifier les aides disponibles</h3>
+        <p data-i18n="ben.6.b">Certains dispositifs luxembourgeois peuvent accompagner les PME dans leurs projets de cybersécurité selon leur éligibilité.</p>
         <a href="#contact" class="blink" onclick="setOrigine('Bénéfices — Infos sur les aides et dispositifs luxembourgeois')">
-          Découvrir les possibilités d'accompagnement
+          <span data-i18n="ben.6.link">Découvrir les possibilités d'accompagnement</span>
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2v6" stroke="#005F69" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
@@ -2223,33 +2250,33 @@ footer{
   <div class="coinner">
     <div class="cogrid">
       <div>
-        <div class="eyebrow" style="color:rgba(0,155,165,.9)">Prenons contact</div>
-        <h2 class="co-title">Un expert cegecom<br>vous accompagne.</h2>
-        <p class="co-body">Vous souhaitez connaître votre niveau réel, préparer le Cyberscore ou identifier les premières actions à mettre en place ?<br><br>Nos équipes vous accompagne pour analyser votre situation, prioriser les mesures utiles et construire une cybersécurité adaptée à votre entreprise. </p>
+        <div class="eyebrow" style="color:rgba(0,155,165,.9)" data-i18n="co.eyebrow">Prenons contact</div>
+        <h2 class="co-title" data-i18n-html="co.title">Un expert cegecom <br>vous accompagne.</h2>
+        <p class="co-body" data-i18n-html="co.body">Vous souhaitez connaître votre niveau réel, préparer le Cyberscore ou identifier les premières actions à mettre en place ?<br><br>Nos équipes vous accompagne pour analyser votre situation, prioriser les mesures utiles et construire une cybersécurité adaptée à votre entreprise. </p>
         <div class="perks">
           <div class="perk">
             <div class="pico">
               <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M8.5 2L3 4.6v3.5c0 3 2.4 5.7 5.5 6.6C11.6 13.8 14 11.1 14 8.1V4.6L8.5 2z" stroke="rgba(0,155,165,.85)" stroke-width="1.4" stroke-linejoin="round"/><path d="M6 8.5l2 2 3-3" stroke="rgba(0,155,165,.85)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
-            <div class="ptxt"><strong>Diagnostic personnalisé</strong>Analyse de votre situation, de vos enjeux et de votre niveau de maturité actuel.</div>
+            <div class="ptxt" data-i18n-html="co.perk.1"><strong>Diagnostic personnalisé</strong>Analyse de votre situation, de vos enjeux et de votre niveau de maturité actuel.</div>
           </div>
           <div class="perk">
             <div class="pico">
               <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><rect x="3" y="2.5" width="11" height="12" rx="1.4" stroke="rgba(0,155,165,.85)" stroke-width="1.4"/><path d="M5.5 7h6M5.5 9.5h6M5.5 12h4" stroke="rgba(0,155,165,.85)" stroke-width="1.3" stroke-linecap="round"/></svg>
             </div>
-            <div class="ptxt"><strong>Plan d'action priorisé</strong>Recommandations comncrètes selon vos risques, vos contraintes et votre budget.</div>
+            <div class="ptxt" data-i18n-html="co.perk.2"><strong>Plan d'action priorisé</strong>Recommandations concrètes selon vos risques, vos contraintes et votre budget.</div>
           </div>
           <div class="perk">
             <div class="pico">
               <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M3 15V7.5l5.5-4.5 5.5 4.5V15" stroke="rgba(0,155,165,.85)" stroke-width="1.4" stroke-linejoin="round"/><rect x="6.2" y="9.5" width="2.2" height="3.2" rx=".4" stroke="rgba(0,155,165,.85)" stroke-width="1.2"/><rect x="8.6" y="9.5" width="2.2" height="3.2" rx=".4" stroke="rgba(0,155,165,.85)" stroke-width="1.2"/><path d="M2 15h13" stroke="rgba(0,155,165,.85)" stroke-width="1.3" stroke-linecap="round"/></svg>
             </div>
-            <div class="ptxt"><strong>Accompagnement local</strong>une approche adaptée au contexte luxembourgeois et aux besoins des PME.</div>
+            <div class="ptxt" data-i18n-html="co.perk.3"><strong>Accompagnement local</strong>une approche adaptée au contexte luxembourgeois et aux besoins des PME.</div>
           </div>
           <div class="perk">
             <div class="pico">
               <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M9.5 2.5L5 9.5h5l-2.5 5L14 7h-5l2.5-4.5-2 0z" stroke="rgba(0,155,165,.85)" stroke-width="1.4" stroke-linejoin="round"/></svg>
             </div>
-            <div class="ptxt"><strong>Orientation vers les aides disponibles</strong>Identification des dispositifs mobilisables selon votre projet et votre éligibilité.</div>
+            <div class="ptxt" data-i18n-html="co.perk.4"><strong>Orientation vers les aides disponibles</strong>Identification des dispositifs mobilisables selon votre projet et votre éligibilité.</div>
           </div>
         </div>
       </div>
@@ -2257,41 +2284,41 @@ footer{
       <!-- FORM -->
       <div class="fbox" id="fwrap">
         <div id="ffields">
-          <div class="fbox-title">Demander mon diagnostic gratuit</div>
+          <div class="fbox-title" data-i18n="form.title">Demander mon diagnostic gratuit</div>
           <div class="frow">
-            <div class="fg2"><label>Prénom <span>*</span></label><input type="text" placeholder="Jean" id="fp"></div>
-            <div class="fg2"><label>Nom <span>*</span></label><input type="text" placeholder="Dupont" id="fn"></div>
-            <div class="fg2"><label>Email professionnel <span>*</span></label><input type="email" placeholder="j.dupont@entreprise.lu" id="fe"></div>
-            <div class="fg2"><label>Téléphone <span>*</span></label><input type="tel" placeholder="+352 6x xx xx xx" id="ft"></div>
-            <div class="fg2 full"><label>Société <span>*</span></label><input type="text" placeholder="Nom de votre entreprise" id="fs"></div>
-            <div class="fg2 full"><label>Votre fonction</label>
+            <div class="fg2"><label data-i18n-html="form.firstname">Prénom <span>*</span></label><input type="text" placeholder="Jean" data-i18n-placeholder="form.ph.firstname" id="fp"></div>
+            <div class="fg2"><label data-i18n-html="form.lastname">Nom <span>*</span></label><input type="text" placeholder="Dupont" data-i18n-placeholder="form.ph.lastname" id="fn"></div>
+            <div class="fg2"><label data-i18n-html="form.email">Email professionnel <span>*</span></label><input type="email" placeholder="j.dupont@entreprise.lu" data-i18n-placeholder="form.ph.email" id="fe"></div>
+            <div class="fg2"><label data-i18n-html="form.phone">Téléphone <span>*</span></label><input type="tel" placeholder="+352 6x xx xx xx" id="ft"></div>
+            <div class="fg2 full"><label data-i18n-html="form.company">Société <span>*</span></label><input type="text" placeholder="Nom de votre entreprise" data-i18n-placeholder="form.ph.company" id="fs"></div>
+            <div class="fg2 full"><label data-i18n="form.role">Votre fonction</label>
               <select id="ff">
-                <option value="">Sélectionner...</option>
-                <option>CEO / Directeur général</option>
-                <option>CFO / Directeur financier</option>
-                <option>CTO / DSI</option>
-                <option>Responsable IT</option>
-                <option>Autre</option>
+                <option value="" data-i18n="form.role.none">Sélectionner...</option>
+                <option data-i18n="form.role.ceo">CEO / Directeur général</option>
+                <option data-i18n="form.role.cfo">CFO / Directeur financier</option>
+                <option data-i18n="form.role.cto">CTO / DSI</option>
+                <option data-i18n="form.role.it">Responsable IT</option>
+                <option data-i18n="form.role.other">Autre</option>
               </select>
             </div>
-            <div class="fg2 full"><label>Message (optionnel)</label><textarea placeholder="Décrivez brièvement votre situation, vos besoins ou vos priorités cybersécurité." id="fm"></textarea></div>
+            <div class="fg2 full"><label data-i18n="form.message">Message (optionnel)</label><textarea placeholder="Décrivez brièvement votre situation, vos besoins ou vos priorités cybersécurité." data-i18n-placeholder="form.ph.message" id="fm"></textarea></div>
           </div>
           <label class="fcheck">
             <input type="checkbox" id="frgpd">
-            J’accepte que mes données soient traitées par cegecom afin d’être recontacté dans le cadre de ma demande, conformément à la  <a href="https://cegecom.lu/fr/cegecom-luxembourg/protection-des-donnees-cegecom/" target="_blank" rel="noopener noreferrer">politique de confidentialité</a>.
+            <span data-i18n-html="form.rgpd">J’accepte que mes données soient traitées par cegecom afin d’être recontacté dans le cadre de ma demande, conformément à la <a href="https://cegecom.lu/fr/cegecom-luxembourg/protection-des-donnees-cegecom/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">politique de confidentialité</a>.</span>
           </label>
           <div class="hp-field" aria-hidden="true">
             <label>Site web</label>
             <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
           </div>
-          <button class="btn-sub" onclick="submitForm()">Envoyer ma demande →</button>
+          <button class="btn-sub" onclick="submitForm()" data-i18n="form.submit">Envoyer ma demande →</button>
         </div>  
         <div class="fsuccess" id="fsuccess">
           <div class="fchk">
             <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M5.5 13l5.5 5.5 10-10" stroke="#005F69" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
-          <div class="fok">Demande bien reçue !</div>
-          <p class="fokb">Merci pour votre intérêt. Un expert cegecom reviendra vers vous prochainement afin d'échanger sur les prochaines étapes possibles.<br><br></p>
+          <div class="fok" data-i18n="form.ok">Demande bien reçue !</div>
+          <p class="fokb" data-i18n-html="form.okb">Merci pour votre intérêt. Un expert cegecom reviendra vers vous prochainement afin d'échanger sur les prochaines étapes possibles.<br><br></p>
         </div>
     </div>
   </div>
@@ -2301,11 +2328,11 @@ footer{
      FOOTER
 ══════════════════════════════════ -->
 <footer>
-  <div class="fleft">© 2025 cegecom S.A. — Premier opérateur alternatif au Luxembourg</div>
+  <div class="fleft" data-i18n="footer.left">© 2025 cegecom S.A. — Premier opérateur alternatif au Luxembourg</div>
   <div class="flinks">
-    <a href="https://cegecom.lu/fr/cegecom-luxembourg/protection-des-donnees-cegecom/" target="_blank" rel="noopener noreferrer">Protection des données</a>
-    <a href="https://cegecom.lu/fr/cegecom-luxembourg/mentions-legales-cegecom/" target="_blank" rel="noopener noreferrer">Mentions légales</a>
-    <a href="https://cegecom.lu/fr/" target="_blank" rel="noopener noreferrer">cegecom.lu</a>
+    <a href="https://cegecom.lu/fr/cegecom-luxembourg/protection-des-donnees-cegecom/" id="footPrivacy" target="_blank" rel="noopener noreferrer" data-i18n="footer.privacy">Protection des données</a>
+    <a href="https://cegecom.lu/fr/cegecom-luxembourg/mentions-legales-cegecom/" id="footLegal" target="_blank" rel="noopener noreferrer" data-i18n="footer.legal">Mentions légales</a>
+    <a href="https://cegecom.lu/fr/" id="footSite" target="_blank" rel="noopener noreferrer">cegecom.lu</a>
   </div>
 </footer>
 
@@ -2313,7 +2340,7 @@ footer{
      FLOATING SHARE BUTTON
 ══════════════════════════════════ -->
 <div class="share-widget" id="shareWidget">
-  <div class="share-toast" id="shareToast">Lien copié</div>
+  <div class="share-toast" id="shareToast" data-i18n="share.toast">Lien copié</div>
 
   <div class="share-menu" id="shareMenu" aria-hidden="true">
     <button class="share-option" type="button" id="shareNative">
@@ -2323,7 +2350,7 @@ footer{
         <circle cx="12.5" cy="5.5" r="2" stroke="currentColor" stroke-width="1.5"/>
         <circle cx="12.5" cy="11.5" r="2" stroke="currentColor" stroke-width="1.5"/>
       </svg>
-      Partager la page
+      <span data-i18n="share.page">Partager la page</span>
     </button>
 
     <button class="share-option" type="button" id="copyLink">
@@ -2331,7 +2358,7 @@ footer{
         <rect x="6" y="3" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
         <path d="M3 6.5v6A1.5 1.5 0 004.5 14h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
-      Copier le lien
+      <span data-i18n="share.copy">Copier le lien</span>
     </button>
 
     <a class="share-option" id="shareEmail" href="#">
@@ -2339,7 +2366,7 @@ footer{
         <rect x="2.5" y="4" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
         <path d="M3.5 5l5 4 5-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      Envoyer par email
+      <span data-i18n="share.email">Envoyer par email</span>
     </a>
   </div>
 
@@ -2350,53 +2377,1139 @@ footer{
       <circle cx="12.5" cy="5.5" r="2" stroke="currentColor" stroke-width="1.6"/>
       <circle cx="12.5" cy="11.5" r="2" stroke="currentColor" stroke-width="1.6"/>
     </svg>
-    <span>Partager</span>
+    <span data-i18n="share.btn">Partager</span>
   </button>
 </div>
+
 <!-- ══════════════════════════════════
-     QUIZ LOGIC
+     I18N + QUIZ LOGIC
 ══════════════════════════════════ -->
 <script>
-const Qs=[
+/* ══════════════════════════════════════════════════════════════
+   I18N — Dictionnaire FR / EN / DE / LU (Lëtzebuergesch)
+   Pour ajouter du texte traduisible :
+     • texte simple  → <span data-i18n="ma.cle">…</span>
+     • texte + HTML  → <p data-i18n-html="ma.cle">…</p>
+     • placeholder   → <input data-i18n-placeholder="ma.cle">
+     • aria-label    → <button data-i18n-aria-label="ma.cle">
+   puis ajouter la clé dans les 4 langues ci-dessous.
+══════════════════════════════════════════════════════════════ */
+const LANGS = ['fr','en','de','lu'];
+
+const I18N = {
+
+/* ─────────────────────────── FRANÇAIS ─────────────────────────── */
+fr:{
+'meta.title':'Cyberscore by cegecom — Évaluez votre cybersécurité',
+'meta.desc':'Évaluez en quelques minutes la maturité cybersécurité de votre entreprise.',
+'html.lang':'fr',
+'site.url':'https://cegecom.lu/fr/',
+
+'lang.fr':'Français','lang.en':'Anglais','lang.de':'Allemand','lang.lu':'Luxembourgeois',
+'nav.lang.label':'Langue',
+'nav.burger.open':'Ouvrir le menu',
+'nav.burger.close':'Fermer le menu',
+'nav.cta':'Demander un accompagnement',
+
+'hero.pill':'Diagnostique cybersécurité · PME & entreprises luxembourgeoises',
+'hero.title':'Évaluez la maturité <br>cybersécurité de votre <em>entreprise.</em>',
+'hero.sub':'En quelques minutes, obtenez une première estimation de votre niveau de préparation face aux risques cyber et identifiez les axes prioritaires à renforcer.',
+'hero.cta1':'Lancer le diagnostic',
+'hero.cta2':'Être accompagné par un expert',
+'hero.card.label':'Aperçu du diagnostic Cyberscore',
+'hero.card.b1':'Gouvernance',
+'hero.card.b2':'Gestion des accès',
+'hero.card.b3':'Sauvegardes',
+'hero.card.b4':'Sensibilisation',
+'hero.card.b5':'Conformité NIS2',
+'hero.card.foot':'Diagnostic confidentiel · Résultat en 2 minutes',
+
+'trust.1':'Diagnostic gratuit',
+'trust.2':'En deux minutes',
+'trust.3':'Sans engagement',
+'trust.4':'Acteur local luxembourgeois',
+'trust.5':'Partenaire Luxcontrol',
+
+'ceo.eyebrow':'Nouveau cadre légal · Mars 2025',
+'ceo.title':'La cybersécurité, <br>un enjeu de gouvernance',
+'ceo.body':'Aujourd\'hui, la cybersécurité ne concerne plus uniquement les équipes techniques.<br><br>Les dirigeants doivent pouvoir démontrer une démarche d\'évaluation et d\'amélioration de leur posture cyber. Au Luxembourg, depuis la <strong>directive NIS 2</strong> le CEO est désormais <strong>personnellement responsable</strong> en cas d\'incident.<br><br>Le Cyberscore permet d\'obtenir un état des lieux clair, de prioriser les actions à mener et de structurer une trajectoire d\'amélioration adaptée à <strong>votre organisation.</strong>',
+'ceo.s1.n':'Vision claire','ceo.s1.t':'Évaluez rapidement votre niveau de maturité cyber.',
+'ceo.s2.n':'8 questions','ceo.s2.t':'Le questionnaire repose sur une analyse détaillée en 8 points.',
+'ceo.s3.n':'Score A → E','ceo.s3.t':'Une notation lisible pour situer votre niveau et suivre votre progression.',
+'ceo.s4.n':'Plan d\'action','ceo.s4.t':'Identifiez les priorités pour renforcer votre sécurité par étape.',
+
+'quiz.eyebrow':'Diagnostic rapide',
+'quiz.title':'Quel est votre Cyberscore ?',
+'quiz.sub':'Répondez à 8 questions clés inspirées du Cyberscore . Vous obtiendrez une première estimation de votre niveau de préparation.',
+'quiz.progress':'Question {n} sur {total}',
+'quiz.next':'Question suivante →',
+'quiz.see':'Voir mon résultat →',
+
+'res.eyebrow':'Votre résultat',
+'res.title':'Votre estimation Cyberscore',
+'res.critical':'Points critiques identifiés',
+'res.good':'Bonnes pratiques en place',
+'res.legal.title':'Responsabilité personnelle du CEO',
+'res.legal.body':'Depuis mars 2025, le dirigeant est personnellement responsable de la cybersécurité au Luxembourg. Votre score actuel vous expose à des sanctions en cas d\'incident. cegecom vous accompagne pour remédier rapidement à cette situation.',
+'res.cta':'Parler à un expert cegecom',
+
+'pkg.eyebrow':'Packages CyberScore',
+'pkg.title':'4 niveaux pour évaluer, comprendre et renforcer votre cybersécurité',
+'pkg.sub':'Du premier diagnostic rapide à l’accompagnement de conformité, les packages CyberScore permettent d’avancer progressivement selon votre niveau de maturité, vos objectifs et vos obligations.',
+'pkg.h.method':'Méthode','pkg.h.deliver':'Livrables','pkg.h.usecase':'Cas d’usage','pkg.h.frameworks':'Référentiels couverts',
+'pkg.light.sub':'Je veux un premier niveau de visibilité.',
+'pkg.light.m1':'Auto-évaluation en ligne',
+'pkg.light.m2':'8 questions essentielles',
+'pkg.light.m3':'Réalisation en moins de 15 minutes',
+'pkg.light.d1':'Score global de A à E',
+'pkg.light.d2':'Niveau de maturité estimé',
+'pkg.light.u1':'Première approche cybersécurité',
+'pkg.light.u2':'Sensibilisation des dirigeants',
+'pkg.light.u3':'PME n’ayant jamais réalisé d’évaluation',
+'pkg.light.dur':'Durée : 15 minutes',
+'pkg.light.mode':'Réalisation : en ligne',
+'pkg.audit.m1':'Évaluation indépendante réalisée sur site',
+'pkg.audit.m2':'Plus de 90 points de contrôle',
+'pkg.audit.m3':'Entretiens avec les parties prenantes',
+'pkg.audit.m4':'Vérifications factuelles de la mise en œuvre des mesures',
+'pkg.audit.m5':'Réalisé par 2 experts certifiés IT & cybersécurité',
+'pkg.d.note':'Note finale de A à E',
+'pkg.d.analysis':'Analyse des résultats',
+'pkg.d.report':'Rapport détaillé',
+'pkg.d.reco':'Recommandations',
+'pkg.dur.1day':'Durée : 1 jour sur site + temps de rédaction',
+'pkg.mode.full':'Réalisation : sur site - 2 personnes + rapport et recommandations',
+'pkg.basic.sub':'Je veux connaître mon niveau réel de cybersécurité.',
+'pkg.basic.note':'Aucun rapport détaillé. Aucune recommandation.',
+'pkg.basic.u1':'Évaluation d’un fournisseur ou sous-traitant',
+'pkg.basic.u2':'Évaluation d’une filiale ou d’un partenaire',
+'pkg.basic.u3':'Due diligence cyber',
+'pkg.basic.u4':'Benchmark interne',
+'pkg.basic.u5':'Qualification d’un partenaire avant contractualisation',
+'pkg.basic.mode':'Réalisation : sur site - 2 personnes',
+'pkg.standard.sub':'Je veux comprendre et améliorer ma maturité cyber.',
+'pkg.standard.option':'<strong>Option :</strong> obtention du label « Cyber-Responsable ».',
+'pkg.standard.u1':'PME',
+'pkg.standard.u2':'ETI',
+'pkg.standard.u3':'Collectivités',
+'pkg.standard.u4':'Organisations souhaitant structurer leur démarche cybersécurité',
+'pkg.compliance.sub':'Je veux mesurer et démontrer ma conformité.',
+'pkg.compliance.m1':'Évaluation basée sur un référentiel ou une réglementation',
+'pkg.compliance.m2':'Analyse documentaire',
+'pkg.compliance.m3':'Interviews',
+'pkg.compliance.m4':'Vérification sur site',
+'pkg.compliance.m5':'Mapping des exigences',
+'pkg.compliance.d2':'Taux de conformité',
+'pkg.compliance.d3':'Analyse des écarts',
+'pkg.compliance.d5':'Plan d’actions',
+'pkg.compliance.d6':'Feuille de route de mise en conformité',
+'pkg.compliance.u1':'Préparation à une certification ISO 27001',
+'pkg.compliance.u2':'Préparation à NIS2',
+'pkg.compliance.u3':'Préparation à DORA',
+'pkg.compliance.u4':'Réponse aux exigences clients ou réglementaires',
+'pkg.compliance.dur':'Durée : 2 à 3 jours sur site + temps de rédaction',
+
+'journey.0.t':'Un parcours progressif','journey.0.s':'adapté à vos besoins',
+'journey.1.t':'Sensibiliser','journey.1.s':'premier pas',
+'journey.2.t':'Mesurer','journey.2.s':'connaître son niveau',
+'journey.3.t':'Comprendre & agir','journey.3.s':'améliorer sa maturité',
+'journey.4.t':'Se conformer','journey.4.s':'répondre aux exigences',
+
+'risks.eyebrow':'Pourquoi agir maintenant ?',
+'risks.title':'Les risques concernent <br>toutes les entreprises',
+'risks.desc':'Les cyberattaques ne visent plus uniquement les grandes entreprises. Les PME et TPE sont aussi exposées à des risques concrets : interruption d\'activité, perte de données, atteinte à la réputation, pression réglementaire ou perte de confiance des clients.',
+'risks.1.t':'Des attaques ciblées',
+'risks.1.b':'Les cybercriminels exploitent souvent les organisations les moins préparées : accès mal protégés, sauvegarde insuffisantes, absence de procédure ou manque de sensibilisation.',
+'risks.2.t':'L\'humain reste un point d\'entrée majeur',
+'risks.2.b':'Phishing, mots de passe faibles ou encore erreur de manipulation : une grande partie des incidents commencent par une action humaine évitable.',
+'risks.3.t':'Des exigences plus fortes',
+'risks.3.b':'La cybersécurité devient un critère de confiance. De plus en plus de clients et partenaires attendent des garanties concrètes sur la sécurité de leurs prestataires.',
+
+'ben.eyebrow':'Ce que vous gagnez',
+'ben.title':'Transformez votre Cyberscore <br>en plan d\'action',
+'ben.desc':'Le Cyberscore ne se limite pas à une note. Il permet de structurer une démarche progressive, lisible et actionnable pour améliorer votre posture cybersécurité.',
+'ben.1.t':'Comprendre votre niveau actuel',
+'ben.1.b':'Obtenez une vision claire de vos forces, de vos faiblesses mais également des domaines à renforcer.',
+'ben.2.t':'Prioriser les bonnes actions',
+'ben.2.b':'Identifiez les mesures les plus importantes à mettre en place selon votre niveau de risque, vos contraintes et vos ressources.',
+'ben.3.t':'Structurer votre démarche cyber',
+'ben.3.b':'Passez d\'actions ponctuelles à une feuille de route cohérente, documentée et surtout suivie dans le temps.',
+'ben.4.t':'Renforcer la confiance',
+'ben.4.b':'Montrez à vos clients, partenaires et collaborateurs que la cybersécurité est prise au sérieux dans votre organisation.',
+'ben.5.t':'Préparer les exigences réglementaires',
+'ben.5.b':'Anticipez les attentes liée à la gouvernance cyber, à la continuité d\'activité, à la gestion des incidents et à la protection des données.',
+'ben.6.t':'Identifier les aides disponibles',
+'ben.6.b':'Certains dispositifs luxembourgeois peuvent accompagner les PME dans leurs projets de cybersécurité selon leur éligibilité.',
+'ben.6.link':'Découvrir les possibilités d\'accompagnement',
+
+'co.eyebrow':'Prenons contact',
+'co.title':'Un expert cegecom <br>vous accompagne.',
+'co.body':'Vous souhaitez connaître votre niveau réel, préparer le Cyberscore ou identifier les premières actions à mettre en place ?<br><br>Nos équipes vous accompagne pour analyser votre situation, prioriser les mesures utiles et construire une cybersécurité adaptée à votre entreprise. ',
+'co.perk.1':'<strong>Diagnostic personnalisé</strong>Analyse de votre situation, de vos enjeux et de votre niveau de maturité actuel.',
+'co.perk.2':'<strong>Plan d\'action priorisé</strong>Recommandations concrètes selon vos risques, vos contraintes et votre budget.',
+'co.perk.3':'<strong>Accompagnement local</strong>une approche adaptée au contexte luxembourgeois et aux besoins des PME.',
+'co.perk.4':'<strong>Orientation vers les aides disponibles</strong>Identification des dispositifs mobilisables selon votre projet et votre éligibilité.',
+
+'form.title':'Demander mon diagnostic gratuit',
+'form.firstname':'Prénom <span>*</span>',
+'form.lastname':'Nom <span>*</span>',
+'form.email':'Email professionnel <span>*</span>',
+'form.phone':'Téléphone <span>*</span>',
+'form.company':'Société <span>*</span>',
+'form.role':'Votre fonction',
+'form.role.none':'Sélectionner...',
+'form.role.ceo':'CEO / Directeur général',
+'form.role.cfo':'CFO / Directeur financier',
+'form.role.cto':'CTO / DSI',
+'form.role.it':'Responsable IT',
+'form.role.other':'Autre',
+'form.message':'Message (optionnel)',
+'form.ph.firstname':'Jean',
+'form.ph.lastname':'Dupont',
+'form.ph.email':'j.dupont@entreprise.lu',
+'form.ph.company':'Nom de votre entreprise',
+'form.ph.message':'Décrivez brièvement votre situation, vos besoins ou vos priorités cybersécurité.',
+'form.rgpd':'J’accepte que mes données soient traitées par cegecom afin d’être recontacté dans le cadre de ma demande, conformément à la <a href="https://cegecom.lu/fr/cegecom-luxembourg/protection-des-donnees-cegecom/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">politique de confidentialité</a>.',
+'form.submit':'Envoyer ma demande →',
+'form.sending':'Envoi en cours…',
+'form.ok':'Demande bien reçue !',
+'form.okb':'Merci pour votre intérêt. Un expert cegecom reviendra vers vous prochainement afin d\'échanger sur les prochaines étapes possibles.<br><br>',
+'form.err.required':'Merci de remplir tous les champs obligatoires.',
+'form.err.email':'Merci de renseigner une adresse email valide.',
+'form.err.rgpd':'Veuillez accepter la politique de confidentialité.',
+'form.err.unavailable':'L\'envoi du formulaire est momentanément indisponible. Merci de nous contacter directement.',
+'form.err.generic':'Une erreur est survenue. Veuillez réessayer ou nous contacter directement.',
+
+'footer.left':'© 2025 cegecom S.A. — Premier opérateur alternatif au Luxembourg',
+'footer.privacy':'Protection des données',
+'footer.legal':'Mentions légales',
+
+'share.btn':'Partager',
+'share.page':'Partager la page',
+'share.copy':'Copier le lien',
+'share.email':'Envoyer par email',
+'share.toast':'Lien copié',
+'share.subject':'CyberScore cegecom — Diagnostic cybersécurité',
+'share.mailbody':'Bonjour,\n\nJe te partage cette page pour évaluer rapidement la maturité cybersécurité de notre entreprise :\n\n{url}\n\n',
+'share.text':'Découvrez ce diagnostic rapide pour évaluer la maturité cybersécurité de votre entreprise.'
+},
+
+/* ─────────────────────────── ENGLISH ─────────────────────────── */
+en:{
+'meta.title':'Cyberscore by cegecom — Assess your cybersecurity',
+'meta.desc':'Assess your company\'s cybersecurity maturity in just a few minutes.',
+'html.lang':'en',
+'site.url':'https://cegecom.lu/en/',
+
+'lang.fr':'French','lang.en':'English','lang.de':'German','lang.lu':'Luxembourgish',
+'nav.lang.label':'Language',
+'nav.burger.open':'Open menu',
+'nav.burger.close':'Close menu',
+'nav.cta':'Request support',
+
+'hero.pill':'Cybersecurity assessment · Luxembourg SMEs & companies',
+'hero.title':'Assess your <em>company\'s</em><br>cybersecurity maturity.',
+'hero.sub':'In just a few minutes, get a first estimate of how prepared you are for cyber risks and identify the priority areas to strengthen.',
+'hero.cta1':'Start the assessment',
+'hero.cta2':'Get expert support',
+'hero.card.label':'Cyberscore assessment preview',
+'hero.card.b1':'Governance',
+'hero.card.b2':'Access management',
+'hero.card.b3':'Backups',
+'hero.card.b4':'Awareness',
+'hero.card.b5':'NIS2 compliance',
+'hero.card.foot':'Confidential assessment · Result in 2 minutes',
+
+'trust.1':'Free assessment',
+'trust.2':'In two minutes',
+'trust.3':'No commitment',
+'trust.4':'Local Luxembourg player',
+'trust.5':'Luxcontrol partner',
+
+'ceo.eyebrow':'New legal framework · March 2025',
+'ceo.title':'Cybersecurity, <br>a governance issue',
+'ceo.body':'Today, cybersecurity is no longer the concern of technical teams alone.<br><br>Executives must be able to demonstrate a process for assessing and improving their cyber posture. In Luxembourg, under the <strong>NIS 2 directive</strong>, the CEO is now <strong>personally liable</strong> in the event of an incident.<br><br>Cyberscore gives you a clear picture of where you stand, helps you prioritise the actions to take and lets you structure an improvement path tailored to <strong>your organisation.</strong>',
+'ceo.s1.n':'A clear picture','ceo.s1.t':'Quickly assess your cyber maturity level.',
+'ceo.s2.n':'8 questions','ceo.s2.t':'The questionnaire is based on a detailed 8-point analysis.',
+'ceo.s3.n':'Score A → E','ceo.s3.t':'A readable rating to situate your level and track your progress.',
+'ceo.s4.n':'Action plan','ceo.s4.t':'Identify the priorities for strengthening your security step by step.',
+
+'quiz.eyebrow':'Quick assessment',
+'quiz.title':'What is your Cyberscore?',
+'quiz.sub':'Answer 8 key questions inspired by the Cyberscore. You will get a first estimate of your level of preparedness.',
+'quiz.progress':'Question {n} of {total}',
+'quiz.next':'Next question →',
+'quiz.see':'See my result →',
+
+'res.eyebrow':'Your result',
+'res.title':'Your Cyberscore estimate',
+'res.critical':'Critical points identified',
+'res.good':'Good practices in place',
+'res.legal.title':'Personal liability of the CEO',
+'res.legal.body':'Since March 2025, executives have been personally liable for cybersecurity in Luxembourg. Your current score exposes you to sanctions in the event of an incident. cegecom can help you remedy this situation quickly.',
+'res.cta':'Talk to a cegecom expert',
+
+'pkg.eyebrow':'CyberScore packages',
+'pkg.title':'4 levels to assess, understand and strengthen your cybersecurity',
+'pkg.sub':'From a first quick assessment to full compliance support, the CyberScore packages let you move forward step by step according to your maturity level, your objectives and your obligations.',
+'pkg.h.method':'Method','pkg.h.deliver':'Deliverables','pkg.h.usecase':'Use cases','pkg.h.frameworks':'Frameworks covered',
+'pkg.light.sub':'I want a first level of visibility.',
+'pkg.light.m1':'Online self-assessment',
+'pkg.light.m2':'8 essential questions',
+'pkg.light.m3':'Completed in under 15 minutes',
+'pkg.light.d1':'Overall score from A to E',
+'pkg.light.d2':'Estimated maturity level',
+'pkg.light.u1':'First approach to cybersecurity',
+'pkg.light.u2':'Raising executive awareness',
+'pkg.light.u3':'SMEs that have never carried out an assessment',
+'pkg.light.dur':'Duration: 15 minutes',
+'pkg.light.mode':'Delivery: online',
+'pkg.audit.m1':'Independent on-site assessment',
+'pkg.audit.m2':'More than 90 control points',
+'pkg.audit.m3':'Interviews with stakeholders',
+'pkg.audit.m4':'Factual verification that measures are implemented',
+'pkg.audit.m5':'Carried out by 2 certified IT & cybersecurity experts',
+'pkg.d.note':'Final rating from A to E',
+'pkg.d.analysis':'Analysis of the results',
+'pkg.d.report':'Detailed report',
+'pkg.d.reco':'Recommendations',
+'pkg.dur.1day':'Duration: 1 day on site + reporting time',
+'pkg.mode.full':'Delivery: on site - 2 people + report and recommendations',
+'pkg.basic.sub':'I want to know my real cybersecurity level.',
+'pkg.basic.note':'No detailed report. No recommendations.',
+'pkg.basic.u1':'Assessment of a supplier or subcontractor',
+'pkg.basic.u2':'Assessment of a subsidiary or a partner',
+'pkg.basic.u3':'Cyber due diligence',
+'pkg.basic.u4':'Internal benchmark',
+'pkg.basic.u5':'Qualifying a partner before contracting',
+'pkg.basic.mode':'Delivery: on site - 2 people',
+'pkg.standard.sub':'I want to understand and improve my cyber maturity.',
+'pkg.standard.option':'<strong>Option:</strong> obtaining the “Cyber-Responsible” label.',
+'pkg.standard.u1':'SMEs',
+'pkg.standard.u2':'Mid-sized companies',
+'pkg.standard.u3':'Public bodies',
+'pkg.standard.u4':'Organisations wishing to structure their cybersecurity approach',
+'pkg.compliance.sub':'I want to measure and demonstrate my compliance.',
+'pkg.compliance.m1':'Assessment based on a framework or a regulation',
+'pkg.compliance.m2':'Document review',
+'pkg.compliance.m3':'Interviews',
+'pkg.compliance.m4':'On-site verification',
+'pkg.compliance.m5':'Mapping of requirements',
+'pkg.compliance.d2':'Compliance rate',
+'pkg.compliance.d3':'Gap analysis',
+'pkg.compliance.d5':'Action plan',
+'pkg.compliance.d6':'Compliance roadmap',
+'pkg.compliance.u1':'Preparing for ISO 27001 certification',
+'pkg.compliance.u2':'Preparing for NIS2',
+'pkg.compliance.u3':'Preparing for DORA',
+'pkg.compliance.u4':'Responding to client or regulatory requirements',
+'pkg.compliance.dur':'Duration: 2 to 3 days on site + reporting time',
+
+'journey.0.t':'A step-by-step path','journey.0.s':'tailored to your needs',
+'journey.1.t':'Raise awareness','journey.1.s':'first step',
+'journey.2.t':'Measure','journey.2.s':'know your level',
+'journey.3.t':'Understand & act','journey.3.s':'improve your maturity',
+'journey.4.t':'Comply','journey.4.s':'meet the requirements',
+
+'risks.eyebrow':'Why act now?',
+'risks.title':'The risks concern <br>every company',
+'risks.desc':'Cyberattacks no longer target only large companies. SMEs and very small businesses are also exposed to concrete risks: business interruption, data loss, reputational damage, regulatory pressure or loss of customer trust.',
+'risks.1.t':'Targeted attacks',
+'risks.1.b':'Cybercriminals often exploit the least prepared organisations: poorly protected access, insufficient backups, missing procedures or a lack of awareness.',
+'risks.2.t':'People remain a major entry point',
+'risks.2.b':'Phishing, weak passwords or simple handling errors: a large share of incidents begin with an avoidable human action.',
+'risks.3.t':'Higher expectations',
+'risks.3.b':'Cybersecurity is becoming a trust criterion. More and more clients and partners expect concrete guarantees about the security of their providers.',
+
+'ben.eyebrow':'What you gain',
+'ben.title':'Turn your Cyberscore <br>into an action plan',
+'ben.desc':'The Cyberscore is more than a rating. It helps you structure a progressive, readable and actionable approach to improving your cybersecurity posture.',
+'ben.1.t':'Understand your current level',
+'ben.1.b':'Get a clear view of your strengths, your weaknesses and the areas that need reinforcing.',
+'ben.2.t':'Prioritise the right actions',
+'ben.2.b':'Identify the most important measures to put in place according to your risk level, your constraints and your resources.',
+'ben.3.t':'Structure your cyber approach',
+'ben.3.b':'Move from one-off actions to a coherent, documented roadmap that is genuinely followed over time.',
+'ben.4.t':'Strengthen trust',
+'ben.4.b':'Show your clients, partners and staff that cybersecurity is taken seriously in your organisation.',
+'ben.5.t':'Prepare for regulatory requirements',
+'ben.5.b':'Anticipate expectations around cyber governance, business continuity, incident management and data protection.',
+'ben.6.t':'Identify available support schemes',
+'ben.6.b':'Certain Luxembourg schemes can support SMEs in their cybersecurity projects, subject to eligibility.',
+'ben.6.link':'Explore the support options',
+
+'co.eyebrow':'Get in touch',
+'co.title':'A cegecom expert <br>is here to help.',
+'co.body':'Would you like to know your real level, prepare for the Cyberscore or identify the first actions to take?<br><br>Our teams help you analyse your situation, prioritise the measures that matter and build cybersecurity that fits your company. ',
+'co.perk.1':'<strong>Tailored assessment</strong>Analysis of your situation, your challenges and your current maturity level.',
+'co.perk.2':'<strong>Prioritised action plan</strong>Concrete recommendations based on your risks, your constraints and your budget.',
+'co.perk.3':'<strong>Local support</strong>an approach suited to the Luxembourg context and to the needs of SMEs.',
+'co.perk.4':'<strong>Guidance on available funding</strong>Identification of the schemes you can draw on, depending on your project and eligibility.',
+
+'form.title':'Request my free assessment',
+'form.firstname':'First name <span>*</span>',
+'form.lastname':'Last name <span>*</span>',
+'form.email':'Business email <span>*</span>',
+'form.phone':'Phone <span>*</span>',
+'form.company':'Company <span>*</span>',
+'form.role':'Your role',
+'form.role.none':'Select...',
+'form.role.ceo':'CEO / Managing Director',
+'form.role.cfo':'CFO / Finance Director',
+'form.role.cto':'CTO / Head of IS',
+'form.role.it':'IT Manager',
+'form.role.other':'Other',
+'form.message':'Message (optional)',
+'form.ph.firstname':'John',
+'form.ph.lastname':'Smith',
+'form.ph.email':'j.smith@company.lu',
+'form.ph.company':'Your company name',
+'form.ph.message':'Briefly describe your situation, your needs or your cybersecurity priorities.',
+'form.rgpd':'I agree that my data may be processed by cegecom so that I can be contacted regarding my request, in accordance with the <a href="https://cegecom.lu/fr/cegecom-luxembourg/protection-des-donnees-cegecom/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">privacy policy</a>.',
+'form.submit':'Send my request →',
+'form.sending':'Sending…',
+'form.ok':'Request received!',
+'form.okb':'Thank you for your interest. A cegecom expert will get back to you shortly to discuss the possible next steps.<br><br>',
+'form.err.required':'Please fill in all required fields.',
+'form.err.email':'Please enter a valid email address.',
+'form.err.rgpd':'Please accept the privacy policy.',
+'form.err.unavailable':'Form submission is temporarily unavailable. Please contact us directly.',
+'form.err.generic':'An error occurred. Please try again or contact us directly.',
+
+'footer.left':'© 2025 cegecom S.A. — Luxembourg\'s leading alternative operator',
+'footer.privacy':'Data protection',
+'footer.legal':'Legal notice',
+
+'share.btn':'Share',
+'share.page':'Share the page',
+'share.copy':'Copy the link',
+'share.email':'Send by email',
+'share.toast':'Link copied',
+'share.subject':'CyberScore cegecom — Cybersecurity assessment',
+'share.mailbody':'Hello,\n\nI\'m sharing this page with you to quickly assess our company\'s cybersecurity maturity:\n\n{url}\n\n',
+'share.text':'Discover this quick assessment to evaluate your company\'s cybersecurity maturity.'
+},
+
+/* ─────────────────────────── DEUTSCH ─────────────────────────── */
+de:{
+'meta.title':'Cyberscore by cegecom — Bewerten Sie Ihre Cybersicherheit',
+'meta.desc':'Bewerten Sie in wenigen Minuten die Cybersicherheitsreife Ihres Unternehmens.',
+'html.lang':'de',
+'site.url':'https://cegecom.lu/de/',
+
+'lang.fr':'Französisch','lang.en':'Englisch','lang.de':'Deutsch','lang.lu':'Luxemburgisch',
+'nav.lang.label':'Sprache',
+'nav.burger.open':'Menü öffnen',
+'nav.burger.close':'Menü schließen',
+'nav.cta':'Beratung anfragen',
+
+'hero.pill':'Cybersicherheits-Check · Luxemburger KMU & Unternehmen',
+'hero.title':'Bewerten Sie die Cyber-<br>sicherheitsreife Ihres <em>Unternehmens.</em>',
+'hero.sub':'Erhalten Sie in wenigen Minuten eine erste Einschätzung Ihres Vorbereitungsgrads gegenüber Cyberrisiken und erkennen Sie die vorrangig zu stärkenden Bereiche.',
+'hero.cta1':'Check starten',
+'hero.cta2':'Von einem Experten begleiten lassen',
+'hero.card.label':'Vorschau des Cyberscore-Checks',
+'hero.card.b1':'Governance',
+'hero.card.b2':'Zugriffsverwaltung',
+'hero.card.b3':'Datensicherungen',
+'hero.card.b4':'Sensibilisierung',
+'hero.card.b5':'NIS2-Konformität',
+'hero.card.foot':'Vertraulicher Check · Ergebnis in 2 Minuten',
+
+'trust.1':'Kostenloser Check',
+'trust.2':'In zwei Minuten',
+'trust.3':'Unverbindlich',
+'trust.4':'Lokaler Luxemburger Akteur',
+'trust.5':'Luxcontrol-Partner',
+
+'ceo.eyebrow':'Neuer Rechtsrahmen · März 2025',
+'ceo.title':'Cybersicherheit, <br>eine Frage der Governance',
+'ceo.body':'Cybersicherheit betrifft heute längst nicht mehr nur die technischen Teams.<br><br>Die Unternehmensleitung muss nachweisen können, dass sie ihre Cyber-Position bewertet und verbessert. In Luxemburg haftet der CEO seit der <strong>NIS-2-Richtlinie</strong> im Falle eines Vorfalls <strong>persönlich</strong>.<br><br>Der Cyberscore liefert eine klare Bestandsaufnahme, hilft bei der Priorisierung der Maßnahmen und ermöglicht einen auf <strong>Ihre Organisation</strong> zugeschnittenen Verbesserungspfad.',
+'ceo.s1.n':'Klarer Überblick','ceo.s1.t':'Bewerten Sie Ihren Cyber-Reifegrad schnell und einfach.',
+'ceo.s2.n':'8 Fragen','ceo.s2.t':'Der Fragebogen beruht auf einer detaillierten Analyse in 8 Punkten.',
+'ceo.s3.n':'Bewertung A → E','ceo.s3.t':'Eine verständliche Note, um Ihr Niveau einzuordnen und Ihren Fortschritt zu verfolgen.',
+'ceo.s4.n':'Aktionsplan','ceo.s4.t':'Erkennen Sie die Prioritäten, um Ihre Sicherheit Schritt für Schritt zu stärken.',
+
+'quiz.eyebrow':'Schnell-Check',
+'quiz.title':'Wie hoch ist Ihr Cyberscore?',
+'quiz.sub':'Beantworten Sie 8 Kernfragen, die sich am Cyberscore orientieren. Sie erhalten eine erste Einschätzung Ihres Vorbereitungsgrads.',
+'quiz.progress':'Frage {n} von {total}',
+'quiz.next':'Nächste Frage →',
+'quiz.see':'Mein Ergebnis ansehen →',
+
+'res.eyebrow':'Ihr Ergebnis',
+'res.title':'Ihre Cyberscore-Einschätzung',
+'res.critical':'Erkannte kritische Punkte',
+'res.good':'Vorhandene gute Praktiken',
+'res.legal.title':'Persönliche Haftung des CEO',
+'res.legal.body':'Seit März 2025 haftet die Unternehmensleitung in Luxemburg persönlich für die Cybersicherheit. Ihr aktuelles Ergebnis setzt Sie im Falle eines Vorfalls Sanktionen aus. cegecom unterstützt Sie dabei, diese Situation rasch zu beheben.',
+'res.cta':'Mit einem cegecom-Experten sprechen',
+
+'pkg.eyebrow':'CyberScore-Pakete',
+'pkg.title':'4 Stufen, um Ihre Cybersicherheit zu bewerten, zu verstehen und zu stärken',
+'pkg.sub':'Vom ersten Schnell-Check bis zur Begleitung bei der Konformität ermöglichen die CyberScore-Pakete ein schrittweises Vorgehen – je nach Reifegrad, Zielen und Verpflichtungen.',
+'pkg.h.method':'Methode','pkg.h.deliver':'Ergebnisse','pkg.h.usecase':'Anwendungsfälle','pkg.h.frameworks':'Abgedeckte Regelwerke',
+'pkg.light.sub':'Ich möchte einen ersten Überblick gewinnen.',
+'pkg.light.m1':'Online-Selbstbewertung',
+'pkg.light.m2':'8 wesentliche Fragen',
+'pkg.light.m3':'Durchführung in weniger als 15 Minuten',
+'pkg.light.d1':'Gesamtbewertung von A bis E',
+'pkg.light.d2':'Geschätzter Reifegrad',
+'pkg.light.u1':'Erster Zugang zur Cybersicherheit',
+'pkg.light.u2':'Sensibilisierung der Führungsebene',
+'pkg.light.u3':'KMU ohne bisherige Bewertung',
+'pkg.light.dur':'Dauer: 15 Minuten',
+'pkg.light.mode':'Durchführung: online',
+'pkg.audit.m1':'Unabhängige Bewertung vor Ort',
+'pkg.audit.m2':'Mehr als 90 Kontrollpunkte',
+'pkg.audit.m3':'Gespräche mit den Beteiligten',
+'pkg.audit.m4':'Faktische Überprüfung der umgesetzten Maßnahmen',
+'pkg.audit.m5':'Durchgeführt von 2 zertifizierten IT- & Cybersicherheitsexperten',
+'pkg.d.note':'Endnote von A bis E',
+'pkg.d.analysis':'Analyse der Ergebnisse',
+'pkg.d.report':'Detaillierter Bericht',
+'pkg.d.reco':'Empfehlungen',
+'pkg.dur.1day':'Dauer: 1 Tag vor Ort + Zeit für die Berichterstellung',
+'pkg.mode.full':'Durchführung: vor Ort – 2 Personen + Bericht und Empfehlungen',
+'pkg.basic.sub':'Ich möchte mein tatsächliches Cybersicherheitsniveau kennen.',
+'pkg.basic.note':'Kein detaillierter Bericht. Keine Empfehlungen.',
+'pkg.basic.u1':'Bewertung eines Lieferanten oder Subunternehmers',
+'pkg.basic.u2':'Bewertung einer Tochtergesellschaft oder eines Partners',
+'pkg.basic.u3':'Cyber-Due-Diligence',
+'pkg.basic.u4':'Interner Benchmark',
+'pkg.basic.u5':'Qualifizierung eines Partners vor Vertragsabschluss',
+'pkg.basic.mode':'Durchführung: vor Ort – 2 Personen',
+'pkg.standard.sub':'Ich möchte meine Cyber-Reife verstehen und verbessern.',
+'pkg.standard.option':'<strong>Option:</strong> Erlangung des Labels „Cyber-Responsable“.',
+'pkg.standard.u1':'KMU',
+'pkg.standard.u2':'Mittelständische Unternehmen',
+'pkg.standard.u3':'Öffentliche Einrichtungen',
+'pkg.standard.u4':'Organisationen, die ihr Cybersicherheitsvorgehen strukturieren möchten',
+'pkg.compliance.sub':'Ich möchte meine Konformität messen und nachweisen.',
+'pkg.compliance.m1':'Bewertung auf Basis eines Regelwerks oder einer Vorschrift',
+'pkg.compliance.m2':'Dokumentenanalyse',
+'pkg.compliance.m3':'Interviews',
+'pkg.compliance.m4':'Überprüfung vor Ort',
+'pkg.compliance.m5':'Mapping der Anforderungen',
+'pkg.compliance.d2':'Konformitätsgrad',
+'pkg.compliance.d3':'Abweichungsanalyse',
+'pkg.compliance.d5':'Maßnahmenplan',
+'pkg.compliance.d6':'Fahrplan zur Herstellung der Konformität',
+'pkg.compliance.u1':'Vorbereitung auf eine ISO-27001-Zertifizierung',
+'pkg.compliance.u2':'Vorbereitung auf NIS2',
+'pkg.compliance.u3':'Vorbereitung auf DORA',
+'pkg.compliance.u4':'Erfüllung von Kunden- oder Regulierungsanforderungen',
+'pkg.compliance.dur':'Dauer: 2 bis 3 Tage vor Ort + Zeit für die Berichterstellung',
+
+'journey.0.t':'Ein schrittweiser Weg','journey.0.s':'auf Ihre Bedürfnisse zugeschnitten',
+'journey.1.t':'Sensibilisieren','journey.1.s':'erster Schritt',
+'journey.2.t':'Messen','journey.2.s':'sein Niveau kennen',
+'journey.3.t':'Verstehen & handeln','journey.3.s':'seine Reife verbessern',
+'journey.4.t':'Konform werden','journey.4.s':'die Anforderungen erfüllen',
+
+'risks.eyebrow':'Warum jetzt handeln?',
+'risks.title':'Die Risiken betreffen <br>alle Unternehmen',
+'risks.desc':'Cyberangriffe richten sich längst nicht mehr nur gegen Großunternehmen. Auch KMU und Kleinstbetriebe sind konkreten Risiken ausgesetzt: Betriebsunterbrechung, Datenverlust, Reputationsschaden, regulatorischer Druck oder Vertrauensverlust bei den Kunden.',
+'risks.1.t':'Gezielte Angriffe',
+'risks.1.b':'Cyberkriminelle nutzen häufig die am wenigsten vorbereiteten Organisationen aus: schlecht geschützte Zugänge, unzureichende Datensicherungen, fehlende Verfahren oder mangelnde Sensibilisierung.',
+'risks.2.t':'Der Mensch bleibt ein wichtiges Einfallstor',
+'risks.2.b':'Phishing, schwache Passwörter oder auch Bedienfehler: Ein großer Teil der Vorfälle beginnt mit einer vermeidbaren menschlichen Handlung.',
+'risks.3.t':'Höhere Anforderungen',
+'risks.3.b':'Cybersicherheit wird zu einem Vertrauenskriterium. Immer mehr Kunden und Partner erwarten konkrete Garantien zur Sicherheit ihrer Dienstleister.',
+
+'ben.eyebrow':'Ihr Nutzen',
+'ben.title':'Machen Sie aus Ihrem Cyberscore <br>einen Aktionsplan',
+'ben.desc':'Der Cyberscore ist mehr als eine Note. Er hilft Ihnen, ein schrittweises, verständliches und umsetzbares Vorgehen zur Verbesserung Ihrer Cybersicherheit zu strukturieren.',
+'ben.1.t':'Ihr aktuelles Niveau verstehen',
+'ben.1.b':'Erhalten Sie einen klaren Überblick über Ihre Stärken, Ihre Schwächen und die Bereiche, die gestärkt werden müssen.',
+'ben.2.t':'Die richtigen Maßnahmen priorisieren',
+'ben.2.b':'Erkennen Sie die wichtigsten Maßnahmen, die Sie je nach Risikoniveau, Rahmenbedingungen und Ressourcen umsetzen sollten.',
+'ben.3.t':'Ihr Cyber-Vorgehen strukturieren',
+'ben.3.b':'Gehen Sie von punktuellen Maßnahmen zu einem stimmigen, dokumentierten und dauerhaft verfolgten Fahrplan über.',
+'ben.4.t':'Vertrauen stärken',
+'ben.4.b':'Zeigen Sie Ihren Kunden, Partnern und Mitarbeitenden, dass Cybersicherheit in Ihrer Organisation ernst genommen wird.',
+'ben.5.t':'Regulatorische Anforderungen vorbereiten',
+'ben.5.b':'Antizipieren Sie die Erwartungen an Cyber-Governance, Geschäftskontinuität, Vorfallsmanagement und Datenschutz.',
+'ben.6.t':'Verfügbare Fördermittel erkennen',
+'ben.6.b':'Bestimmte Luxemburger Programme können KMU je nach Förderfähigkeit bei ihren Cybersicherheitsprojekten unterstützen.',
+'ben.6.link':'Die Unterstützungsmöglichkeiten entdecken',
+
+'co.eyebrow':'Kontakt aufnehmen',
+'co.title':'Ein cegecom-Experte <br>begleitet Sie.',
+'co.body':'Möchten Sie Ihr tatsächliches Niveau kennen, sich auf den Cyberscore vorbereiten oder die ersten umzusetzenden Maßnahmen bestimmen?<br><br>Unsere Teams unterstützen Sie dabei, Ihre Situation zu analysieren, die sinnvollen Maßnahmen zu priorisieren und eine auf Ihr Unternehmen zugeschnittene Cybersicherheit aufzubauen. ',
+'co.perk.1':'<strong>Individuelle Analyse</strong>Untersuchung Ihrer Situation, Ihrer Herausforderungen und Ihres aktuellen Reifegrads.',
+'co.perk.2':'<strong>Priorisierter Aktionsplan</strong>Konkrete Empfehlungen je nach Risiken, Rahmenbedingungen und Budget.',
+'co.perk.3':'<strong>Lokale Begleitung</strong>ein Ansatz, der auf den luxemburgischen Kontext und die Bedürfnisse von KMU zugeschnitten ist.',
+'co.perk.4':'<strong>Orientierung zu verfügbaren Fördermitteln</strong>Ermittlung der Programme, die Sie je nach Projekt und Förderfähigkeit nutzen können.',
+
+'form.title':'Meinen kostenlosen Check anfragen',
+'form.firstname':'Vorname <span>*</span>',
+'form.lastname':'Nachname <span>*</span>',
+'form.email':'Geschäftliche E-Mail <span>*</span>',
+'form.phone':'Telefon <span>*</span>',
+'form.company':'Unternehmen <span>*</span>',
+'form.role':'Ihre Funktion',
+'form.role.none':'Auswählen...',
+'form.role.ceo':'CEO / Geschäftsführer',
+'form.role.cfo':'CFO / Finanzleiter',
+'form.role.cto':'CTO / IT-Leitung',
+'form.role.it':'IT-Verantwortlicher',
+'form.role.other':'Sonstiges',
+'form.message':'Nachricht (optional)',
+'form.ph.firstname':'Max',
+'form.ph.lastname':'Mustermann',
+'form.ph.email':'m.mustermann@unternehmen.lu',
+'form.ph.company':'Name Ihres Unternehmens',
+'form.ph.message':'Beschreiben Sie kurz Ihre Situation, Ihre Bedürfnisse oder Ihre Cybersicherheitsprioritäten.',
+'form.rgpd':'Ich bin damit einverstanden, dass meine Daten von cegecom verarbeitet werden, um im Rahmen meiner Anfrage kontaktiert zu werden, gemäß der <a href="https://cegecom.lu/fr/cegecom-luxembourg/protection-des-donnees-cegecom/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Datenschutzerklärung</a>.',
+'form.submit':'Anfrage senden →',
+'form.sending':'Wird gesendet…',
+'form.ok':'Anfrage erhalten!',
+'form.okb':'Vielen Dank für Ihr Interesse. Ein cegecom-Experte meldet sich in Kürze bei Ihnen, um die möglichen nächsten Schritte zu besprechen.<br><br>',
+'form.err.required':'Bitte füllen Sie alle Pflichtfelder aus.',
+'form.err.email':'Bitte geben Sie eine gültige E-Mail-Adresse an.',
+'form.err.rgpd':'Bitte akzeptieren Sie die Datenschutzerklärung.',
+'form.err.unavailable':'Das Absenden des Formulars ist vorübergehend nicht möglich. Bitte kontaktieren Sie uns direkt.',
+'form.err.generic':'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt.',
+
+'footer.left':'© 2025 cegecom S.A. — Führender alternativer Betreiber in Luxemburg',
+'footer.privacy':'Datenschutz',
+'footer.legal':'Impressum',
+
+'share.btn':'Teilen',
+'share.page':'Seite teilen',
+'share.copy':'Link kopieren',
+'share.email':'Per E-Mail senden',
+'share.toast':'Link kopiert',
+'share.subject':'CyberScore cegecom — Cybersicherheits-Check',
+'share.mailbody':'Hallo,\n\nich teile diese Seite mit dir, um die Cybersicherheitsreife unseres Unternehmens schnell zu bewerten:\n\n{url}\n\n',
+'share.text':'Entdecken Sie diesen Schnell-Check, um die Cybersicherheitsreife Ihres Unternehmens zu bewerten.'
+},
+
+/* ─────────────────────── LËTZEBUERGESCH ─────────────────────── */
+lu:{
+'meta.title':'Cyberscore by cegecom — Evaluéiert Är Cybersécherheet',
+'meta.desc':'Evaluéiert a wéinege Minutten d\'Cybersécherheetsreife vun Ärem Betrib.',
+'html.lang':'lb',
+'site.url':'https://cegecom.lu/fr/',
+
+'lang.fr':'Franséisch','lang.en':'Englesch','lang.de':'Däitsch','lang.lu':'Lëtzebuergesch',
+'nav.lang.label':'Sprooch',
+'nav.burger.open':'Menü opmaachen',
+'nav.burger.close':'Menü zoumaachen',
+'nav.cta':'Ënnerstëtzung ufroen',
+
+'hero.pill':'Cybersécherheets-Check · Lëtzebuerger KMU & Betriber',
+'hero.title':'Evaluéiert d\'Cyber-<br>sécherheetsreife vun Ärem <em>Betrib.</em>',
+'hero.sub':'A wéinege Minutten kritt Dir eng éischt Aschätzung vun Ärem Virbereedungsniveau géintiwwer Cyberrisiken an Dir erkennt d\'Beräicher, déi prioritär ze stäerken sinn.',
+'hero.cta1':'Check starten',
+'hero.cta2':'Vun engem Expert begleet ginn',
+'hero.card.label':'Iwwerbléck vum Cyberscore-Check',
+'hero.card.b1':'Gouvernance',
+'hero.card.b2':'Zougangsverwaltung',
+'hero.card.b3':'Backupen',
+'hero.card.b4':'Sensibiliséierung',
+'hero.card.b5':'NIS2-Konformitéit',
+'hero.card.foot':'Vertraulechen Check · Resultat a 2 Minutten',
+
+'trust.1':'Gratis Check',
+'trust.2':'An zwou Minutten',
+'trust.3':'Ouni Engagement',
+'trust.4':'Lokalen Lëtzebuerger Acteur',
+'trust.5':'Luxcontrol-Partner',
+
+'ceo.eyebrow':'Neie gesetzleche Kader · Mäerz 2025',
+'ceo.title':'Cybersécherheet, <br>eng Fro vun der Gouvernance',
+'ceo.body':'Haut betrëfft d\'Cybersécherheet net méi nëmmen déi technesch Equipen.<br><br>D\'Direktioun muss weisen kënnen, datt si hir Cyber-Positioun evaluéiert a verbessert. Zu Lëtzebuerg ass de CEO zanter der <strong>NIS-2-Direktiv</strong> am Fall vun engem Tëschefall <strong>perséinlech verantwortlech</strong>.<br><br>De Cyberscore gëtt e kloren Iwwerbléck, hëlleft d\'Moossnamen ze prioriséieren an erlaabt e Verbesserungswee, deen op <strong>Är Organisatioun</strong> ofgestëmmt ass.',
+'ceo.s1.n':'Kloren Iwwerbléck','ceo.s1.t':'Evaluéiert séier Ären Niveau vun der Cyber-Reife.',
+'ceo.s2.n':'8 Froen','ceo.s2.t':'De Questionnaire baséiert op enger detailléierter Analyse a 8 Punkten.',
+'ceo.s3.n':'Score A → E','ceo.s3.t':'Eng verständlech Note fir Ären Niveau anzeuerdnen an Äre Fortschrëtt ze verfollegen.',
+'ceo.s4.n':'Aktiounsplang','ceo.s4.t':'Erkennt d\'Prioritéiten fir Är Sécherheet Schrëtt fir Schrëtt ze stäerken.',
+
+'quiz.eyebrow':'Séiere Check',
+'quiz.title':'Wat ass Äre Cyberscore?',
+'quiz.sub':'Beäntwert 8 Schlësselfroen, déi sech um Cyberscore orientéieren. Dir kritt eng éischt Aschätzung vun Ärem Virbereedungsniveau.',
+'quiz.progress':'Fro {n} vun {total}',
+'quiz.next':'Nächst Fro →',
+'quiz.see':'Mäi Resultat weisen →',
+
+'res.eyebrow':'Äert Resultat',
+'res.title':'Är Cyberscore-Aschätzung',
+'res.critical':'Erkannte kritesch Punkten',
+'res.good':'Gutt Praktiken, déi schonn do sinn',
+'res.legal.title':'Perséinlech Verantwortung vum CEO',
+'res.legal.body':'Zanter Mäerz 2025 ass d\'Direktioun zu Lëtzebuerg perséinlech verantwortlech fir d\'Cybersécherheet. Äre momentane Score setzt Iech am Fall vun engem Tëschefall Sanktiounen aus. cegecom hëlleft Iech, dës Situatioun séier ze verbesseren.',
+'res.cta':'Mat engem cegecom-Expert schwätzen',
+
+'pkg.eyebrow':'CyberScore-Packagen',
+'pkg.title':'4 Niveauen fir Är Cybersécherheet ze evaluéieren, ze verstoen an ze stäerken',
+'pkg.sub':'Vum éischte séiere Check bis zur Begleedung bei der Konformitéit erlaben d\'CyberScore-Packagen e Schrëtt-fir-Schrëtt-Virgoen — no Ärem Reifegrad, Ären Ziler an Ären Obligatiounen.',
+'pkg.h.method':'Method','pkg.h.deliver':'Resultater','pkg.h.usecase':'Uwendungsfäll','pkg.h.frameworks':'Ofgedeckte Referentiellen',
+'pkg.light.sub':'Ech wëll en éischten Iwwerbléck kréien.',
+'pkg.light.m1':'Selbstevaluatioun online',
+'pkg.light.m2':'8 wesentlech Froen',
+'pkg.light.m3':'Duerchféierung a manner wéi 15 Minutten',
+'pkg.light.d1':'Gesamtscore vun A bis E',
+'pkg.light.d2':'Geschaten Reifegrad',
+'pkg.light.u1':'Éischten Zougang zur Cybersécherheet',
+'pkg.light.u2':'Sensibiliséierung vun der Direktioun',
+'pkg.light.u3':'KMU, déi nach ni eng Evaluatioun gemaach hunn',
+'pkg.light.dur':'Dauer: 15 Minutten',
+'pkg.light.mode':'Duerchféierung: online',
+'pkg.audit.m1':'Onofhängeg Evaluatioun op der Plaz',
+'pkg.audit.m2':'Méi wéi 90 Kontrollpunkten',
+'pkg.audit.m3':'Gespréicher mat de Betraffenen',
+'pkg.audit.m4':'Faktesch Iwwerpréifung vun der Ëmsetzung vun de Moossnamen',
+'pkg.audit.m5':'Duerchgefouert vun 2 zertifizéierten IT- & Cybersécherheetsexperten',
+'pkg.d.note':'Endnote vun A bis E',
+'pkg.d.analysis':'Analyse vun de Resultater',
+'pkg.d.report':'Detailléierte Rapport',
+'pkg.d.reco':'Empfeelungen',
+'pkg.dur.1day':'Dauer: 1 Dag op der Plaz + Zäit fir de Rapport',
+'pkg.mode.full':'Duerchféierung: op der Plaz - 2 Persounen + Rapport an Empfeelungen',
+'pkg.basic.sub':'Ech wëll mäin tatsächlechen Niveau vun der Cybersécherheet kennen.',
+'pkg.basic.note':'Kee detailléierte Rapport. Keng Empfeelungen.',
+'pkg.basic.u1':'Evaluatioun vun engem Fournisseur oder Ënnerdeelnehmer',
+'pkg.basic.u2':'Evaluatioun vun enger Filial oder engem Partner',
+'pkg.basic.u3':'Cyber-Due-Diligence',
+'pkg.basic.u4':'Interne Benchmark',
+'pkg.basic.u5':'Qualifikatioun vun engem Partner virum Vertragsofschloss',
+'pkg.basic.mode':'Duerchféierung: op der Plaz - 2 Persounen',
+'pkg.standard.sub':'Ech wëll meng Cyber-Reife verstoen a verbesseren.',
+'pkg.standard.option':'<strong>Optioun:</strong> Erhalen vum Label « Cyber-Responsable ».',
+'pkg.standard.u1':'KMU',
+'pkg.standard.u2':'Mëttelgrouss Betriber',
+'pkg.standard.u3':'Ëffentlech Instanzen',
+'pkg.standard.u4':'Organisatiounen, déi hir Cybersécherheetsdemarche strukturéiere wëllen',
+'pkg.compliance.sub':'Ech wëll meng Konformitéit moossen a beleeën.',
+'pkg.compliance.m1':'Evaluatioun op Basis vun engem Referentiel oder enger Reglementatioun',
+'pkg.compliance.m2':'Dokumentenanalyse',
+'pkg.compliance.m3':'Interviewen',
+'pkg.compliance.m4':'Iwwerpréifung op der Plaz',
+'pkg.compliance.m5':'Mapping vun den Ufuerderungen',
+'pkg.compliance.d2':'Konformitéitsgrad',
+'pkg.compliance.d3':'Analyse vun den Ecarten',
+'pkg.compliance.d5':'Aktiounsplang',
+'pkg.compliance.d6':'Feuille de route fir d\'Konformitéit',
+'pkg.compliance.u1':'Virbereedung op eng ISO-27001-Zertifizéierung',
+'pkg.compliance.u2':'Virbereedung op NIS2',
+'pkg.compliance.u3':'Virbereedung op DORA',
+'pkg.compliance.u4':'Äntwert op Client- oder reglementaresch Ufuerderungen',
+'pkg.compliance.dur':'Dauer: 2 bis 3 Deeg op der Plaz + Zäit fir de Rapport',
+
+'journey.0.t':'E Schrëtt-fir-Schrëtt-Wee','journey.0.s':'ugepasst un Är Besoinen',
+'journey.1.t':'Sensibiliséieren','journey.1.s':'éischte Schrëtt',
+'journey.2.t':'Moossen','journey.2.s':'säin Niveau kennen',
+'journey.3.t':'Verstoen & handelen','journey.3.s':'seng Reife verbesseren',
+'journey.4.t':'Konform ginn','journey.4.s':'d\'Ufuerderunge erfëllen',
+
+'risks.eyebrow':'Firwat elo handelen?',
+'risks.title':'D\'Risike betreffen <br>all Betriber',
+'risks.desc':'Cyberattacke riichte sech net méi nëmme géint grouss Betriber. Och KMU a ganz kleng Betriber si konkrete Risiken ausgesat: Ënnerbriechung vun der Aktivitéit, Datteverloscht, Rufschued, reglementaresche Drock oder Verloscht vum Vertrauen vun de Clienten.',
+'risks.1.t':'Geziilt Attacken',
+'risks.1.b':'Cyberkriminell notzen dacks déi am mannsten virbereet Organisatiounen aus: schlecht geschützte Zougäng, ongenügend Backupen, feelend Prozeduren oder e Mangel u Sensibiliséierung.',
+'risks.2.t':'De Mënsch bleift e wichtegen Aganspunkt',
+'risks.2.b':'Phishing, schwaach Passwierder oder och Bedienungsfeeler: E grousse Bestanddeel vun den Tëschefäll fänkt mat enger vermeidbarer mënschlecher Handlung un.',
+'risks.3.t':'Méi héich Ufuerderungen',
+'risks.3.b':'D\'Cybersécherheet gëtt zu engem Vertrauenskritär. Ëmmer méi Clienten a Partner erwaarde konkret Garantien iwwer d\'Sécherheet vun hire Prestatairen.',
+
+'ben.eyebrow':'Wat Dir gewannt',
+'ben.title':'Maacht aus Ärem Cyberscore <br>en Aktiounsplang',
+'ben.desc':'De Cyberscore ass méi wéi eng Note. Hie hëlleft Iech, eng schrëttweis, verständlech an ëmsetzbar Demarche fir d\'Verbesserung vun Ärer Cybersécherheet ze strukturéieren.',
+'ben.1.t':'Ären aktuellen Niveau verstoen',
+'ben.1.b':'Kritt e kloren Iwwerbléck iwwer Är Stäerkten, Är Schwächten an och d\'Beräicher, déi ze stäerke sinn.',
+'ben.2.t':'Déi richteg Moossname prioriséieren',
+'ben.2.b':'Erkennt déi wichtegst Moossnamen, déi no Ärem Risikoniveau, Äre Contrainten an Äre Ressourcen ëmzesetze sinn.',
+'ben.3.t':'Är Cyber-Demarche strukturéieren',
+'ben.3.b':'Gitt vu punktuellen Aktiounen op eng kohärent, dokumentéiert a virun allem iwwer d\'Zäit verfollegt Feuille de route iwwer.',
+'ben.4.t':'D\'Vertrauen stäerken',
+'ben.4.b':'Weist Äre Clienten, Partner a Mataarbechter, datt d\'Cybersécherheet an Ärer Organisatioun eescht geholl gëtt.',
+'ben.5.t':'Op déi reglementaresch Ufuerderunge virbereeden',
+'ben.5.b':'Antizipéiert d\'Erwaardungen un d\'Cyber-Gouvernance, d\'Kontinuitéit vun der Aktivitéit, d\'Gestioun vun Tëschefäll an de Schutz vun den Donnéeën.',
+'ben.6.t':'Déi verfügbar Hëllefe erkennen',
+'ben.6.b':'Verschidde Lëtzebuerger Dispositive kënnen KMU bei hire Cybersécherheetsprojeten ënnerstëtzen, jee no Eligibilitéit.',
+'ben.6.link':'D\'Ënnerstëtzungsméiglechkeeten entdecken',
+
+'co.eyebrow':'Loosst eis Kontakt ophuelen',
+'co.title':'En cegecom-Expert <br>begleet Iech.',
+'co.body':'Wëllt Dir Ären tatsächlechen Niveau kennen, Iech op de Cyberscore virbereeden oder déi éischt Moossnamen erkennen, déi ëmzesetze sinn?<br><br>Eis Equipen hëllefen Iech, Är Situatioun ze analyséieren, déi nëtzlech Moossnamen ze prioriséieren an eng Cybersécherheet opzebauen, déi op Äre Betrib ugepasst ass. ',
+'co.perk.1':'<strong>Perséinlech Analyse</strong>Analyse vun Ärer Situatioun, Ären Erausfuerderungen an Ärem aktuelle Reifegrad.',
+'co.perk.2':'<strong>Prioriséierten Aktiounsplang</strong>Konkret Empfeelungen no Äre Risiken, Äre Contrainten an Ärem Budget.',
+'co.perk.3':'<strong>Lokal Begleedung</strong>eng Approche, déi um Lëtzebuerger Kontext an de Besoine vun de KMU ugepasst ass.',
+'co.perk.4':'<strong>Orientéierung zu de verfügbaren Hëllefen</strong>Identifikatioun vun den Dispositiven, déi Dir jee no Projet an Eligibilitéit notze kënnt.',
+
+'form.title':'Mäi gratis Check ufroen',
+'form.firstname':'Virnumm <span>*</span>',
+'form.lastname':'Numm <span>*</span>',
+'form.email':'Beruflech E-Mail <span>*</span>',
+'form.phone':'Telefon <span>*</span>',
+'form.company':'Betrib <span>*</span>',
+'form.role':'Är Funktioun',
+'form.role.none':'Auswielen...',
+'form.role.ceo':'CEO / Generaldirekter',
+'form.role.cfo':'CFO / Finanzdirekter',
+'form.role.cto':'CTO / IT-Direktioun',
+'form.role.it':'IT-Verantwortlechen',
+'form.role.other':'Anerer',
+'form.message':'Message (fakultativ)',
+'form.ph.firstname':'Jang',
+'form.ph.lastname':'Muller',
+'form.ph.email':'j.muller@betrib.lu',
+'form.ph.company':'Numm vun Ärem Betrib',
+'form.ph.message':'Beschreift kuerz Är Situatioun, Är Besoinen oder Är Cybersécherheetsprioritéiten.',
+'form.rgpd':'Ech si domat averstanen, datt meng Donnéeë vu cegecom veraarbecht ginn, fir am Kader vu menger Ufro kontaktéiert ze ginn, konform zu der <a href="https://cegecom.lu/fr/cegecom-luxembourg/protection-des-donnees-cegecom/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Dateschutzerklärung</a>.',
+'form.submit':'Meng Ufro schécken →',
+'form.sending':'Gëtt geschéckt…',
+'form.ok':'Ufro gutt ukomm!',
+'form.okb':'Merci fir Ären Interessi. En cegecom-Expert mellt sech geschwënn bei Iech, fir déi méiglech nächst Schrëtt ze besprieche.<br><br>',
+'form.err.required':'Wgl. all obligatoresch Felder ausfëllen.',
+'form.err.email':'Wgl. eng gülteg E-Mail-Adress uginn.',
+'form.err.rgpd':'Wgl. d\'Dateschutzerklärung akzeptéieren.',
+'form.err.unavailable':'D\'Schécke vum Formulaire ass am Moment net méiglech. Kontaktéiert eis wgl. direkt.',
+'form.err.generic':'Et ass e Feeler opgetrueden. Probéiert wgl. nach eng Kéier oder kontaktéiert eis direkt.',
+
+'footer.left':'© 2025 cegecom S.A. — Éischten alternativen Operateur zu Lëtzebuerg',
+'footer.privacy':'Dateschutz',
+'footer.legal':'Impressum',
+
+'share.btn':'Deelen',
+'share.page':'D\'Säit deelen',
+'share.copy':'De Link kopéieren',
+'share.email':'Per E-Mail schécken',
+'share.toast':'Link kopéiert',
+'share.subject':'CyberScore cegecom — Cybersécherheets-Check',
+'share.mailbody':'Moien,\n\nech deelen dës Säit mat dir, fir d\'Cybersécherheetsreife vun eisem Betrib séier ze evaluéieren:\n\n{url}\n\n',
+'share.text':'Entdeckt dëse séiere Check, fir d\'Cybersécherheetsreife vun Ärem Betrib ze evaluéieren.'
+}
+
+};
+
+/* ══════════════════════════════════════════════════════════════
+   CONTENU DU QUIZ — 4 langues
+   Les valeurs de risque (r) sont identiques dans toutes les langues :
+   seul le texte change.
+══════════════════════════════════════════════════════════════ */
+const QUIZ={
+fr:[
   {cat:"Gouvernance",q:"Votre entreprise dispose-t-elle d'une politique de cybersécurité formalisée ?",a:[{t:"Oui, elle est documentée, communiquée et régulièrement mise à jour.",r:0},{t:"Partiellement, certaines règles existent mais ne sont pas formalisées.",r:0.75},{t:"Non, aucune politique claire n'est mise en place.",r:1.5}]},
   {cat:"Responsabilité",q:"Une personne ou une équipe est-elle clairement responsable de la cybersécurité ?",a:[{t:"Oui, les rôles et les responsabilités sont clairement définis.",r:0},{t:"Partiellement, le sujet est géré sans cadre vraiment formalisé.",r:1},{t:"Non, personne n'est clairement identifié.",r:2}]},
   {cat:"Gestion des accès",q:"Comment les accès aux outils et données sensibles sont-ils protégés ?",a:[{t:"Les accès sont limités, revus régulièrement et protégés par MFA.",r:0},{t:"Les accès sont protégés, mais sans revue régulière ni MFA systématique.",r:1},{t:"Les accès sont peu contrôlés ou partagés entre plusieurs utilisateurs.",r:2}]},
   {cat:"Sauvegardes",q:"Vos données critiques sont-elles sauvegardées et testées régulièrement ?",a:[{t:"Oui, les sauvegardes sont régulières, sécurisées et testées.",r:0},{t:"Des sauvegardes existent, mais elles sont peu ou jamais testées.",r:1},{t:"Non, les sauvegardes ne sont pas clairement maîtrisées.",r:2}]},
   {cat:"Sensibilisation",q:"Vos collaborateurs sont-ils sensibilisés aux risques cyber ?",a:[{t:"Oui, avec des formations régulières ou des simulations.",r:0},{t:"Occasionnellement, mais sans programme structuré.",r:0.75},{t:"Non, aucune sensibilisation spécifique n'est réalisée.",r:1.5}]},
   {cat:"Incident cyber",q:"Votre entreprise saurait-elle quoi faire dans les premières heures d'un incident cyber ?",a:[{t:"Une procédure existe et les contacts sont identifiés.",r:0},{t:"Vaguement, certaines personnes sauraient réagir mais sans procédure claire.",r:0.75},{t:"La réaction serait probablement improvisée.",r:1.5}]},
-  {cat:"Continuité d'activité",q:"Disposez-vous d'un plan de continuité ou de reprise d'activité en cas d'attaque ?",a:[{t:"Oui, il est documenté et testé régulièrement.",r:0},{t:"Un plan existe mais n'est pas testé régulièrement.",r:1},{t:"Aucun plan n'est formalisé.",r:2}]},  
+  {cat:"Continuité d'activité",q:"Disposez-vous d'un plan de continuité ou de reprise d'activité en cas d'attaque ?",a:[{t:"Oui, il est documenté et testé régulièrement.",r:0},{t:"Un plan existe mais n'est pas testé régulièrement.",r:1},{t:"Aucun plan n'est formalisé.",r:2}]},
   {cat:"Conformité & amélioration",q:"Avez-vous déjà évalué votre niveau de conformité ou de maturité cyber ?",a:[{t:"Oui, une évaluation récente à été réalisée.",r:0},{t:"Une réflexion est en cours, mais aucune démarche complète n'a été menée.",r:0.5},{t:"Non, le sujet n'a pas encore été évalué.",r:1}]}
-];
+],
+en:[
+  {cat:"Governance",q:"Does your company have a formalised cybersecurity policy?",a:[{t:"Yes, it is documented, communicated and regularly updated.",r:0},{t:"Partially — some rules exist but are not formalised.",r:0.75},{t:"No, no clear policy is in place.",r:1.5}]},
+  {cat:"Accountability",q:"Is a person or a team clearly responsible for cybersecurity?",a:[{t:"Yes, roles and responsibilities are clearly defined.",r:0},{t:"Partially — the topic is handled without a truly formal framework.",r:1},{t:"No, nobody is clearly identified.",r:2}]},
+  {cat:"Access management",q:"How is access to sensitive tools and data protected?",a:[{t:"Access is restricted, reviewed regularly and protected by MFA.",r:0},{t:"Access is protected, but without regular reviews or systematic MFA.",r:1},{t:"Access is loosely controlled or shared between several users.",r:2}]},
+  {cat:"Backups",q:"Is your critical data backed up and tested regularly?",a:[{t:"Yes, backups are regular, secured and tested.",r:0},{t:"Backups exist, but they are rarely or never tested.",r:1},{t:"No, backups are not clearly under control.",r:2}]},
+  {cat:"Awareness",q:"Are your employees made aware of cyber risks?",a:[{t:"Yes, with regular training or simulations.",r:0},{t:"Occasionally, but without a structured programme.",r:0.75},{t:"No, no specific awareness activity is carried out.",r:1.5}]},
+  {cat:"Cyber incident",q:"Would your company know what to do in the first hours of a cyber incident?",a:[{t:"A procedure exists and the contacts are identified.",r:0},{t:"Vaguely — some people would react, but without a clear procedure.",r:0.75},{t:"The response would most likely be improvised.",r:1.5}]},
+  {cat:"Business continuity",q:"Do you have a business continuity or disaster recovery plan in case of an attack?",a:[{t:"Yes, it is documented and tested regularly.",r:0},{t:"A plan exists but is not tested regularly.",r:1},{t:"No plan has been formalised.",r:2}]},
+  {cat:"Compliance & improvement",q:"Have you ever assessed your level of compliance or cyber maturity?",a:[{t:"Yes, a recent assessment has been carried out.",r:0},{t:"It is being considered, but no full process has been undertaken.",r:0.5},{t:"No, the topic has not been assessed yet.",r:1}]}
+],
+de:[
+  {cat:"Governance",q:"Verfügt Ihr Unternehmen über eine formalisierte Cybersicherheitsrichtlinie?",a:[{t:"Ja, sie ist dokumentiert, kommuniziert und wird regelmäßig aktualisiert.",r:0},{t:"Teilweise – einige Regeln bestehen, sind aber nicht formalisiert.",r:0.75},{t:"Nein, es gibt keine klare Richtlinie.",r:1.5}]},
+  {cat:"Verantwortlichkeit",q:"Ist eine Person oder ein Team eindeutig für die Cybersicherheit verantwortlich?",a:[{t:"Ja, Rollen und Verantwortlichkeiten sind klar definiert.",r:0},{t:"Teilweise – das Thema wird ohne wirklich formalen Rahmen betreut.",r:1},{t:"Nein, es ist niemand eindeutig benannt.",r:2}]},
+  {cat:"Zugriffsverwaltung",q:"Wie ist der Zugriff auf sensible Werkzeuge und Daten geschützt?",a:[{t:"Zugriffe sind eingeschränkt, werden regelmäßig überprüft und durch MFA geschützt.",r:0},{t:"Zugriffe sind geschützt, aber ohne regelmäßige Überprüfung und ohne durchgängige MFA.",r:1},{t:"Zugriffe sind kaum kontrolliert oder werden von mehreren Nutzern geteilt.",r:2}]},
+  {cat:"Datensicherungen",q:"Werden Ihre kritischen Daten regelmäßig gesichert und getestet?",a:[{t:"Ja, die Sicherungen erfolgen regelmäßig, sind geschützt und werden getestet.",r:0},{t:"Sicherungen bestehen, werden aber kaum oder nie getestet.",r:1},{t:"Nein, die Sicherungen sind nicht klar im Griff.",r:2}]},
+  {cat:"Sensibilisierung",q:"Sind Ihre Mitarbeitenden für Cyberrisiken sensibilisiert?",a:[{t:"Ja, mit regelmäßigen Schulungen oder Simulationen.",r:0},{t:"Gelegentlich, aber ohne strukturiertes Programm.",r:0.75},{t:"Nein, es findet keine gezielte Sensibilisierung statt.",r:1.5}]},
+  {cat:"Cyber-Vorfall",q:"Wüsste Ihr Unternehmen, was in den ersten Stunden eines Cyber-Vorfalls zu tun ist?",a:[{t:"Es gibt ein Verfahren und die Ansprechpartner sind benannt.",r:0},{t:"Ungefähr – einige Personen würden reagieren, aber ohne klares Verfahren.",r:0.75},{t:"Die Reaktion wäre vermutlich improvisiert.",r:1.5}]},
+  {cat:"Geschäftskontinuität",q:"Verfügen Sie über einen Notfall- oder Wiederanlaufplan für den Fall eines Angriffs?",a:[{t:"Ja, er ist dokumentiert und wird regelmäßig getestet.",r:0},{t:"Ein Plan besteht, wird aber nicht regelmäßig getestet.",r:1},{t:"Es ist kein Plan formalisiert.",r:2}]},
+  {cat:"Konformität & Verbesserung",q:"Haben Sie Ihren Konformitäts- oder Cyber-Reifegrad bereits bewertet?",a:[{t:"Ja, es wurde kürzlich eine Bewertung durchgeführt.",r:0},{t:"Es gibt Überlegungen, aber kein vollständiges Vorgehen.",r:0.5},{t:"Nein, das Thema wurde noch nicht bewertet.",r:1}]}
+],
+lu:[
+  {cat:"Gouvernance",q:"Huet Äre Betrib eng formaliséiert Cybersécherheetspolitik?",a:[{t:"Jo, si ass dokumentéiert, kommunizéiert a gëtt regelméisseg aktualiséiert.",r:0},{t:"Deelweis — e puer Reegele ginn et, mä si sinn net formaliséiert.",r:0.75},{t:"Nee, et gëtt keng kloer Politik.",r:1.5}]},
+  {cat:"Verantwortung",q:"Ass eng Persoun oder eng Equipe kloer fir d'Cybersécherheet verantwortlech?",a:[{t:"Jo, d'Rollen an d'Verantwortunge si kloer definéiert.",r:0},{t:"Deelweis — d'Thema gëtt ouni richtege formelle Kader beträit.",r:1},{t:"Nee, kee ass kloer benannt.",r:2}]},
+  {cat:"Zougangsverwaltung",q:"Wéi sinn d'Zougäng zu sensiblen Outilen an Donnéeë geschützt?",a:[{t:"D'Zougäng si limitéiert, ginn regelméisseg iwwerpréift a si mat MFA geschützt.",r:0},{t:"D'Zougäng si geschützt, mä ouni regelméisseg Iwwerpréifung an ouni systematesch MFA.",r:1},{t:"D'Zougäng si wéineg kontrolléiert oder ënner méi Notzer gedeelt.",r:2}]},
+  {cat:"Backupen",q:"Ginn Är kritesch Donnéeë regelméisseg gesäichert an getest?",a:[{t:"Jo, d'Backupe si regelméisseg, geséchert an getest.",r:0},{t:"Backupe ginn et, mä si gi wéineg oder ni getest.",r:1},{t:"Nee, d'Backupe si net kloer am Grëff.",r:2}]},
+  {cat:"Sensibiliséierung",q:"Sinn Är Mataarbechter fir d'Cyberrisike sensibiliséiert?",a:[{t:"Jo, mat regelméissege Formatiounen oder Simulatiounen.",r:0},{t:"Heiansdo, mä ouni strukturéiert Programm.",r:0.75},{t:"Nee, et gëtt keng gezielte Sensibiliséierung.",r:1.5}]},
+  {cat:"Cyber-Tëschefall",q:"Wéisst Äre Betrib, wat an den éischte Stonne vun engem Cyber-Tëschefall ze maachen ass?",a:[{t:"Et gëtt eng Prozedur an d'Kontakter si benannt.",r:0},{t:"Ongeféier — e puer Leit géife reagéieren, mä ouni kloer Prozedur.",r:0.75},{t:"D'Reaktioun wier wuel improviséiert.",r:1.5}]},
+  {cat:"Kontinuitéit vun der Aktivitéit",q:"Hutt Dir e Kontinuitéits- oder Neistartplang am Fall vun enger Attack?",a:[{t:"Jo, hien ass dokumentéiert a gëtt regelméisseg getest.",r:0},{t:"E Plang gëtt et, mä hie gëtt net regelméisseg getest.",r:1},{t:"Et ass kee Plang formaliséiert.",r:2}]},
+  {cat:"Konformitéit & Verbesserung",q:"Hutt Dir Ären Niveau vu Konformitéit oder Cyber-Reife scho evaluéiert?",a:[{t:"Jo, viru kuerzem ass eng Evaluatioun gemaach ginn.",r:0},{t:"Et gëtt driwwer nogeduecht, mä et gouf keng komplett Demarche.",r:0.5},{t:"Nee, d'Thema ass nach net evaluéiert ginn.",r:1}]}
+]
+};
 
-const RM=[
+/* Messages de risque (points critiques) — index = numéro de question */
+const RISKMSG={
+fr:[
   "Aucune politique formalisée — risque réglementaire immédiat pour le CEO",
   "Aucun responsable désigné — la responsabilité du dirigeant n'est pas couverte",
   "Accès non contrôlés — vecteur principal des attaques ransomware",
-  "Aucun plan de reprise — une attaque pourrait arrêter définitivement votre activité",
   "Sauvegardes non isolées ou non testées — inefficaces face à un ransomware",
   "Personnel non formé — 91% des attaques débutent par un email de phishing",
   "Aucune procédure d'urgence — chaque heure coûte en moyenne 35 000€",
+  "Aucun plan de reprise — une attaque pourrait arrêter définitivement votre activité",
   "Non-conformité NIS2/Cyberscore — sanctions financières et pénales possibles"
-];
-const GM=[
+],
+en:[
+  "No formalised policy — immediate regulatory risk for the CEO",
+  "No designated owner — the executive's liability is not covered",
+  "Uncontrolled access — the main vector for ransomware attacks",
+  "Backups not isolated or not tested — ineffective against ransomware",
+  "Untrained staff — 91% of attacks start with a phishing email",
+  "No emergency procedure — each hour costs €35,000 on average",
+  "No recovery plan — an attack could shut your business down for good",
+  "NIS2/Cyberscore non-compliance — financial and criminal sanctions possible"
+],
+de:[
+  "Keine formalisierte Richtlinie — unmittelbares regulatorisches Risiko für den CEO",
+  "Kein benannter Verantwortlicher — die Haftung der Geschäftsleitung ist nicht abgedeckt",
+  "Unkontrollierte Zugriffe — Hauptvektor von Ransomware-Angriffen",
+  "Sicherungen nicht isoliert oder nicht getestet — wirkungslos gegen Ransomware",
+  "Ungeschultes Personal — 91 % der Angriffe beginnen mit einer Phishing-E-Mail",
+  "Kein Notfallverfahren — jede Stunde kostet im Schnitt 35 000 €",
+  "Kein Wiederanlaufplan — ein Angriff könnte Ihr Geschäft dauerhaft stoppen",
+  "NIS2-/Cyberscore-Nichtkonformität — finanzielle und strafrechtliche Sanktionen möglich"
+],
+lu:[
+  "Keng formaliséiert Politik — direkt reglementarescht Risiko fir de CEO",
+  "Kee benannte Verantwortlechen — d'Verantwortung vun der Direktioun ass net ofgedeckt",
+  "Onkontrolléiert Zougäng — Haaptvecteur vu Ransomware-Attacken",
+  "Backupen net isoléiert oder net getest — wierkungslos géint Ransomware",
+  "Net geschoult Personal — 91 % vun den Attacke fänke mat enger Phishing-E-Mail un",
+  "Keng Noutprozedur — all Stonn kascht am Duerchschnëtt 35 000 €",
+  "Kee Neistartplang — eng Attack kéint Är Aktivitéit definitiv stoppen",
+  "NIS2-/Cyberscore-Netkonformitéit — finanziell a strofrechtlech Sanktioune méiglech"
+]
+};
+
+/* Messages positifs (bonnes pratiques) — index = numéro de question */
+const GOODMSG={
+fr:[
   "Politique de cybersécurité documentée",
   "Responsable cybersécurité désigné",
   "Authentification multi-facteurs en place",
-  "Plan de reprise d'activité testé",
   "Sauvegardes isolées et testées régulièrement",
   "Personnel sensibilisé régulièrement",
   "Procédure d'urgence opérationnelle",
+  "Plan de reprise d'activité testé",
   "Conformité NIS2 évaluée et engagée"
-];
-const GL={A:"Très bonne maturité cyber",B:"Bonne base, quelques points à renforcer",C:"Maturité intermédiaire : des actions sont recommandées",D:"Niveau de préparation insuffisant",E:"Situation à traiter en priorité"};
-const GD={
+],
+en:[
+  "Documented cybersecurity policy",
+  "Designated cybersecurity owner",
+  "Multi-factor authentication in place",
+  "Backups isolated and tested regularly",
+  "Staff made aware on a regular basis",
+  "Operational emergency procedure",
+  "Tested business recovery plan",
+  "NIS2 compliance assessed and under way"
+],
+de:[
+  "Dokumentierte Cybersicherheitsrichtlinie",
+  "Benannter Cybersicherheitsverantwortlicher",
+  "Multi-Faktor-Authentifizierung im Einsatz",
+  "Sicherungen isoliert und regelmäßig getestet",
+  "Personal regelmäßig sensibilisiert",
+  "Einsatzbereites Notfallverfahren",
+  "Getesteter Wiederanlaufplan",
+  "NIS2-Konformität bewertet und angegangen"
+],
+lu:[
+  "Dokumentéiert Cybersécherheetspolitik",
+  "Benannte Cybersécherheetsverantwortlechen",
+  "Multi-Faktor-Authentifikatioun am Asaz",
+  "Backupen isoléiert a regelméisseg getest",
+  "Personal regelméisseg sensibiliséiert",
+  "Funktionéierend Noutprozedur",
+  "Getesten Neistartplang",
+  "NIS2-Konformitéit evaluéiert an ugaangen"
+]
+};
+
+/* Libellés de note A → E */
+const GRADELBL={
+fr:{A:"Très bonne maturité cyber",B:"Bonne base, quelques points à renforcer",C:"Maturité intermédiaire : des actions sont recommandées",D:"Niveau de préparation insuffisant",E:"Situation à traiter en priorité"},
+en:{A:"Very good cyber maturity",B:"Solid basis, a few points to strengthen",C:"Intermediate maturity: actions are recommended",D:"Insufficient level of preparedness",E:"Situation to be addressed as a priority"},
+de:{A:"Sehr gute Cyber-Reife",B:"Gute Basis, einige Punkte zu stärken",C:"Mittlere Reife: Maßnahmen werden empfohlen",D:"Unzureichender Vorbereitungsgrad",E:"Situation vorrangig zu behandeln"},
+lu:{A:"Ganz gutt Cyber-Reife",B:"Gutt Basis, e puer Punkten ze stäerken",C:"Mëttel Reife: Moossname ginn empfohlen",D:"Net genuch Virbereedungsniveau",E:"Situatioun prioritär ze behandelen"}
+};
+
+/* Descriptions de note A → E */
+const GRADEDESC={
+fr:{
   A:"Votre entreprise semble avoir des bases solides en matière de cybersécurité. Le Cyberscore permettrait de formaliser cette posture, de la valoriser et d'identifier les derniers axes d'optimisation.",
   B:"Votre entreprise présente plusieurs bonnes pratiques, mais certains points méritent d'être renforcés pour améliorer votre niveau de résilience et structurer davantage votre démarche cybersécurité.",
   C:"Votre entreprise dispose de certaines pratiques de sécurité, mais plusieurs axes d'améliorations ressortent. Une analyse approfondie permettrait de prioriser les mesures à mettre en place.",
   D:"Votre organisation pourrait être exposée à des risques importants en cas d'incident cyber. Il est recommandé de formaliser rapidement une démarche structurée d'évaluation et d'amélioration.",
   E:"Votre niveau de préparation semble faible au regard des risques actuels. Un accompagnement dédié permettrait d'identifier les mesures urgentes à mettre en place pour réduire votre exposition."
+},
+en:{
+  A:"Your company appears to have solid cybersecurity foundations. The Cyberscore would help formalise that posture, demonstrate it and identify the last areas for optimisation.",
+  B:"Your company shows several good practices, but some points deserve to be strengthened in order to improve your resilience and further structure your cybersecurity approach.",
+  C:"Your company has some security practices in place, but several areas for improvement stand out. An in-depth analysis would help prioritise the measures to implement.",
+  D:"Your organisation could be exposed to significant risks in the event of a cyber incident. It is recommended to quickly formalise a structured assessment and improvement process.",
+  E:"Your level of preparedness appears low given current risks. Dedicated support would help identify the urgent measures needed to reduce your exposure."
+},
+de:{
+  A:"Ihr Unternehmen scheint über solide Grundlagen in der Cybersicherheit zu verfügen. Der Cyberscore würde helfen, diese Position zu formalisieren, sichtbar zu machen und die letzten Optimierungsfelder zu erkennen.",
+  B:"Ihr Unternehmen zeigt mehrere gute Praktiken, doch einige Punkte sollten gestärkt werden, um Ihre Widerstandsfähigkeit zu erhöhen und Ihr Cybersicherheitsvorgehen weiter zu strukturieren.",
+  C:"Ihr Unternehmen verfügt über einige Sicherheitspraktiken, doch es zeigen sich mehrere Verbesserungsfelder. Eine vertiefte Analyse würde helfen, die umzusetzenden Maßnahmen zu priorisieren.",
+  D:"Ihre Organisation könnte bei einem Cyber-Vorfall erheblichen Risiken ausgesetzt sein. Es wird empfohlen, rasch ein strukturiertes Bewertungs- und Verbesserungsvorgehen zu formalisieren.",
+  E:"Ihr Vorbereitungsgrad erscheint angesichts der aktuellen Risiken gering. Eine gezielte Begleitung würde helfen, die dringenden Maßnahmen zur Verringerung Ihrer Gefährdung zu bestimmen."
+},
+lu:{
+  A:"Äre Betrib schéngt solide Grondlagen an der Cybersécherheet ze hunn. De Cyberscore géif hëllefen, dës Positioun ze formaliséieren, se ze valoriséieren an déi lescht Optimiséierungsfelder ze erkennen.",
+  B:"Äre Betrib weist e puer gutt Praktiken, mä verschidde Punkte sollte gestäerkt ginn, fir Är Resilienz ze verbesseren an Är Cybersécherheetsdemarche weider ze strukturéieren.",
+  C:"Äre Betrib huet e puer Sécherheetspraktiken, mä verschidde Verbesserungsfelder falen op. Eng déif Analyse géif hëllefen, déi ëmzesetzend Moossnamen ze prioriséieren.",
+  D:"Är Organisatioun kéint am Fall vun engem Cyber-Tëschefall wichtege Risiken ausgesat sinn. Et gëtt recommandéiert, séier eng strukturéiert Evaluatiouns- a Verbesserungsdemarche ze formaliséieren.",
+  E:"Äre Virbereedungsniveau schéngt am Verhältnis zu den aktuelle Risike schwaach. Eng gezielte Begleedung géif hëllefen, déi dréngend Moossnamen ze erkennen, fir Är Ausgesatheet ze reduzéieren."
+}
 };
 
+/* ══════════════════════════════════════════════════════════════
+   MOTEUR I18N
+══════════════════════════════════════════════════════════════ */
+const LANG_STORAGE_KEY = 'cyberscore-lang';
+
+let LANG = 'fr';
+
+// Contenu du quiz pour la langue active (réaffecté par setLang)
+let Qs = QUIZ.fr;
+let RM = RISKMSG.fr;
+let GM = GOODMSG.fr;
+let GL = GRADELBL.fr;
+let GD = GRADEDESC.fr;
+
+/** Traduit une clé. {n} / {total} / {url} sont remplacés par vars. */
+function t(key, vars){
+  const dict = I18N[LANG] || I18N.fr;
+  let s = (key in dict) ? dict[key] : (I18N.fr[key] !== undefined ? I18N.fr[key] : key);
+  if(vars){
+    for(const k in vars) s = s.split('{'+k+'}').join(vars[k]);
+  }
+  return s;
+}
+
+/** Langue initiale : choix mémorisé > langue du navigateur > français. */
+function detectLang(){
+  try{
+    const saved = localStorage.getItem(LANG_STORAGE_KEY);
+    if(saved && I18N[saved]) return saved;
+  }catch(e){}
+  const nav = (navigator.language || 'fr').toLowerCase();
+  if(nav.startsWith('lb')) return 'lu';
+  if(nav.startsWith('de')) return 'de';
+  if(nav.startsWith('en')) return 'en';
+  if(nav.startsWith('fr')) return 'fr';
+  return 'fr';
+}
+
+/** Applique la langue courante à tout le contenu statique de la page. */
+function applyI18n(){
+  document.documentElement.lang = t('html.lang');
+  document.title = t('meta.title');
+
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if(metaDesc) metaDesc.setAttribute('content', t('meta.desc'));
+
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    el.textContent = t(el.getAttribute('data-i18n'));
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+    el.innerHTML = t(el.getAttribute('data-i18n-html'));
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){
+    el.setAttribute('placeholder', t(el.getAttribute('data-i18n-placeholder')));
+  });
+  document.querySelectorAll('[data-i18n-aria-label]').forEach(function(el){
+    el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria-label')));
+  });
+
+  // Liens vers le site cegecom (les pages légales n'existent qu'en FR)
+  const siteUrl = t('site.url');
+  ['navCegecomLink','footSite'].forEach(function(id){
+    const el = document.getElementById(id);
+    if(el) el.href = siteUrl;
+  });
+
+  // Le libellé du burger dépend de l'état ouvert/fermé
+  const nav = document.getElementById('siteNav');
+  const burger = document.getElementById('navBurger');
+  if(nav && burger){
+    burger.setAttribute('aria-label', t(nav.classList.contains('open') ? 'nav.burger.close' : 'nav.burger.open'));
+  }
+
+  updateShareLinks();
+}
+
+/** Change la langue et rafraîchit tout le contenu, statique et dynamique. */
+function setLang(lang){
+  if(!I18N[lang]) lang = 'fr';
+  LANG = lang;
+
+  Qs = QUIZ[lang];
+  RM = RISKMSG[lang];
+  GM = GOODMSG[lang];
+  GL = GRADELBL[lang];
+  GD = GRADEDESC[lang];
+
+  try{ localStorage.setItem(LANG_STORAGE_KEY, lang); }catch(e){}
+
+  applyI18n();
+
+  const current = document.getElementById('langCurrent');
+  if(current) current.textContent = lang.toUpperCase();
+  document.querySelectorAll('.lang-opt').forEach(function(btn){
+    btn.setAttribute('aria-selected', btn.getAttribute('data-lang') === lang ? 'true' : 'false');
+  });
+
+  // Contenu généré en JS : quiz ou résultats
+  const res = document.getElementById('res');
+  if(res && res.style.display === 'block') renderRes();
+  else render();
+}
+
+/** Menu déroulant de langue. */
+function initLangSwitcher(){
+  const wrap = document.getElementById('langSwitch');
+  const btn  = document.getElementById('langBtn');
+  const menu = document.getElementById('langMenu');
+  const nav  = document.getElementById('siteNav');
+  if(!wrap || !btn || !menu) return;
+
+  function close(){
+    wrap.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');
+  }
+
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    const isOpen = wrap.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+
+  menu.querySelectorAll('.lang-opt').forEach(function(opt){
+    opt.addEventListener('click', function(e){
+      e.stopPropagation();
+      setLang(opt.getAttribute('data-lang'));
+      close();
+      // referme aussi le menu mobile
+      if(nav && nav.classList.contains('open')){
+        nav.classList.remove('open');
+        const burger = document.getElementById('navBurger');
+        if(burger){
+          burger.setAttribute('aria-expanded','false');
+          burger.setAttribute('aria-label', t('nav.burger.open'));
+        }
+      }
+    });
+  });
+
+  document.addEventListener('click', function(e){
+    if(!wrap.contains(e.target)) close();
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') close();
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════
+   QUIZ
+══════════════════════════════════════════════════════════════ */
 const icoWarn=`<svg class="pt-ico" width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M7.5 2L1 13h13L7.5 2z" stroke="#6B1414" stroke-width="1.3" stroke-linejoin="round"/><path d="M7.5 6.5v3" stroke="#6B1414" stroke-width="1.3" stroke-linecap="round"/><circle cx="7.5" cy="10.8" r=".6" fill="#6B1414"/></svg>`;
 const icoOk=`<svg class="pt-ico" width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6" stroke="#0F4A28" stroke-width="1.3"/><path d="M5 7.5l2 2 3-3" stroke="#0F4A28" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 const icoLegal=`<svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M8.5 2L3 4.6v3.5c0 3 2.4 5.7 5.5 6.6 3.1-.9 5.5-3.6 5.5-6.6V4.6L8.5 2z" stroke="#6B4208" stroke-width="1.3" stroke-linejoin="round"/><path d="M8.5 6.5v3" stroke="#6B4208" stroke-width="1.3" stroke-linecap="round"/><circle cx="8.5" cy="11" r=".6" fill="#6B4208"/></svg>`;
@@ -2407,7 +3520,7 @@ function render(){
   const q=Qs[cur];
   const p=(cur+1)/Qs.length;
   document.getElementById('pfill').style.width=(p*100)+'%';
-  document.getElementById('plbl').textContent=`Question ${cur+1} sur ${Qs.length}`;
+  document.getElementById('plbl').textContent=t('quiz.progress',{n:cur+1,total:Qs.length});
   document.getElementById('ppct').textContent=Math.round(p*100)+'%';
   document.getElementById('qcontainer').innerHTML=`
     <div class="qcard">
@@ -2417,9 +3530,16 @@ function render(){
     </div>
     <div class="qnav">
       <button class="btn-next" id="btn-next" onclick="go()">
-        ${cur<Qs.length-1?'Question suivante →':'Voir mon résultat →'}
+        ${cur<Qs.length-1?t('quiz.next'):t('quiz.see')}
       </button>
     </div>`;
+
+  // Restaure la réponse déjà sélectionnée (utile après un changement de langue)
+  if(ans[cur]){
+    const sel=document.getElementById('a'+ans[cur].i);
+    if(sel) sel.classList.add('sel');
+    document.getElementById('btn-next').classList.add('on');
+  }
 }
 
 function pick(i,r){
@@ -2443,34 +3563,33 @@ function grade(r){
   if(p<=.15)return'A';if(p<=.35)return'B';if(p<=.55)return'C';if(p<=.75)return'D';return'E';
 }
 
-function showRes(){
+/** Construit le bloc de résultats dans la langue courante. */
+function renderRes(){
   const g=grade(risk);
-  setNoteQuiz(g, GL[g]);
-  document.getElementById('quiz').style.display='none';
-  const rs=document.getElementById('res');
-  rs.style.display='block';
 
   const gauge=['A','B','C','D','E'].map(l=>`<div class="gp g${l}${l===g?' lit':''}">${l}</div>`).join('');
 
   const bads = ans
-    .map((a, index) => ({ answer: a, index }))
+    .map((answer, index) => ({ answer, index }))
     .filter(item => {
       const maxForQuestion = Math.max(...Qs[item.index].a.map(option => option.r));
       return item.answer.r >= maxForQuestion;
     })
     .map(item => `<div class="pt bad">${icoWarn}<span>${RM[item.index]}</span></div>`)
     .join('');
-  
-  const goods=ans.filter(a=>a.r===0)
-    .map(a=>`<div class="pt good">${icoOk}<span>${GM[ans.indexOf(a)]}</span></div>`)
+
+  const goods = ans
+    .map((answer, index) => ({ answer, index }))
+    .filter(item => item.answer.r === 0)
+    .map(item => `<div class="pt good">${icoOk}<span>${GM[item.index]}</span></div>`)
     .join('');
 
   const legal=['C','D','E'].includes(g)?`
     <div class="legalbox">
       ${icoLegal}
       <div class="lbody">
-        <strong>Responsabilité personnelle du CEO</strong>
-        <p>Depuis mars 2025, le dirigeant est personnellement responsable de la cybersécurité au Luxembourg. Votre score actuel vous expose à des sanctions en cas d'incident. cegecom vous accompagne pour remédier rapidement à cette situation.</p>
+        <strong>${t('res.legal.title')}</strong>
+        <p>${t('res.legal.body')}</p>
       </div>
     </div>`:'';
 
@@ -2479,20 +3598,67 @@ function showRes(){
       <div class="gauge">${gauge}</div>
       <div class="rs-title">${GL[g]}</div>
       <p class="rs-sub">${GD[g]}</p>
-      ${bads?`<div class="ptgroup"><div class="ptlabel">Points critiques identifiés</div>${bads}</div>`:''}
-      ${goods?`<div class="ptgroup"><div class="ptlabel">Bonnes pratiques en place</div>${goods}</div>`:''}
+      ${bads?`<div class="ptgroup"><div class="ptlabel">${t('res.critical')}</div>${bads}</div>`:''}
+      ${goods?`<div class="ptgroup"><div class="ptlabel">${t('res.good')}</div>${goods}</div>`:''}
       ${legal}
       <div class="rsctas">
-        <a href="#contact" class="btn-main" onclick="setOrigine('Résultats quiz')">Parler à un expert cegecom</a>
+        <a href="#contact" class="btn-main" onclick="setOrigine('Résultats quiz')">${t('res.cta')}</a>
       </div>
     </div>`;
+}
+
+function showRes(){
+  const g=grade(risk);
+  setNoteQuiz(g, GRADELBL.fr[g]);
+  document.getElementById('quiz').style.display='none';
+  const rs=document.getElementById('res');
+  rs.style.display='block';
+  renderRes();
   rs.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-// ── EmailJS init ──────────────────────────────────────────────────────────
-emailjs.init({ publicKey: 'KKGAZovxe4JvkehyH' });
+// ── EmailJS (appel direct de l'API REST, sans SDK ni CDN) ─────────────────
+// Le SDK @emailjs/browser était chargé depuis jsDelivr : bloqué par certains
+// pare-feux d'entreprise et bloqueurs de pub, le formulaire devenait alors
+// inutilisable. On poste directement sur l'API, ce que faisait le SDK.
+const EMAILJS = {
+  publicKey:  'KKGAZovxe4JvkehyH',
+  serviceId:  'service_f73hdpo',
+  templateId: 'template_1jie6yv',
+  endpoint:   'https://api.emailjs.com/api/v1.0/email/send',
+};
+
+/**
+ * Envoie un email via EmailJS.
+ * @param {Object} templateParams variables du template
+ * @returns {Promise<void>} rejetée avec un Error si l'envoi échoue
+ */
+function sendEmailJS(templateParams){
+  const controller = new AbortController();
+  const timeout = setTimeout(function(){ controller.abort(); }, 20000);
+
+  return fetch(EMAILJS.endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      service_id:      EMAILJS.serviceId,
+      template_id:     EMAILJS.templateId,
+      user_id:         EMAILJS.publicKey,
+      template_params: templateParams,
+    }),
+    signal: controller.signal,
+  }).then(function(response){
+    if(response.ok) return;
+    return response.text().then(function(body){
+      throw new Error('EmailJS ' + response.status + ': ' + body);
+    });
+  }).finally(function(){
+    clearTimeout(timeout);
+  });
+}
 
 // ── Tracking origine ──────────────────────────────────────────────────────
+// Ces libellés restent en français : ils ne sont lus que dans les emails internes.
 let _origine = 'Direct (formulaire)';
 let _noteQuiz = 'Quiz non effectué';
 
@@ -2529,27 +3695,28 @@ function submitForm(){
   }
   
   if(!prenom||!nom||!email||!societe||!tel){
-    alert('Merci de remplir tous les champs obligatoires.');return;
+    alert(t('form.err.required'));return;
   }
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if(!emailRegex.test(email)){
-    alert('Merci de renseigner une adresse email valide.');
+    alert(t('form.err.email'));
     return;
   }
   
   if(!rgpd){
-    alert('Veuillez accepter la politique de confidentialité.');return;
+    alert(t('form.err.rgpd'));return;
   }
 
   // Désactiver le bouton pendant l'envoi
   const btn = document.querySelector('.btn-sub');
   btn.disabled = true;
-  btn.textContent = 'Envoi en cours…';
+  btn.textContent = t('form.sending');
 
   const templateParams = {
     origine:   _origine,
     note_quiz: _noteQuiz,
+    langue:    LANG.toUpperCase(),
     prenom:    prenom,
     nom:       nom,
     email:     email,
@@ -2559,20 +3726,30 @@ function submitForm(){
     message:   message  || 'Aucun message',
   };
 
-  emailjs.send('service_f73hdpo', 'template_1jie6yv', templateParams)
+  sendEmailJS(templateParams)
     .then(function() {
       document.getElementById('ffields').style.display='none';
       document.getElementById('fsuccess').style.display='block';
     }, function(error) {
       btn.disabled = false;
-      btn.textContent = 'Envoyer ma demande →';
-      alert('Une erreur est survenue. Veuillez réessayer ou nous contacter directement.');
+      btn.textContent = t('form.submit');
+      alert(t('form.err.generic'));
       console.error('EmailJS error:', error);
     });
 }
 // ── Floating share button ────────────────────────────────────────────────
 function getShareUrl(){
   return window.location.origin + window.location.pathname;
+}
+
+/** Met à jour le lien mailto de partage dans la langue courante. */
+function updateShareLinks(){
+  const emailLink = document.getElementById('shareEmail');
+  if(!emailLink) return;
+  const url = getShareUrl();
+  const subject = encodeURIComponent(t('share.subject'));
+  const body = encodeURIComponent(t('share.mailbody', {url: url}));
+  emailLink.href = `mailto:?subject=${subject}&body=${body}`;
 }
 
 function showShareToast(message){
@@ -2592,7 +3769,7 @@ async function copyShareLink(){
 
   try{
     await navigator.clipboard.writeText(url);
-    showShareToast('Lien copié');
+    showShareToast(t('share.toast'));
   }catch(e){
     const tempInput = document.createElement('textarea');
     tempInput.value = url;
@@ -2603,14 +3780,14 @@ async function copyShareLink(){
     tempInput.select();
     document.execCommand('copy');
     document.body.removeChild(tempInput);
-    showShareToast('Lien copié');
+    showShareToast(t('share.toast'));
   }
 }
 
 async function sharePage(){
   const shareData = {
     title: 'CyberScore cegecom',
-    text: 'Découvrez ce diagnostic rapide pour évaluer la maturité cybersécurité de votre entreprise.',
+    text: t('share.text'),
     url: getShareUrl()
   };
 
@@ -2631,17 +3808,10 @@ function initShareWidget(){
   const menu = document.getElementById('shareMenu');
   const nativeBtn = document.getElementById('shareNative');
   const copyBtn = document.getElementById('copyLink');
-  const emailLink = document.getElementById('shareEmail');
 
   if(!widget || !toggle || !menu) return;
 
-  const url = getShareUrl();
-  const subject = encodeURIComponent('CyberScore cegecom — Diagnostic cybersécurité');
-  const body = encodeURIComponent(
-    `Hello,\n\nJe te partage cette page pour évaluer rapidement la maturité cybersécurité de notre entreprise :\n\n${url}\n\n`
-  );
-
-  emailLink.href = `mailto:?subject=${subject}&body=${body}`;
+  updateShareLinks();
 
   toggle.addEventListener('click', function(e){
     e.stopPropagation();
@@ -2682,8 +3852,48 @@ function initShareWidget(){
   });
 }
 
+// ── Menu mobile (burger) ─────────────────────────────────────────────────
+function initMobileNav(){
+  const nav = document.getElementById('siteNav');
+  const burger = document.getElementById('navBurger');
+  const panel = document.getElementById('navRight');
+  if(!nav || !burger || !panel) return;
+
+  function close(){
+    nav.classList.remove('open');
+    burger.setAttribute('aria-expanded','false');
+    burger.setAttribute('aria-label', t('nav.burger.open'));
+  }
+
+  burger.addEventListener('click', function(e){
+    e.stopPropagation();
+    const isOpen = nav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    burger.setAttribute('aria-label', t(isOpen ? 'nav.burger.close' : 'nav.burger.open'));
+  });
+
+  // Fermeture au clic sur un lien du panneau
+  panel.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click', close);
+  });
+
+  document.addEventListener('click', function(e){
+    if(nav.classList.contains('open') && !nav.contains(e.target)) close();
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') close();
+  });
+
+  window.addEventListener('resize', function(){
+    if(window.innerWidth > 900) close();
+  });
+}
+
+initMobileNav();
 initShareWidget();
-render();
+initLangSwitcher();
+setLang(detectLang());
 </script>
 </body>
 </html>
