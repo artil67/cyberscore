@@ -3751,7 +3751,7 @@ function submitForm(){
       document.getElementById('ffields').style.display='none';
       document.getElementById('fsuccess').style.display='block';
       window._mtm = window._mtm || [];
-      _mtm.push({'event': 'quiz_complete'});
+      _mtm.push({'event': 'form_submit_contact'});
     }, function(error) {
       btn.disabled = false;
       btn.textContent = t('form.submit');
